@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    
+      <header>
+        <nav>
+            <div class="logo">🚌 LocoTranz</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#routes">Routes</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Your Journey Starts Here</h1>
+        <p>Book bus tickets across 
+            your Native with ease and comfort</p>
+    </section>
+
+    <!-- Booking Form -->
+    <div class="booking-form">
+        <form id="searchForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="from">From</label>
+                    <input type="text" id="from" placeholder="From" required>
+                </div>
+                <div class="form-group">
+                    <label for="to">To</label>
+                    <input type="text" id="to" placeholder="To" required>
+                </div>
+              
+                <div class="form-group">
+                    <label for="passengers">Passengers</label>
+                    <select id="passengers" required>
+                        <option value="1">1 Passenger</option>
+                        <option value="2">2 Passengers</option>
+                        <option value="3">3 Passengers</option>
+                        <option value="4">4 Passengers</option>
+                        <option value="5">5+ Passengers</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="search-btn">Search Buses</button>
+        </form>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>Why Choose LocoTranz?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💺</div>
+                <h3>Comfortable Seats</h3>
+                <p>Sometimes the journey matters more than the destination — especially from the window seat</p>
+                
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure Booking</h3>
+                <p>Your data and transactions are protected with industry-standard encryption and secure payment gateways.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Best Prices</h3>
+                <p>Get the most competitive prices with regular offers and discounts on popular routes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Easy Cancellation</h3>
+                <p>Cancel or modify your bookings hassle-free with our flexible cancellation policy.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>24/7 Support</h3>
+                <p>Our customer support team is always available to assist you with your travel needs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎫</div>
+                <h3>Instant Confirmation</h3>
+                <p>Get instant booking confirmation and e-tickets delivered to your email immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Routes -->
+    <section class="routes" id="routes">
+        <div class="routes-container">
+            <h2>Popular Routes</h2>
+            <div class="routes-grid">
+                <div class="route-card">
+                    <h4>Velachery  → Chennai Beach</h4>
+                    <p>Starting from ₹50</p>
+                </div>
+                <div class="route-card">
+                    <h4>Chennai Beach → Tambaram</h4>
+                    <p>Starting from ₹60</p>
+                </div>
+                <div class="route-card">
+                    <h4>Broadway → Poonamallee </h4>
+                    <p>Starting from ₹65</p>
+                </div>
+                <div class="route-card">
+                    <h4>Koyambedu → Thiruvallur</h4>
+                    <p>Starting from ₹20</p>
+                </div>
+                <div class="route-card">
+                    <h4>Avadi → Koyambedu</h4>
+                    <p>Starting from ₹35</p>
+                </div>
+                <div class="route-card">
+                    <h4>Koyambedu → Red Hills</h4>
+                    <p>Starting from ₹55</p>
+                </div>
+                <div class="route-card">
+                    <h4>High Court → Tambaram</h4>
+                    <p>Starting from ₹40</p>
+                </div>
+                <div class="route-card">
+                    <h4>T.Nagar → Guduvanchery</h4>
+                    <p>Starting from ₹35</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>&copy; 2025 TravelEase. All rights reserved. | Contact: support@travelease.com</p>
+    </footer>
+</body>
+</html>
