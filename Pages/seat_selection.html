@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Styles/seat_selection.css">
+</head>
+<body>
+     <div class="container">
+        <header>
+            <div class="logo">LocoTranz</div>
+            <button class="back-btn">← Back to Bus List</button>
+        </header>
+
+        <div class="main-content">
+            <div class="left-section">
+                <div class="bus-info-card">
+                    <div class="bus-name">Shivneri Travels</div>
+                    <span class="bus-type">AC Seater / Sleeper</span>
+                    
+                    <div class="journey-info">
+                        <div class="journey-item">
+                            <div class="journey-label">FROM</div>
+                            <div class="journey-value">Mumbai</div>
+                            <div class="journey-label" style="margin-top: 5px;">06:00 AM</div>
+                        </div>
+                        <div class="journey-item">
+                            <div class="journey-label">DURATION</div>
+                            <div class="journey-value">3h 30m</div>
+                        </div>
+                        <div class="journey-item">
+                            <div class="journey-label">TO</div>
+                            <div class="journey-value">Pune</div>
+                            <div class="journey-label" style="margin-top: 5px;">09:30 AM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seat-layout-card">
+                    <div class="layout-header">Select Your Seats</div>
+
+                 
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-box available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box booked"></div>
+                            <span>Booked</span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="bus-layout">
+                        <div class="driver-section">
+                            <div class="steering-wheel">🚗</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">1A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">1A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">1A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                        </div>
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">1A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">1C</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat booked">2A</div>
+                            <div class="seat booked">2B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">2C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">2C</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">3A</div>
+                            <div class="seat female" onclick="toggleSeat(this)">3B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">3C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">3C</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">4A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">4B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat booked">4C</div>
+                            <div class="seat booked">4C</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">5A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">5B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">5C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">5C</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">6A</div>
+                            <div class="seat booked">6B</div>
+                            <div class="seat empty"></div>
+                            <div class="seat available" onclick="toggleSeat(this)">6C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">6C</div>
+                        </div>
+
+                        <div class="seat-row">
+                            <div class="seat available" onclick="toggleSeat(this)">7A</div>
+                            <div class="seat available" onclick="toggleSeat(this)">7B</div>
+                            <div class="seat available" onclick="toggleSeat(this)">7C</div>
+                            <div class="seat available" onclick="toggleSeat(this)">7D</div>
+                            <div class="seat available" onclick="toggleSeat(this)">7D</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-summary">
+                <div class="summary-title">Booking Summary</div>
+                
+                <div class="selected-seats">
+                    <div class="boarding-label">Selected Seats</div>
+                    <div id="seatDisplay">
+                        <p style="color: #888; font-size: 14px;">No seats selected</p>
+                    </div>
+                </div>
+
+                <div class="boarding-points">
+                    <div class="boarding-label">Boarding Point</div>
+                    <select class="boarding-select">
+                        <option>Select boarding point</option>
+                        <option>Mumbai Central - 05:45 AM</option>
+                        <option>Dadar - 06:00 AM</option>
+                        <option>Thane - 06:15 AM</option>
+                    </select>
+
+                    <div class="boarding-label">Dropping Point</div>
+                    <select class="boarding-select">
+                        <option>Select dropping point</option>
+                        <option>Pune Station - 09:30 AM</option>
+                        <option>Shivaji Nagar - 09:45 AM</option>
+                        <option>Katraj - 10:00 AM</option>
+                    </select>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>Base Fare</span>
+                        <span id="baseFare">₹0</span>
+                    </div>
+                    <div class="price-row">
+                        <span>GST (5%)</span>
+                        <span id="gst">₹0</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Total Amount</span>
+                        <span id="totalAmount">₹0</span>
+                    </div>
+                </div>
+
+                <button class="continue-btn" id="continueBtn" disabled>Continue to Payment</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

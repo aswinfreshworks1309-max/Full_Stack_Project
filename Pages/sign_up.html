@@ -1,73 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../Styles/sign_up.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Booking - Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../Styles/sign_up.css">
 </head>
 <body>
-    <div class="container">
-        <div class="left-section">
-            <h1>🚌 Welcome to LocoTranz</h1>
-            <p>Join thousands of travelers who trust us for comfortable and affordable bus journeys.</p>
-            
-            <ul class="features">
-                <li>Book tickets instantly</li>
-                <li>Track your bus in real-time</li>
-                <li>Secure payment options</li>
-                <li>24/7 customer support</li>
-                <li>Exclusive discounts & offers</li>
-            </ul>
+ <div class="container">
+        <div class="header">
+            <div class="bus-icon">
+                <i class="fas fa-bus"></i>
+            </div>
+            <h1>Create Your Account</h1>
+            <p>Join BusBook for seamless travel experiences</p>
         </div>
-
-        <div class="right-section">
-            <div class="logo">🎫 LocoTranz</div>
-            <p class="subtitle">Create your account</p>
-
-            <form>
-                <div class="name-group">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" placeholder="First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" placeholder="Last Name" required>
-                    </div>
+        
+        <div class="form-container">
+            <form id="signupForm">
+                <div class="input-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" placeholder="Enter your full name" required>
+                    <i class="fas fa-user"></i>
                 </div>
-
-                <div class="form-group">
+                
+                <div class="input-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter Your E-mail" required>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <i class="fas fa-envelope"></i>
                 </div>
-
-                <div class="form-group">
+                
+                <div class="input-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Mobile Number" required>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                    <i class="fas fa-phone"></i>
                 </div>
-
-                <div class="form-group">
+                
+                <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a strong password" required>
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Create a password" required>
+                        <span class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                 </div>
-
-                <div class="form-group">
+                
+                <div class="input-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <span class="toggle-password" id="toggleConfirmPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                 </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                
+                <div class="options">
+                    <div class="remember">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the Terms & Conditions</label>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn-submit">Create Account</button>
-
-                <p class="login-link">
-                    Already have an account? <a href="./log_in.html">Log in</a>
-                </p>
+                
+                <button type="submit" class="btn">Sign Up</button>
             </form>
+            
+           
+          <br>
+            
+            <div class="signup-link">
+                Already have an account? <a href="../Pages/log_in.html">Sign In</a>
+            </div>
         </div>
     </div>
 </body>
