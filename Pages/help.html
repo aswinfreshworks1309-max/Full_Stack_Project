@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket</title>
+    <link rel="stylesheet" href="../Styles/help.css">
+</head>
+<body>
+     <header>
+            <div class="logo">LocoTranz</div>
+            <div class="header-buttons">
+                <button class="btn download-btn" onclick="downloadTicket()">📥 Download PDF</button>
+                <button class="btn print-btn" onclick="window.print()">🖨️ Print Ticket</button>
+            </div>
+        </header>
+
+        <div class="success-banner">
+            <div class="success-icon">✓</div>
+            <div class="success-title">Booking Confirmed!</div>
+            <div class="success-message">Your bus ticket has been successfully booked. A confirmation email has been sent to your registered email address.</div>
+            <div class="booking-id">Booking ID: LOCO2025OCT789456</div>
+        </div>
+
+        <div class="ticket-container" id="ticketContent">
+            <div class="ticket-header">
+                <div class="ticket-logo">LocoTranz</div>
+                <div class="ticket-type">E-TICKET</div>
+            </div>
+
+            <div class="ticket-body">
+                <div class="payment-status">
+                    Payment Successful - Transaction ID: TXN987654321
+                </div>
+
+                <div class="journey-section" style="position: relative;">
+                    <div class="journey-duration">3h 30m</div>
+                    <div class="journey-point">
+                        <div class="journey-label">Departure</div>
+                        <div class="journey-city">Mumbai</div>
+                        <div class="journey-time">06:00 AM</div>
+                        <div class="journey-date">25 Oct 2025</div>
+                    </div>
+                    <div class="journey-arrow">→</div>
+                    <div class="journey-point">
+                        <div class="journey-label">Arrival</div>
+                        <div class="journey-city">Pune</div>
+                        <div class="journey-time">09:30 AM</div>
+                        <div class="journey-date">25 Oct 2025</div>
+                    </div>
+                </div>
+
+              
+        
+
+                <div class="section-title">Boarding & Dropping Points</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Boarding Point</div>
+                        <div class="info-value">Dadar - 06:00 AM</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">Dadar East Bus Station, Mumbai</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Dropping Point</div>
+                        <div class="info-value">Pune Station - 09:30 AM</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">Pune Railway Station Bus Stand</div>
+                    </div>
+                </div>
+
+                <div class="section-title">Passenger Details</div>
+                <table class="passenger-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Seat Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rajesh Kumar</td>
+                            <td>32</td>
+                            <td>Male</td>
+                            <td><span class="seat-badge">1A</span></td>
+                        </tr>
+                        <tr>
+                            <td>Priya Sharma</td>
+                            <td>28</td>
+                            <td>Female</td>
+                            <td><span class="seat-badge">1B</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="section-title">Contact Information</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">rajesh.kumar@email.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Mobile Number</div>
+                        <div class="info-value">+91 98765 43210</div>
+                    </div>
+                </div>
+
+                <div class="section-title">Price Breakdown</div>
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>Base Fare (2 seats × ₹450)</span>
+                        <span>₹900</span>
+                    </div>
+                    <div class="price-row">
+                        <span>GST (5%)</span>
+                        <span>₹45</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Convenience Fee</span>
+                        <span>₹30</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Total Amount Paid</span>
+                        <span>₹975</span>
+                    </div>
+                </div>
+
+                <div class="qr-section">
+                    <div class="qr-code">📱</div>
+                    <div class="qr-text"><strong>Scan this QR code</strong> at the boarding point for quick check-in</div>
+                </div>
+
+                <div class="important-info">
+                    <div class="important-title">Important Instructions</div>
+                    <ul class="important-list">
+                        <li>Please arrive at the boarding point at least <strong>15 minutes before departure time</strong></li>
+                        <li>Carry a <strong>valid government-issued photo ID</strong> (Aadhaar, PAN, Driving License, or Passport)</li>
+                        <li>Show this e-ticket (printed or mobile) to the bus conductor</li>
+                        <li>Partial cancellation is not allowed. Full ticket must be cancelled for refund</li>
+                        <li>Cancellation charges: 25% if cancelled 24 hours before, 50% if cancelled 6-24 hours before, No refund within 6 hours</li>
+                        <li>In case of bus delay or cancellation, contact us immediately at <strong>1800-123-4567</strong></li>
+                        <li>Please maintain decorum and follow bus rules during the journey</li>
+                    </ul>
+                </div>
+
+                <div class="contact-support">
+                    <div class="contact-support-title">Need Help? Contact Our Support Team</div>
+                    <div class="contact-buttons">
+                        <a href="tel:18001234567" class="contact-btn">📞 Call Support</a>
+                        <a href="mailto:support@locotranz.com" class="contact-btn">✉️ Email Us</a>
+                        <a href="#" class="contact-btn">💬 Live Chat</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket-footer">
+                <p><strong>LocoTranz</strong> - Your Trusted Travel Partner</p>
+                <p>For queries: support@locotranz.com | 1800-123-4567 | www.locotranz.com</p>
+                <p style="margin-top: 10px; font-size: 11px;">This is a computer-generated ticket and does not require a signature.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

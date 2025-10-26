@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Styles/admin.css">
+</head>
+<body>
+     <div class="container">
+        <header>
+            <div class="logo">🚌 MyBus Admin</div>
+            <div class="admin-info">
+                <div>
+                    <div style="font-weight: bold; color: #333;">Admin Dashboard</div>
+                    <div style="font-size: 12px; color: #666;">Last login: Today, 09:30 AM</div>
+                </div>
+                <div class="admin-avatar">A</div>
+            </div>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-title">Running Today</div>
+                <div class="stat-value">24</div>
+                <div class="stat-icon">🚌</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Total Buses</div>
+                <div class="stat-value">42</div>
+                <div class="stat-icon">🚍</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Scheduled</div>
+                <div class="stat-value">15</div>
+                <div class="stat-icon">📅</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Maintenance</div>
+                <div class="stat-value">3</div>
+                <div class="stat-icon">🔧</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="section-header">
+                <h2 class="section-title">Bus Fleet Management</h2>
+                <div class="filter-controls">
+                    <button class="filter-btn active">All Buses</button>
+                    <button class="filter-btn">Running</button>
+                    <button class="filter-btn">Scheduled</button>
+                    <button class="filter-btn">Maintenance</button>
+                </div>
+            </div>
+
+            <table class="bus-table">
+                <thead>
+                    <tr>
+                        <th>Bus Number</th>
+                        <th>Route</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Time</th>
+                        <th>Status</th>
+                        <th>Capacity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="bus-number">MB-101</span></td>
+                        <td>Chennai → Bangalore</td>
+                        <td>06:00 AM</td>
+                        <td>12:30 PM</td>
+                        <td><span class="status-badge status-running">Running</span></td>
+                        <td>45/50</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-101', 'Chennai → Bangalore', '06:00', '12:30')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-102</span></td>
+                        <td>Chennai → Coimbatore</td>
+                        <td>07:30 AM</td>
+                        <td>02:00 PM</td>
+                        <td><span class="status-badge status-running">Running</span></td>
+                        <td>38/50</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-102', 'Chennai → Coimbatore', '07:30', '14:00')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-103</span></td>
+                        <td>Chennai → Madurai</td>
+                        <td>08:00 AM</td>
+                        <td>04:30 PM</td>
+                        <td><span class="status-badge status-running">Running</span></td>
+                        <td>42/50</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-103', 'Chennai → Madurai', '08:00', '16:30')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-104</span></td>
+                        <td>Chennai → Trichy</td>
+                        <td>09:00 AM</td>
+                        <td>02:30 PM</td>
+                        <td><span class="status-badge status-running">Running</span></td>
+                        <td>40/50</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-104', 'Chennai → Trichy', '09:00', '14:30')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-105</span></td>
+                        <td>Chennai → Pondicherry</td>
+                        <td>10:00 AM</td>
+                        <td>01:00 PM</td>
+                        <td><span class="status-badge status-running">Running</span></td>
+                        <td>35/45</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-105', 'Chennai → Pondicherry', '10:00', '13:00')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-106</span></td>
+                        <td>Bangalore → Chennai</td>
+                        <td>11:00 AM</td>
+                        <td>05:30 PM</td>
+                        <td><span class="status-badge status-scheduled">Scheduled</span></td>
+                        <td>0/50</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-106', 'Bangalore → Chennai', '11:00', '17:30')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-107</span></td>
+                        <td>Chennai → Salem</td>
+                        <td>12:00 PM</td>
+                        <td>04:30 PM</td>
+                        <td><span class="status-badge status-scheduled">Scheduled</span></td>
+                        <td>0/50</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-107', 'Chennai → Salem', '12:00', '16:30')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bus-number">MB-108</span></td>
+                        <td>Chennai → Vellore</td>
+                        <td>01:00 PM</td>
+                        <td>03:30 PM</td>
+                        <td><span class="status-badge status-maintenance">Maintenance</span></td>
+                        <td>0/45</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="openModal('MB-108', 'Chennai → Vellore', '13:00', '15:30')">Edit Route</button>
+                            <button class="action-btn btn-view">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">Edit Bus Route & Timing</div>
+            
+            <div class="route-info">
+                <div style="font-weight: bold; color: #333; margin-bottom: 8px;">Current Route</div>
+                <div class="route-stops">
+                    <span id="modalRoute"></span>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Bus Number</label>
+                    <input type="text" class="form-input" id="busNumber" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Departure Location</label>
+                    <input type="text" class="form-input" id="departureLocation" placeholder="Enter departure location">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Arrival Location</label>
+                    <input type="text" class="form-input" id="arrivalLocation" placeholder="Enter arrival location">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Departure Time</label>
+                    <input type="time" class="form-input" id="departureTime">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Arrival Time</label>
+                    <input type="time" class="form-input" id="arrivalTime">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Bus Status</label>
+                    <select class="form-input" id="busStatus">
+                        <option value="running">Running</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                    <button type="button" class="btn-save" onclick="saveChanges()">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(busNum, route, depTime, arrTime) {
+            document.getElementById('editModal').classList.add('active');
+            document.getElementById('busNumber').value = busNum;
+            document.getElementById('modalRoute').textContent = route;
+            
+            const routeParts = route.split(' → ');
+            document.getElementById('departureLocation').value = routeParts[0];
+            document.getElementById('arrivalLocation').value = routeParts[1];
+            document.getElementById('departureTime').value = depTime;
+            document.getElementById('arrivalTime').value = arrTime;
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        function saveChanges() {
+            alert('Route and timing updated successfully!');
+            closeModal();
+        }
+
+        // Filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Styles/payment.css">
+</head>
+<body>
+      <div class="container">
+        <div class="header">
+            <h1>UPI Payment</h1>
+            <p>Secure & Fast Payment Gateway</p>
+        </div>
+
+        <form id="paymentForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="upiId">UPI ID</label>
+                <input type="text" id="upiId" name="upiId" placeholder="yourname@upi" required>
+            </div>
+
+            <div class="payment-methods">
+                <h3>Select Payment Method</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="phonepe" name="paymentMethod" value="phonepe" required>
+                        <label for="phonepe" class="payment-card">
+                            <div class="payment-icon">📱</div>
+                            <div class="payment-name">PhonePe</div>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" id="gpay" name="paymentMethod" value="gpay">
+                        <label for="gpay" class="payment-card">
+                            <div class="payment-icon">🔵</div>
+                            <div class="payment-name">Google Pay</div>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" id="paytm" name="paymentMethod" value="paytm">
+                        <label for="paytm" class="payment-card">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-name">Paytm</div>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" id="supermoney" name="paymentMethod" value="supermoney">
+                        <label for="supermoney" class="payment-card">
+                            <div class="payment-icon">💰</div>
+                            <div class="payment-name">SuperMoney</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Proceed to Pay</button>
+        </form>
+
+        <div class="secure-badge">
+            Secure Payment
+        </div>
+    </div>
+    
+</body>
+</html>

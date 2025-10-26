@@ -1,0 +1,463 @@
+  * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+             background-color:#667eea ;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+           
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🚌";
+            font-size: 36px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+
+        .download-btn {
+            background: #4caf50;
+            color: white;
+        }
+    
+
+        .download-btn:hover {
+            background: #45a049;
+        }
+
+        .print-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .print-btn:hover {
+            background: #5568d3;
+        }
+
+        .success-banner {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+
+        .success-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .booking-id {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 700;
+            background: #f0f0f0;
+            padding: 12px 25px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .ticket-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .ticket-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ticket-logo::before {
+            content: "🚌";
+            font-size: 32px;
+        }
+
+        .ticket-type {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .ticket-body {
+            padding: 35px;
+        }
+
+        .journey-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .journey-point {
+            text-align: center;
+            flex: 1;
+        }
+
+        .journey-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .journey-city {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .journey-time {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .journey-date {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .journey-arrow {
+            font-size: 40px;
+            color: #667eea;
+            padding: 0 20px;
+        }
+
+        .journey-duration {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+            border: 2px solid #e0e0e0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .passenger-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .passenger-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .passenger-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .passenger-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .passenger-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .seat-badge {
+            background: #4caf50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .price-breakdown {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .price-row.total {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .payment-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .payment-status::before {
+            content: "✓";
+            font-size: 24px;
+            background: white;
+            color: #4caf50;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .important-info {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+            margin-bottom: 30px;
+        }
+
+        .important-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .important-title::before {
+            content: "⚠️";
+            font-size: 20px;
+        }
+
+        .important-list {
+            margin-left: 28px;
+        }
+
+        .important-list li {
+            color: #856404;
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: 8px;
+        }
+
+        .qr-section {
+            text-align: center;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .qr-code {
+            width: 180px;
+            height: 180px;
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 80px;
+        }
+
+        .qr-text {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .contact-support {
+            text-align: center;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 12px;
+        }
+
+        .contact-support-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 12px 25px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .ticket-footer {
+            background: #f9f9f9;
+            padding: 20px 35px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            border-top: 2px dashed #e0e0e0;
+        }
+

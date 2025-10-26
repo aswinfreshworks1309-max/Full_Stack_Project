@@ -241,9 +241,11 @@
             background: white;
         }
 
-        .seat:hover:not(.booked) {
-            transform: scale(1.1);
+
+        .seat:hover.available{
+             transform: scale(1.1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
         }
 
         .seat.available {
@@ -265,15 +267,13 @@
             cursor: not-allowed;
         }
 
-        .seat.female {
-            background: #ffc0cb;
-            border-color: #ffb3c1;
-        }
+
 
         .seat.empty {
             background: transparent;
             border: none;
-            cursor: default;
+            cursor:default;
+            
         }
 
         .aisle {
