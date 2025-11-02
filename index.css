@@ -2,6 +2,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            
+        }
+        a{
+            color: white;
+            text-decoration: none;
         }
 
         body {
@@ -77,11 +82,14 @@
         .booking-form {
             background: white;
             max-width: 900px;
-            margin: -50px auto 0;
+            /* margin: -50px auto 0; */
+            
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             position: relative;
+            left: 275px;
+            bottom: 70px;
             z-index: 100;
         }
 
@@ -234,11 +242,11 @@
         }
 
         /* Footer */
-        footer {
-            background: #2d3748;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
+            footer {
+                background: #2d3748;
+                color: white;
+                padding: 2rem;
+                text-align: center;
+            }
 
         /* Animations */

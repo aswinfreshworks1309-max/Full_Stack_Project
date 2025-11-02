@@ -21,7 +21,10 @@
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+       a{
+        color: white;
+        text-decoration: none;
+       }
         .header {
             background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
             color: white;

@@ -21,7 +21,10 @@
             max-width: 400px;
             animation: slideIn 0.5s ease-out;
         }
-     
+        a{
+            color: white;
+            text-decoration: none;
+        }
         h1 {
             text-align: center;
             color: #333;
