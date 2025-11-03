@@ -8,24 +8,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: white;
             min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            background: white;
-            padding: 20px 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-             background-color:#667eea ;
+           
         }
 
         .logo {
@@ -38,10 +21,6 @@
             gap: 10px;
         }
 
-        .logo::before {
-            content: "🚌";
-            font-size: 36px;
-        }
 
         .header-buttons {
             display: flex;
@@ -85,6 +64,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             text-align: center;
+            margin-top: 50px;
         }
 
         .success-icon {

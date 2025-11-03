@@ -19,7 +19,7 @@
             margin: 0 auto;
         }
 
-        header {
+        .bus_list {
             background: #ffffff;
             padding: 25px 30px;
             border-radius: 10px;

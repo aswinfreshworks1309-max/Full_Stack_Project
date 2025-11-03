@@ -12,10 +12,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: white;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+        
+          
         }
 
         .container {
@@ -25,6 +23,9 @@
             max-width: 450px;
             width: 100%;
             padding: 40px;
+            position: relative;
+            left: 500px;
+            top: 50px;
         }
 
         .header {

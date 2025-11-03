@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Styles/forgot.css">
+    <link rel="stylesheet" href="../Styles/header.css">
+</head>
+<body>
+           <header>
+        <nav>
+            <div class="logo">
+                <div class="logo-icon">🚌</div>
+                <span>BusWay</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#routes">Contact</a></li>
+                <li><a href="#schedule">About</a></li>
+                <li><a href="#offers">help ?</a></li>
+                
+            </ul>
+
+        
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+ 
+     <div class="container">
+        <div class="forgot-logo">
+            <h1>🚌 Locotranz</h1>
+            <p>Your Journey, Our Priority</p>
+        </div>
+
+        <div class="icon">🔒</div>
+
+        <div id="alert" class="alert"></div>
+
+        <!-- Step 1: Enter Mobile Number -->
+        <div id="step1" class="step active">
+            <div class="form-title">
+                <h2>Forgot Password?</h2>
+            </div>
+            <p class="form-subtitle">
+                Enter your registered mobile number to receive an OTP
+            </p>
+
+            <form id="mobileForm">
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input 
+                        type="tel" 
+                        id="mobile" 
+                        name="mobile" 
+                        placeholder="Enter 10-digit mobile number"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+                <button type="submit" class="btn">Send OTP</button>
+            </form>
+
+            <div class="back-to-login">
+                <p>Remember your password? <a href="login.html">Back to Login</a></p>
+            </div>
+        </div>
+
+        <!-- Step 2: Enter OTP -->
+        <div id="step2" class="step">
+            <div class="form-title">
+                <h2>Verify OTP</h2>
+            </div>
+            <p class="form-subtitle">
+                Enter the 6-digit OTP sent to <strong id="displayMobile"></strong>
+            </p>
+
+            <form id="otpForm">
+                <div class="otp-inputs">
+                    <input type="text" class="otp-input" maxlength="1" data-index="0">
+                    <input type="text" class="otp-input" maxlength="1" data-index="1">
+                    <input type="text" class="otp-input" maxlength="1" data-index="2">
+                    <input type="text" class="otp-input" maxlength="1" data-index="3">
+                    <input type="text" class="otp-input" maxlength="1" data-index="4">
+                    <input type="text" class="otp-input" maxlength="1" data-index="5">
+                </div>
+
+                <button type="submit" class="btn">Verify OTP</button>
+
+                <div class="resend-otp">
+                    <p>Didn't receive OTP? <button type="button" id="resendBtn" disabled>Resend OTP <span class="timer" id="timer">(30s)</span></button></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 3: Create New Password -->
+        <div id="step3" class="step">
+            <div class="form-title">
+                <h2>Create New Password</h2>
+            </div>
+            <p class="form-subtitle">
+                Enter your new password below
+            </p>
+
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="newPassword" 
+                            name="newPassword" 
+                            placeholder="Enter new password"
+                            required
+                        >
+                        <span class="toggle-icon" onclick="togglePassword('newPassword', this)">👁️</span>
+                    </div>
+                    <div class="password-requirements">
+                        Password must contain:
+                        <ul>
+                            <li>At least 8 characters</li>
+                            <li>One uppercase letter</li>
+                            <li>One lowercase letter</li>
+                            <li>One number</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            placeholder="Re-enter new password"
+                            required
+                        >
+                        <span class="toggle-icon" onclick="togglePassword('confirmPassword', this)">👁️</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let userMobile = '';
+        let resendTimer;
+        let timeLeft = 30;
+
+        // Step 1: Mobile Number Form
+        document.getElementById('mobileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const mobile = document.getElementById('mobile').value;
+            
+            // Validate mobile number (10 digits)
+            if (!/^\d{10}$/.test(mobile)) {
+                showAlert('Please enter a valid 10-digit mobile number', 'error');
+                return;
+            }
+
+            userMobile = mobile;
+            
+            // Simulate sending OTP
+            showAlert('OTP sent successfully to ' + mobile, 'success');
+            
+            // Move to step 2
+            setTimeout(() => {
+                showStep(2);
+                document.getElementById('displayMobile').textContent = maskMobile(mobile);
+                startResendTimer();
+            }, 1500);
+
+          
+        });
+
+        // Step 2: OTP Form
+        const otpInputs = document.querySelectorAll('.otp-input');
+        
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', function(e) {
+                if (this.value.length === 1) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+
+            // Only allow numbers
+            input.addEventListener('keypress', function(e) {
+                if (!/^\d$/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        document.getElementById('otpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let otp = '';
+            otpInputs.forEach(input => {
+                otp += input.value;
+            });
+
+            if (otp.length !== 6) {
+                showAlert('Please enter complete 6-digit OTP', 'error');
+                return;
+            }
+
+            // Simulate OTP verification
+            showAlert('OTP verified successfully!', 'success');
+            
+            // Move to step 3
+            setTimeout(() => {
+                showStep(3);
+            }, 1500);
+
+            // In real application, verify OTP via API:
+            // fetch('/api/verify-otp', { method: 'POST', body: JSON.stringify({ mobile: userMobile, otp }) })
+        });
+
+        // Resend OTP
+        document.getElementById('resendBtn').addEventListener('click', function() {
+            showAlert('OTP resent successfully!', 'success');
+            
+            // Clear OTP inputs
+            otpInputs.forEach(input => input.value = '');
+            otpInputs[0].focus();
+            
+            // Restart timer
+            startResendTimer();
+
+            // In real application: fetch('/api/send-otp', { method: 'POST', body: JSON.stringify({ mobile: userMobile }) })
+        });
+
+        // Step 3: Password Form
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate password strength
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!passwordRegex.test(newPassword)) {
+                showAlert('Password must be at least 8 characters with uppercase, lowercase, and number', 'error');
+                return;
+            }
+
+            // Check if passwords match
+            if (newPassword !== confirmPassword) {
+                showAlert('Passwords do not match!', 'error');
+                return;
+            }
+
+            // Simulate password reset
+            showAlert('Password reset successful! Redirecting to login...', 'success');
+            
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+
+            // In real application:
+            // fetch('/api/reset-password', { method: 'POST', body: JSON.stringify({ mobile: userMobile, password: newPassword }) })
+        });
+
+        // Helper Functions
+        function showStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('step' + stepNumber).classList.add('active');
+        }
+
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alert');
+            alertBox.textContent = message;
+            alertBox.className = 'alert alert-' + type;
+            alertBox.style.display = 'block';
+
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 5000);
+        }
+
+        function maskMobile(mobile) {
+            return 'XXXXXX' + mobile.slice(-4);
+        }
+
+        function startResendTimer() {
+            timeLeft = 30;
+            const resendBtn = document.getElementById('resendBtn');
+            const timerDisplay = document.getElementById('timer');
+            
+            resendBtn.disabled = true;
+            
+            clearInterval(resendTimer);
+            resendTimer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = '(' + timeLeft + 's)';
+                
+                if (timeLeft <= 0) {
+                    clearInterval(resendTimer);
+                    resendBtn.disabled = false;
+                    timerDisplay.textContent = '';
+                }
+            }, 1000);
+        }
+
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                icon.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>
+
+</body>
+</html>
