@@ -12,20 +12,11 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            animation: slideDown 0.6s ease-out;
+           
+             
         }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+ 
 
         nav {
             max-width: 1400px;
@@ -43,16 +34,13 @@
             font-size: 1.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+ 
             background-clip: text;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+   
 
         .logo-icon {
             width: 45px;
@@ -65,13 +53,9 @@
             color: white;
             font-size: 24px;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            animation: float 3s ease-in-out infinite;
+            
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
+ 
 
         .nav-links {
             display: flex;
@@ -86,22 +70,11 @@
             font-weight: 600;
             font-size: 1rem;
             position: relative;
-            transition: color 0.3s ease;
+           
             padding: 8px 0;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-
+ 
         .nav-links a:hover {
             color: #667eea;
         }
@@ -121,8 +94,7 @@
             border-radius: 25px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
+        
             font-size: 0.95rem;
         }
 
@@ -135,8 +107,7 @@
         .btn-login:hover {
             background: #667eea;
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      
         }
 
         .btn-signup {
@@ -146,7 +117,7 @@
         }
 
         .btn-signup:hover {
-            transform: translateY(-2px);
+           
             color: #667eea;
             border: 2px solid  #667eea;
             background:white ;
@@ -166,5 +137,5 @@
             height: 3px;
             background: #667eea;
             border-radius: 2px;
-            transition: all 0.3s ease;
+            
         }
