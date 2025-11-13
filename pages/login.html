@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LocoTranz | Login</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+
+  <!-- 🎥 BACKGROUND VIDEO -->
+  <video autoplay loop muted playsinline class="bg-video">
+    <source src="https://videos.pexels.com/video-files/4064170/4064170-hd_1280_720_25fps.mp4" type="video/mp4">
+  </video>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>LocoTranz</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../pages/contact.html">Contact</a></li>
+        <li><a href="../pages/about.html">About</a></li>
+        <li><a href="../pages/help.html">Help?</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- LOGIN FORM -->
+  <div class="login-container" data-aos="zoom-in">
+    <div class="bus-icon">
+      <img src="https://cdn-icons-png.flaticon.com/128/4709/4709348.png" alt="Bus Icon">
+    </div>
+    <h1>Welcome Back!</h1>
+    <p class="subtitle">Book your next journey with ease</p>
+
+    <form>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <div class="forgot-password">
+        <a href="#">Forgot Password?</a>
+      </div>
+   <button 
+  type="submit" 
+  class="login-btn" 
+  onclick="window.location.href=' ../index.html'"
+>
+  Login
+</button>
+
+    </form>
+
+    <div class="divider">OR</div>
+    
+    <div class="signup-link">
+        Don’t have an account? <a href="./sign_up.html">Sign Up</a>
+    </div>
+</div>
+
+<footer id="contact">
+<p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+</footer>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+  </script>
+</body>
+</html>

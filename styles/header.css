@@ -1,0 +1,123 @@
+ /* 🔝 Header */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+ 
+ 
+ header {
+      background: rgba(0, 0, 0, 0.8);
+      color: #f1f1f1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 60px;
+      position: fixed;
+     
+      width: 100%;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ffcc33;
+      
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffcc33;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background-color: #ffcc33;
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #f1f1f1;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc33;
+    }
+
+    /* 💬 Help Container */
+    .help-container {
+      margin-top: 120px;
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    .help-container h1 {
+      font-size: 2.8rem;
+      color: #ffcc33;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .help-container p {
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 50px;
+    }
+
+    /* ❓ FAQ Section */
+    .faq {
+      display: grid;
+      gap: 25px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 204, 51, 0.4);
+      transition: 0.3s ease;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 10px rgba(255, 204, 51, 0.3);
+    }
+
+    .faq-item h3 {
+      color: #ffcc33;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .faq-item p {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+
+
+
+    /* footer */
+
+
+    /* Footer */
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #111;
+  color: #aaa;
+}

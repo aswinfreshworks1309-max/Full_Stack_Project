@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LocoTranz • Seat Selection</title>
+  <link rel="stylesheet" href="../Styles/seat.css" />
+  <link rel="stylesheet" href="../Styles/header.css" />
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- NAV / HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      LocoTranz
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+       
+        <li><a href="../pages/about.html">About</a></li>
+        <li><a href="../pages/help.html" style="color: #ffcc33;">Help</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page" data-aos="fade-up">
+    <div class="container">
+      <div class="grid">
+
+        <!-- LEFT: bus info + seats -->
+        <section class="left" data-aos="fade-right">
+          <div class="bus-info-card glass">
+            <div class="bus-top">
+              <div>
+                <div class="bus-name">Shivneri Travels</div>
+                <div class="bus-type">AC Seater / Sleeper • MTC 45A</div>
+              </div>
+              <div class="fare-tag">Premium</div>
+            </div>
+
+            <div class="journey-info">
+              <div class="journey-item">
+                <div class="journey-label">FROM</div>
+                <div class="journey-value">Mumbai</div>
+                <div class="journey-small">06:00 AM</div>
+              </div>
+              <div class="journey-item center">
+                <div class="journey-label">DURATION</div>
+                <div class="journey-value">3h 30m</div>
+              </div>
+              <div class="journey-item">
+                <div class="journey-label">TO</div>
+                <div class="journey-value">Pune</div>
+                <div class="journey-small">09:30 AM</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="seat-layout-card glass" data-aos="zoom-in">
+            <div class="layout-header">Select Your Seats</div>
+
+            <div class="legend">
+              <div class="legend-item"><span class="legend-box available"></span><span>Available</span></div>
+              <div class="legend-item"><span class="legend-box selected"></span><span>Selected</span></div>
+              <div class="legend-item"><span class="legend-box booked"></span><span>Booked</span></div>
+            </div>
+
+            <!-- Bus layout -->
+            <div class="bus-layout" id="busLayout">
+              <div class="driver-section"><div class="steering">🚍</div></div>
+
+              <!-- Seat rows (change labels if needed) -->
+              <!-- Example: 7 rows, 4 seats per row (2 + aisle + 2) -->
+              <div class="seat-row">
+                <div class="seat available" data-seat="1A">1A</div>
+                <div class="seat available" data-seat="1B">1B</div>
+                <div class="aisle"></div>
+                <div class="seat available" data-seat="1C">1C</div>
+                <div class="seat available" data-seat="1D">1D</div>
+              </div>
+
+              <div class="seat-row">
+                <div class="seat available" data-seat="2A">2A</div>
+                <div class="seat available" data-seat="2B">2B</div>
+                <div class="aisle"></div>
+                <div class="seat booked" data-seat="2C">2C</div>
+                <div class="seat booked" data-seat="2D">2D</div>
+              </div>
+
+              <div class="seat-row">
+                <div class="seat available" data-seat="3A">3A</div>
+                <div class="seat available" data-seat="3B">3B</div>
+                <div class="aisle"></div>
+                <div class="seat available" data-seat="3C">3C</div>
+                <div class="seat available" data-seat="3D">3D</div>
+              </div>
+
+              <div class="seat-row">
+                <div class="seat available" data-seat="4A">4A</div>
+                <div class="seat booked" data-seat="4B">4B</div>
+                <div class="aisle"></div>
+                <div class="seat available" data-seat="4C">4C</div>
+                <div class="seat available" data-seat="4D">4D</div>
+              </div>
+
+              <div class="seat-row">
+                <div class="seat available" data-seat="5A">5A</div>
+                <div class="seat available" data-seat="5B">5B</div>
+                <div class="aisle"></div>
+                <div class="seat available" data-seat="5C">5C</div>
+                <div class="seat available" data-seat="5D">5D</div>
+              </div>
+
+              <div class="seat-row">
+                <div class="seat available" data-seat="6A">6A</div>
+                <div class="seat available" data-seat="6B">6B</div>
+                <div class="aisle"></div>
+                <div class="seat booked" data-seat="6C">6C</div>
+                <div class="seat available" data-seat="6D">6D</div>
+              </div>
+
+              <div class="seat-row">
+                <div class="seat available" data-seat="7A">7A</div>
+                <div class="seat available" data-seat="7B">7B</div>
+                <div class="aisle"></div>
+                <div class="seat available" data-seat="7C">7C</div>
+                <div class="seat available" data-seat="7D">7D</div>
+              </div>
+              <div class="seat-row">
+                <div class="seat available" data-seat="7A">7A</div>
+                <div class="seat available" data-seat="7B">7B</div>
+                <div class="aisle"></div>
+                <div class="seat available" data-seat="7C">7C</div>
+                <div class="seat available" data-seat="7D">7D</div>
+              </div>
+    
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: booking summary -->
+        <aside class="right" data-aos="fade-left">
+          <div class="booking-summary glass">
+            <div class="summary-title">Booking Summary</div>
+
+            <div class="selected-seats">
+              <div class="boarding-label">Selected Seats</div>
+              <div id="seatDisplay" class="seat-display">
+                <p class="muted">No seats selected</p>
+              </div>
+            </div>
+
+            <div class="boarding-points">
+              <div class="boarding-label">Boarding Point</div>
+              <select id="boardingSelect" class="boarding-select">
+                <option value="">Select boarding point</option>
+                <option>Mumbai Central - 05:45 AM</option>
+                <option>Dadar - 06:00 AM</option>
+                <option>Thane - 06:15 AM</option>
+              </select>
+
+              <div class="boarding-label">Dropping Point</div>
+              <select id="droppingSelect" class="boarding-select">
+                <option value="">Select dropping point</option>
+                <option>Pune Station - 09:30 AM</option>
+                <option>Shivaji Nagar - 09:45 AM</option>
+                <option>Katraj - 10:00 AM</option>
+              </select>
+            </div>
+
+            <div class="price-breakdown">
+              <div class="price-row"><span>Base Fare</span><span id="baseFare">₹0</span></div>
+              <div class="price-row"><span>GST (5%)</span><span id="gst">₹0</span></div>
+              <div class="price-row total"><span>Total Amount</span><span id="totalAmount">₹0</span></div>
+            </div>
+
+            <button id="continueBtn" class="continue-btn" onclick="window.location.href = './payment.html'">
+              <span>Continue to Payment</span>
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+    <footer id="contact">
+    <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Page JS -->
+  <script>
+    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
+
+    // // Seat selection logic
+    // const PRICE_PER_SEAT = 75; // you can set dynamic price per bus
+    // const seatDisplay = document.getElementById('seatDisplay');
+    // const baseFareEl = document.getElementById('baseFare');
+    // const gstEl = document.getElementById('gst');
+    // const totalEl = document.getElementById('totalAmount');
+    // const continueBtn = document.getElementById('continueBtn');
+
+    // let selectedSeats = [];
+
+    // // delegate clicks for performance
+    // document.getElementById('busLayout').addEventListener('click', function (e) {
+    //   const seat = e.target.closest('.seat');
+    //   if (!seat) return;
+    //   if (seat.classList.contains('booked')) return; // ignore booked
+    //   const seatId = seat.dataset.seat;
+    //   if (!seatId) return;
+
+    //   if (seat.classList.contains('selected')) {
+    //     // deselect
+    //     seat.classList.remove('selected', 'gold-glow');
+    //     selectedSeats = selectedSeats.filter(s => s !== seatId);
+    //   } else {
+    //     // select
+    //     seat.classList.add('selected', 'gold-glow');
+    //     selectedSeats.push(seatId);
+    //   }
+    //   updateSummary();
+    // });
+
+    // function updateSummary() {
+    //   // Update seat chips
+    //   seatDisplay.innerHTML = '';
+    //   if (selectedSeats.length === 0) {
+    //     seatDisplay.innerHTML = '<p class="muted">No seats selected</p>';
+    //     continueBtn.disabled = true;
+    //     continueBtn.classList.remove('active');
+    //   } else {
+    //     selectedSeats.sort(); // optional
+    //     selectedSeats.forEach(s => {
+    //       const chip = document.createElement('span');
+    //       chip.className = 'seat-chip';
+    //       chip.textContent = s;
+    //       seatDisplay.appendChild(chip);
+    //     });
+    //     continueBtn.disabled = false;
+    //     continueBtn.classList.add('active');
+    //   }
+
+    //   // Price calculation
+    //   const base = selectedSeats.length * PRICE_PER_SEAT;
+    //   const gst = Math.round(base * 0.05);
+    //   const total = base + gst;
+
+    //   baseFareEl.textContent = `₹${base}`;
+    //   gstEl.textContent = `₹${gst}`;
+    //   totalEl.textContent = `₹${total}`;
+    // }
+
+    // // Continue button handler (example)
+    // continueBtn.addEventListener('click', function () {
+    //   if (selectedSeats.length === 0) return;
+    //   // Here you would send selection to next page or store in session/localStorage.
+    //   // Example: save to localStorage and navigate
+    //   localStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+    //   localStorage.setItem('totalAmount', totalEl.textContent);
+    //   window.location.href = '../Pages/payment.html'; // adjust if needed
+    // });
+
+    // // small UX: tooltip on hover for booked seats
+    // document.querySelectorAll('.seat.booked').forEach(s => {
+    //   s.title = 'Already booked';
+    // });
+  </script>
+</body>
+</html>

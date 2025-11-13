@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LocoTranz | Pay via UPI</title>
+  <link rel="stylesheet" href="../styles/payment.css">
+  <link rel="stylesheet" href="../styles/header.css">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+<body>
+
+      <header>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      LocoTranz
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+  
+        <li><a href="../pages/about.html">About</a></li>
+        <li><a href="../pages/help.html" style="color: #ffcc33;">Help</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+
+  <div class="container" data-aos="fade-up">
+    <div class="header">
+      <h2>LocoTranz UPI Payment</h2>
+      <p>Choose your preferred UPI app to make payment securely</p>
+    </div>
+
+    <div class="amount-input">
+      <input type="number" id="amount" placeholder="Enter amount (₹)" min="1" step="1" />
+    </div>
+
+    <div class="payment-options">
+      <h3>Select UPI App</h3>
+      <div class="apps-grid">
+        <div class="app-btn" onclick="selectApp('gpay')" id="gpay-btn">
+          <div class="app-icon gpay"><img src="../assests/download.jpg" alt=""></div>
+          <div class="app-name">Google Pay</div>
+        </div>
+        <div class="app-btn" onclick="selectApp('phonepe')" id="phonepe-btn">
+          <div class="app-icon phonepe"><img src="../assests/phone pay.png" alt=""></div>
+          <div class="app-name">PhonePe</div>
+        </div>
+        <div class="app-btn" onclick="selectApp('paytm')" id="paytm-btn">
+          <div class="app-icon paytm"><img src="../assests/paytm.png" alt=""></div>
+          <div class="app-name">Paytm</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="pay-btn" onclick="payNow()" id="pay-btn" >Pay Now</button>
+
+    <div id="qr-section">
+      <h3>Scan QR Code to Pay</h3>
+      <canvas id="qr-canvas"></canvas>
+      <p class="note">Open any UPI app and scan this QR code</p>
+    </div>
+  </div>
+
+
+  
+
+    <footer id="contact">
+    <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.0/dist/qrious.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    const UPI_ID = "locotranz@okaxis";
+    const PAYEE_NAME = "LocoTranz Transport";
+
+    let selectedApp = null;
+
+    function selectApp(app) {
+      document.querySelectorAll('.app-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`${app}-btn`).classList.add('active');
+      selectedApp = app;
+      const amount = document.getElementById('amount').value;
+      document.getElementById('pay-btn').disabled = !(amount && selectedApp);
+    }
+
+    function payNow() {
+      const amountInput = document.getElementById("amount");
+      const amount = amountInput.value.trim();
+
+      if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+        alert("Please enter a valid amount");
+        return;
+      }
+
+      if (!selectedApp) {
+        alert("Please select a UPI app");
+        return;
+      }
+
+      const upiUrl = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR&tn=LocoTranz+Booking`;
+
+      // Show QR code
+      const qrSection = document.getElementById('qr-section');
+      qrSection.style.display = 'block';
+
+      const canvas = document.getElementById('qr-canvas');
+      new QRious({ element: canvas, value: upiUrl, size: 220 });
+
+      // Auto deep link
+      if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        let deepLink = '';
+        switch(selectedApp) {
+          case 'gpay':
+            deepLink = `intent://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+            break;
+          case 'phonepe':
+            deepLink = `phonepe://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR`;
+            break;
+          case 'paytm':
+            deepLink = `paytmmp://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR`;
+            break;
+          default:
+            deepLink = upiUrl;
+        }
+        setTimeout(() => { window.location.href = deepLink; }, 800);
+      }
+    }
+
+    document.getElementById('amount').addEventListener('input', function() {
+      const amount = this.value;
+      document.getElementById('pay-btn').disabled = !(amount && selectedApp);
+    });
+  </script>
+</body>
+</html>

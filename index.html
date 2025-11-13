@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocoTranz | Luxury Travel Booking</title>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">🚌 LocoTranz</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#explore">Explore</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="btn login">
+            <a href="./pages/login.html">Login</a>
+          </button>
+          <button class="btn signup" type="submit">
+            <a href="./pages/signup.html">Sign Up</a>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="overlay"></div>
+      <div class="hero-content" data-aos="zoom-in">
+        <h1>Your Journey Begins in Luxury</h1>
+        <p>Travel smart, travel classy — with LocoTranz.</p>
+        <a href="#booking" class="hero-btn">Explore Now</a>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section id="booking" class="booking-section" data-aos="fade-up">
+      <h2>Find Your Route</h2>
+      <form class="booking-form glass" action="./pages/bus.html">
+        <div class="form-group">
+          <label>From</label><input type="text" placeholder="Departure City" />
+        </div>
+        <div class="form-group">
+          <label>To</label><input type="text" placeholder="Destination" />
+        </div>
+        <div class="form-group"><label>Date</label><input type="date" /></div>
+        <div class="form-group">
+          <label>Passengers</label>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+          </select>
+        </div>
+        <button class="btn search-btn" type="submit">Search Buses</button>
+      </form>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+      <h2 data-aos="fade-down">Why Choose LocoTranz?</h2>
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-right">
+          <div class="icon">💺</div>
+          <h3>Luxury Seating</h3>
+          <p>Recline in comfort and style.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up">
+          <div class="icon">🔒</div>
+          <h3>Secure Payments</h3>
+          <p>Your safety, our priority.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-left">
+          <div class="icon">💰</div>
+          <h3>Best Prices</h3>
+          <p>Premium rides, smart prices.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up">
+          <div class="icon">🎫</div>
+          <h3>Instant Tickets</h3>
+          <p>Confirmation in seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore -->
+    <section id="explore" class="explore">
+      <h2 data-aos="zoom-in">Explore Popular Routes</h2>
+      <div class="routes-grid">
+        <div class="route-card" data-aos="flip-left">
+          <h4>Chennai → Bangalore</h4>
+          <p>Starting ₹ 799</p>
+        </div>
+        <div class="route-card" data-aos="flip-up">
+          <h4>Coimbatore → Madurai</h4>
+          <p>Starting ₹ 499</p>
+        </div>
+        <div class="route-card" data-aos="flip-right">
+          <h4>Trichy → Chennai</h4>
+          <p>Starting ₹ 599</p>
+        </div>
+        <div class="route-card" data-aos="flip-up">
+          <h4>Salem → Pondicherry</h4>
+          <p>Starting ₹ 699</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <h2 data-aos="fade-down">What Our Travelers Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial" data-aos="zoom-in">
+          <p>“Unmatched comfort and style!”</p>
+          <span>- Arjun R.</span>
+        </div>
+        <div class="testimonial" data-aos="zoom-in">
+          <p>“Booking is super easy and secure.”</p>
+          <span>- Priya S.</span>
+        </div>
+        <div class="testimonial" data-aos="zoom-in">
+          <p>“Feels like a first-class flight on wheels.”</p>
+          <span>- Rahul K.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1200, once: true });
+    </script>
+  </body>
+</html>
