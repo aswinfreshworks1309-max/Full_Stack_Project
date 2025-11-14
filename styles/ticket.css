@@ -35,7 +35,7 @@
       .logo {
         font-size: 28px;
         font-weight: bold;
-        color: gold;
+        color: #f7c843;
         text-shadow: 0 0 8px #ffd700;
       }
 
@@ -46,26 +46,13 @@
       }
 
       .nav-links a {
-        color: gold;
+        color: rgb(255, 255, 255);
         font-weight: 600;
         position: relative;
         transition: all 0.3s;
       }
 
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -3px;
-        width: 0;
-        height: 2px;
-        background: gold;
-        transition: width 0.3s;
-      }
 
-      .nav-links a:hover::after {
-        width: 100%;
-      }
 
       .header-buttons {
         display: flex;
@@ -82,20 +69,20 @@
       }
 
       .download-btn {
-        background: gold;
+        background: #f7c843;
         color: #000;
       }
       .download-btn:hover {
-        box-shadow: 0 0 12px gold;
+        box-shadow: 0 0 12px #f7c843;
       }
 
       .print-btn {
         background: #000;
-        color: gold;
-        border: 1px solid gold;
+        color: #f7c843;
+        border: 1px solid #f7c843;
       }
       .print-btn:hover {
-        box-shadow: 0 0 12px gold;
+        box-shadow: 0 0 12px #f7c843;
       }
 
       .menu-toggle {
@@ -108,7 +95,7 @@
       .menu-toggle span {
         width: 25px;
         height: 3px;
-        background: gold;
+        background: #f7c843;
         border-radius: 2px;
         transition: all 0.3s;
       }
@@ -170,7 +157,7 @@
       .success-icon {
         width: 80px;
         height: 80px;
-        background: gold;
+        background: #f7c843;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -186,7 +173,7 @@
       .success-title {
         font-size: 32px;
         font-weight: 700;
-        color: gold;
+        color: #f7c843;
         margin-bottom: 10px;
       }
       .success-message {
@@ -198,7 +185,7 @@
         font-size: 18px;
         color: #000;
         font-weight: 700;
-        background: gold;
+        background: #f7c843;
         padding: 12px 25px;
         border-radius: 8px;
         display: inline-block;
@@ -213,7 +200,7 @@
 
       .ticket-header {
         background: #000;
-        color: gold;
+        color: #f7c843;
         padding: 25px 35px;
         display: flex;
         justify-content: space-between;
@@ -260,7 +247,7 @@
       .journey-city {
         font-size: 26px;
         font-weight: 700;
-        color: gold;
+        color: #f7c843;
         margin-bottom: 5px;
       }
       .journey-time {
@@ -275,7 +262,7 @@
       }
       .journey-arrow {
         font-size: 40px;
-        color: gold;
+        color: #f7c843;
         padding: 0 20px;
       }
       .journey-duration {
@@ -287,9 +274,9 @@
         padding: 5px 15px;
         border-radius: 20px;
         font-size: 13px;
-        color: gold;
+        color: #f7c843;
         font-weight: 600;
-        border: 2px solid gold;
+        border: 2px solid #f7c843;
       }
 
       .info-grid {
@@ -302,7 +289,7 @@
         padding: 20px;
         background: #222;
         border-radius: 10px;
-        border-left: 4px solid gold;
+        border-left: 4px solid #f7c843;
       }
       .info-label {
         font-size: 12px;
@@ -313,14 +300,14 @@
       }
       .info-value {
         font-size: 16px;
-        color: gold;
+        color: #f7c843;
         font-weight: 600;
       }
 
       .section-title {
         font-size: 18px;
         font-weight: 700;
-        color: gold;
+        color: #f7c843;
         margin-bottom: 15px;
         padding-bottom: 10px;
         border-bottom: 2px solid #333;
@@ -333,7 +320,7 @@
         color: #ccc;
       }
       .passenger-table th {
-        background: gold;
+        background: #f7c843;
         color: #000;
         padding: 15px;
         text-align: left;
@@ -346,7 +333,7 @@
         font-size: 14px;
       }
       .seat-badge {
-        background: gold;
+        background: #f7c843;
         color: #000;
         padding: 5px 12px;
         border-radius: 5px;
@@ -370,7 +357,7 @@
       .price-row.total {
         font-size: 24px;
         font-weight: 700;
-        color: gold;
+        color: #f7c843;
         border-top: 2px solid #333;
         padding-top: 15px;
         margin-top: 15px;
@@ -387,14 +374,14 @@
         width: 180px;
         height: 180px;
         background: #000;
-        border: 3px solid gold;
+        border: 3px solid #f7c843;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0 auto 15px;
         font-size: 80px;
-        color: gold;
+        color: #f7c843;
       }
       .qr-text {
         font-size: 13px;
@@ -407,7 +394,7 @@
         text-align: center;
         font-size: 13px;
         color: #ccc;
-        border-top: 2px dashed gold;
+        border-top: 2px dashed #f7c843;
         margin-top: 30px;
       }
 
