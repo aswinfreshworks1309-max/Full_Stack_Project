@@ -1,173 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyBus Admin Dashboard</title>
-    <link rel="stylesheet" href="
-        ../Styles/admin.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../Styles/admin.css" />
+  </head>
+  <body>
     <div class="container">
-        <!-- HEADER -->
-        <header>
-            <div class="logo glow-text">🚌 MyBus Admin</div>
-            <div class="admin-info">
-                <div>
-                    <div style="font-weight: bold;">Admin Dashboard</div>
-                    <div style="font-size: 12px; color: #ccc;">Last login: Today, 09:30 AM</div>
-                </div>
-                <div class="admin-avatar glow-bg">A</div>
+      <!-- HEADER -->
+      <header>
+        <div class="logo glow-text">🚌 MyBus Admin</div>
+        <div class="admin-info">
+          <div>
+            <div style="font-weight: bold">Admin Dashboard</div>
+            <div style="font-size: 12px; color: #ccc">
+              Last login: Today, 09:30 AM
             </div>
-        </header>
+          </div>
+          <div class="admin-avatar glow-bg">A</div>
+        </div>
+      </header>
 
-        <!-- STATS CARDS -->
-        <div class="stats-container">
-            <div class="stat-card glow-card">
-                <div class="stat-title">Running Today</div>
-                <div class="stat-value">24</div>
-                <div class="stat-icon">🚌</div>
-            </div>
-            <div class="stat-card glow-card">
-                <div class="stat-title">Total Buses</div>
-                <div class="stat-value">42</div>
-                <div class="stat-icon">🚍</div>
-            </div>
-            <div class="stat-card glow-card">
-                <div class="stat-title">Scheduled</div>
-                <div class="stat-value">15</div>
-                <div class="stat-icon">📅</div>
-            </div>
-            <div class="stat-card glow-card">
-                <div class="stat-title">Maintenance</div>
-                <div class="stat-value">3</div>
-                <div class="stat-icon">🔧</div>
-            </div>
+      <!-- STATS CARDS -->
+      <div class="stats-container">
+        <div class="stat-card glow-card">
+          <div class="stat-title">Running Today</div>
+          <div class="stat-value">24</div>
+          <div class="stat-icon">🚌</div>
+        </div>
+        <div class="stat-card glow-card">
+          <div class="stat-title">Total Buses</div>
+          <div class="stat-value">42</div>
+          <div class="stat-icon">🚍</div>
+        </div>
+        <div class="stat-card glow-card">
+          <div class="stat-title">Scheduled</div>
+          <div class="stat-value">15</div>
+          <div class="stat-icon">📅</div>
+        </div>
+        <div class="stat-card glow-card">
+          <div class="stat-title">Maintenance</div>
+          <div class="stat-value">3</div>
+          <div class="stat-icon">🔧</div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="section-header">
+          <h2 class="section-title glow-text">Bus Fleet Management</h2>
+          <div class="filter-controls">
+            <button class="filter-btn active glow-btn">All Buses</button>
+            <button class="filter-btn glow-btn">Running</button>
+            <button class="filter-btn glow-btn">Scheduled</button>
+            <button class="filter-btn glow-btn">Maintenance</button>
+          </div>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <div class="section-header">
-                <h2 class="section-title glow-text">Bus Fleet Management</h2>
-                <div class="filter-controls">
-                    <button class="filter-btn active glow-btn">All Buses</button>
-                    <button class="filter-btn glow-btn">Running</button>
-                    <button class="filter-btn glow-btn">Scheduled</button>
-                    <button class="filter-btn glow-btn">Maintenance</button>
-                </div>
-            </div>
-
-            <table class="bus-table">
-                <thead>
-                    <tr>
-                        <th>Bus Number</th>
-                        <th>Route</th>
-                        <th>Departure Time</th>
-                        <th>Arrival Time</th>
-                        <th>Status</th>
-                        <th>Capacity</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="bus-number glow-text">MB-101</span></td>
-                        <td>Chennai → Bangalore</td>
-                        <td>06:00 AM</td>
-                        <td>12:30 PM</td>
-                        <td><span class="status-badge status-running">Running</span></td>
-                        <td>45/50</td>
-                        <td>
-                            <button class="action-btn btn-edit glow-btn" onclick="openModal('MB-101', 'Chennai → Bangalore', '06:00', '12:30')">Edit</button>
-                            <button class="action-btn btn-view">View</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="bus-number glow-text">MB-102</span></td>
-                        <td>Chennai → Coimbatore</td>
-                        <td>07:30 AM</td>
-                        <td>02:00 PM</td>
-                        <td><span class="status-badge status-running">Running</span></td>
-                        <td>38/50</td>
-                        <td>
-                            <button class="action-btn btn-edit glow-btn" onclick="openModal('MB-102', 'Chennai → Coimbatore', '07:30', '14:00')">Edit</button>
-                            <button class="action-btn btn-view">View</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </div>
+        <table class="bus-table">
+          <thead>
+            <tr>
+              <th>Bus Number</th>
+              <th>Route</th>
+              <th>Departure Time</th>
+              <th>Arrival Time</th>
+              <th>Status</th>
+              <th>Capacity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="bus-number glow-text">MB-101</span></td>
+              <td>Chennai → Bangalore</td>
+              <td>06:00 AM</td>
+              <td>12:30 PM</td>
+              <td><span class="status-badge status-running">Running</span></td>
+              <td>45/50</td>
+              <td>
+                <button
+                  class="action-btn btn-edit glow-btn"
+                  onclick="openModal('MB-101', 'Chennai → Bangalore', '06:00', '12:30')"
+                >
+                  Edit
+                </button>
+                <button class="action-btn btn-view">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="bus-number glow-text">MB-102</span></td>
+              <td>Chennai → Coimbatore</td>
+              <td>07:30 AM</td>
+              <td>02:00 PM</td>
+              <td><span class="status-badge status-running">Running</span></td>
+              <td>38/50</td>
+              <td>
+                <button
+                  class="action-btn btn-edit glow-btn"
+                  onclick="openModal('MB-102', 'Chennai → Coimbatore', '07:30', '14:00')"
+                >
+                  Edit
+                </button>
+                <button class="action-btn btn-view">View</button>
+              </td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- MODAL -->
     <div class="modal" id="editModal">
-        <div class="modal-content">
-            <div class="modal-header glow-text">Edit Bus Route & Timing</div>
-            <form>
-                <div class="form-group">
-                    <label class="form-label">Bus Number</label>
-                    <input type="text" class="form-input" id="busNumber" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Departure Location</label>
-                    <input type="text" class="form-input" id="departureLocation">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Arrival Location</label>
-                    <input type="text" class="form-input" id="arrivalLocation">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Departure Time</label>
-                    <input type="time" class="form-input" id="departureTime">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Arrival Time</label>
-                    <input type="time" class="form-input" id="arrivalTime">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Bus Status</label>
-                    <select class="form-input" id="busStatus">
-                        <option value="running">Running</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="maintenance">Maintenance</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-cancel glow-btn" onclick="closeModal()">Cancel</button>
-                    <button type="button" class="btn-save glow-btn" onclick="saveChanges()">Save Changes</button>
-                </div>
-            </form>
-        </div>
+      <div class="modal-content">
+        <div class="modal-header glow-text">Edit Bus Route & Timing</div>
+        <form>
+          <div class="form-group">
+            <label class="form-label">Bus Number</label>
+            <input type="text" class="form-input" id="busNumber" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departure Location</label>
+            <input type="text" class="form-input" id="departureLocation" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Arrival Location</label>
+            <input type="text" class="form-input" id="arrivalLocation" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departure Time</label>
+            <input type="time" class="form-input" id="departureTime" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Arrival Time</label>
+            <input type="time" class="form-input" id="arrivalTime" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bus Status</label>
+            <select class="form-input" id="busStatus">
+              <option value="running">Running</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="maintenance">Maintenance</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="btn-cancel glow-btn"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn-save glow-btn"
+              onclick="saveChanges()"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-
-    <script>
-        function openModal(busNum, route, depTime, arrTime) {
-            document.getElementById('editModal').classList.add('active');
-            document.getElementById('busNumber').value = busNum;
-            const routeParts = route.split(' → ');
-            document.getElementById('departureLocation').value = routeParts[0];
-            document.getElementById('arrivalLocation').value = routeParts[1];
-            document.getElementById('departureTime').value = depTime;
-            document.getElementById('arrivalTime').value = arrTime;
-        }
-        function closeModal() {
-            document.getElementById('editModal').classList.remove('active');
-        }
-        function saveChanges() {
-            alert('Bus info updated successfully!');
-            closeModal();
-        }
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-        document.getElementById('editModal').addEventListener('click', function(e) {
-            if(e.target === this) closeModal();
-        });
-    </script>
-</body>
+  </body>
 </html>

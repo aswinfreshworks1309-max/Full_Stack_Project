@@ -18,40 +18,7 @@ body {
   margin: 0 auto;
 }
 
-/* GLOW ANIMATIONS */
-@keyframes glow {
-  0%,
-  100% {
-    text-shadow: 0 0 5px gold, 0 0 10px gold;
-  }
-  50% {
-    text-shadow: 0 0 10px #ffd700, 0 0 20px gold;
-  }
-}
 
-@keyframes glow-bg {
-  0%,
-  100% {
-    box-shadow: 0 0 10px gold, 0 0 20px gold;
-  }
-  50% {
-    box-shadow: 0 0 20px gold, 0 0 40px #ffd700;
-  }
-}
-
-/* GLOW CLASSES */
-.glow-text {
-  animation: glow 2s infinite;
-}
-.glow-bg {
-  animation: glow-bg 2s infinite;
-}
-.glow-card {
-  animation: glow-bg 3s infinite;
-}
-.glow-btn {
-  animation: glow-bg 2.5s infinite;
-}
 
 /* HEADER */
 header {
@@ -77,7 +44,7 @@ header {
 .admin-avatar {
   width: 50px;
   height: 50px;
-  background: gold;
+  background: #f7c843;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -109,7 +76,7 @@ header {
   left: 0;
   width: 5px;
   height: 100%;
-  background: gold;
+  background: #f7c843;
 }
 .stat-title {
   font-size: 14px;
@@ -120,7 +87,7 @@ header {
 .stat-value {
   font-size: 36px;
   font-weight: bold;
-  color: gold;
+  color: #f7c843;
 }
 .stat-icon {
   position: absolute;
@@ -150,7 +117,7 @@ header {
 .section-title {
   font-size: 24px;
   font-weight: bold;
-  color: gold;
+  color: #f7c843;
 }
 
 /* FILTER BUTTONS */
@@ -160,9 +127,9 @@ header {
 }
 .filter-btn {
   padding: 10px 20px;
-  border: 2px solid gold;
+  border: 2px solid #f7c843;
   background: #1a1a1a;
-  color: gold;
+  color: #f7c843;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
@@ -171,7 +138,7 @@ header {
 }
 .filter-btn.active,
 .filter-btn:hover {
-  background: gold;
+  background: #f7c843;
   color: #1a1a1a;
 }
 
@@ -182,7 +149,7 @@ header {
   margin-top: 20px;
 }
 .bus-table thead {
-  background: gold;
+  background: #f7c843;
   color: #1a1a1a;
 }
 .bus-table th,
@@ -195,7 +162,7 @@ header {
 }
 .bus-number {
   font-weight: bold;
-  color: gold;
+  color: #f7c843;
 }
 
 /* STATUS BADGES */
@@ -209,7 +176,7 @@ header {
 }
 .status-running {
   background: #333;
-  color: gold;
+  color: #f7c843;
 }
 .status-scheduled {
   background: #222;
@@ -232,7 +199,7 @@ header {
   margin-right: 8px;
 }
 .btn-edit {
-  background: gold;
+  background: #f7c843;
   color: #1a1a1a;
 }
 .btn-edit:hover {
@@ -279,7 +246,7 @@ header {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 25px;
-  color: gold;
+  color: #f7c843;
   border-bottom: 2px solid #333;
   padding-bottom: 15px;
 }
@@ -300,8 +267,8 @@ header {
 }
 .form-input:focus {
   outline: none;
-  border-color: gold;
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+  border-color: #f7c843;
+  box-shadow: 0 0 0 3px rgba(247, 200, 67, 0.3);
 }
 
 .modal-actions {
@@ -311,7 +278,7 @@ header {
   margin-top: 30px;
 }
 .btn-save {
-  background: gold;
+  background: #f7c843;
   color: #1a1a1a;
   padding: 12px 30px;
   border-radius: 8px;
@@ -329,4 +296,4 @@ header {
 .btn-cancel:hover {
   background: #555;
 }
-/* RESPONSIVE */
+

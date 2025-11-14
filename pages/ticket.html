@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LocoTranz Ticket</title>
     <link rel="stylesheet" href="../styles/ticket.css" />
-  
+
   </head>
   <body>
     <!-- HEADER -->
@@ -14,17 +14,15 @@
         <div class="logo">LocoTranz</div>
 
         <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#help">Help</a></li>
+          <li><a href="../index.html">Home</a></li>
+
+          <li><a href="../pages/about.html">About</a></li>
+          <li><a href="../pages/help.html">Help</a></li>
         </ul>
 
         <div class="header-buttons">
           <button class="btn download-btn">📥 Download PDF</button>
-          <button class="btn print-btn" onclick="window.print()">
-            🖨️ Print Ticket
-          </button>
+          <button class="btn print-btn">🖨️ Print Ticket</button>
         </div>
 
         <div class="menu-toggle">
@@ -34,6 +32,7 @@
         </div>
       </nav>
     </header>
+    q
 
     <div class="container">
       <!-- SUCCESS BANNER -->
@@ -58,14 +57,14 @@
           <div class="journey-section">
             <div class="journey-point">
               <div class="journey-label">Departure</div>
-              <div class="journey-city">Mumbai</div>
+              <div class="journey-city">Red Hills</div>
               <div class="journey-time">06:00 AM</div>
               <div class="journey-date">25 Oct 2025</div>
             </div>
             <div class="journey-arrow">→</div>
             <div class="journey-point">
               <div class="journey-label">Arrival</div>
-              <div class="journey-city">Pune</div>
+              <div class="journey-city">Avadi</div>
               <div class="journey-time">09:30 AM</div>
               <div class="journey-date">25 Oct 2025</div>
             </div>
@@ -75,11 +74,11 @@
           <div class="info-grid">
             <div class="info-item">
               <div class="info-label">Boarding Point</div>
-              <div class="info-value">Red Hills  - 06:00 AM</div>
+              <div class="info-value">Red Hills - 06:00 AM</div>
             </div>
             <div class="info-item">
               <div class="info-label">Dropping Point</div>
-              <div class="info-value"> Avadi - 09:30 AM</div>
+              <div class="info-value">Avadi - 09:30 AM</div>
             </div>
           </div>
 
@@ -128,17 +127,5 @@
     <footer id="contact">
       <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
     </footer>
-
-    <script>
-      const menuToggle = document.querySelector(".menu-toggle");
-      const navLinks = document.querySelector(".nav-links");
-      const headerBtns = document.querySelector(".header-buttons");
-
-      menuToggle.addEventListener("click", () => {
-        menuToggle.classList.toggle("active");
-        navLinks.classList.toggle("active");
-        headerBtns.classList.toggle("active");
-      });
-    </script>
   </body>
 </html>

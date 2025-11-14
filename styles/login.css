@@ -20,22 +20,13 @@
       object-fit: cover;
       z-index: -2;
       filter: brightness(0.25);
+      
     }
 
     /* ✨ GOLD OVERLAY */
-    body::after {
-      content: "";
-    
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.08), transparent 60%);
-      z-index: -1;
-      animation: pulse 6s infinite;
-    }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.2); }
-    }
+
+
 
     /* HEADER */
     header {

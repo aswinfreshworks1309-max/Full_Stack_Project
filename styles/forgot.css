@@ -1,89 +1,109 @@
 /* RESET */
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #121212;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 /* CONTAINER */
 .container {
-    width: 100%;
-    max-width: 450px;
+  width: 100%;
+  max-width: 450px;
 }
 
 /* FORM BOX */
 .form-box {
-    background: #1a1a1a;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255,215,0,0.4);
-    text-align: center;
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  text-align: center;
 }
 
 /* GLOW ANIMATIONS */
-@keyframes glow {
-    0%,100% { text-shadow: 0 0 5px gold, 0 0 10px gold; }
-    50% { text-shadow: 0 0 10px #ffd700, 0 0 20px gold; }
-}
 
-@keyframes glow-bg {
-    0%,100% { box-shadow: 0 0 10px gold, 0 0 20px gold; }
-    50% { box-shadow: 0 0 20px gold, 0 0 40px #ffd700; }
+.glow-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: gold;
+  animation: glow 2s infinite;
+  margin-bottom: 10px;
 }
-
-.glow-text { font-size: 32px; font-weight: bold; color: gold; animation: glow 2s infinite; margin-bottom: 10px; }
-.glow-subtext { font-size: 14px; color: #ccc; animation: glow 3s infinite; margin-bottom: 30px; display:block; }
-.glow-btn { 
-    background: gold; 
-    color: #1a1a1a; 
-    padding: 14px 0; 
-    border-radius: 8px; 
-    border:none; 
-    width: 100%; 
-    cursor: pointer; 
-    font-size:16px; 
-    font-weight:600; 
-    transition: all 0.3s; 
-    animation: glow-bg 2.5s infinite;
+.glow-subtext {
+  font-size: 14px;
+  color: #ccc;
+  animation: glow 3s infinite;
+  margin-bottom: 30px;
+  display: block;
 }
-.glow-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px gold; }
+.glow-btn {
+  background: gold;
+  color: #1a1a1a;
+  padding: 14px 0;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+  animation: glow-bg 2.5s infinite;
+}
+.glow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px gold;
+}
 
 /* FORM INPUTS */
-.form-group { margin-bottom: 25px; text-align: left; }
-.form-group label { font-weight: 600; color: #ccc; margin-bottom: 6px; display:block; }
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+.form-group label {
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 6px;
+  display: block;
+}
 .form-group input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 2px solid #333;
-    background: #222;
-    color: #fff;
-    font-size: 14px;
-    transition: all 0.3s;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background: #222;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s;
 }
 .form-group input:focus {
-    outline: none;
-    border-color: gold;
-    box-shadow: 0 0 10px gold, 0 0 20px #ffd700;
+  outline: none;
+  border-color: gold;
+  box-shadow: 0 0 10px gold, 0 0 20px #ffd700;
 }
 
 /* BACK TO LOGIN LINK */
 .back-login {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #ccc;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
 }
 .back-login a {
-    color: gold;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
+  color: gold;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
 }
-.back-login a:hover { text-shadow: 0 0 5px gold, 0 0 10px gold; }
+.back-login a:hover {
+  text-shadow: 0 0 5px gold, 0 0 10px gold;
+}

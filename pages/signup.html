@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LocoTranz - Signup</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="../styles/signup.css">
-  <link rel="stylesheet" href="../styles/header.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocoTranz - Signup</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/signup.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+  </head>
+  <body>
+    <video autoplay loop muted playsinline class="bg-video">
+      <source src="../assests/background video.mp4" type="video/mp4" />
+    </video>
+    <header>
+      <div class="logo">
+        <div class="logo-icon"></div>
+        LocoTranz
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
 
-</head>
-<body>
-      <header>
-    <div class="logo">
-      <div class="logo-icon"></div>
-      LocoTranz
+          <li><a href="../pages/about.html">About</a></li>
+          <li><a href="../pages/5help.html" style="color: #ffcc33">Help</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <link rel="stylesheet" href="../styles/header.css" />
+
+    <div class="container" data-aos="zoom-in">
+      <div class="signup-box">
+        <div class="logo">LocoTranz</div>
+        <div class="title">Create Your Account</div>
+
+        <form action="../pages/login.html">
+          <div class="input-group">
+            <input type="text" placeholder="Full Name" required />
+            <input type="email" placeholder="Email Address" required />
+            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Confirm Password" required />
+          </div>
+
+          <button class="btn" type="submit">Sign Up</button>
+
+          <div class="links">
+            Already have an account?
+            <a href="../pages/login.html">Login here</a>
+          </div>
+        </form>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-      
-        <li><a href="../pages/about.html">About</a></li>
-        <li><a href="../pages/5help.html" style="color: #ffcc33;">Help</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <link rel="stylesheet" href="../styles/header.css">
+    <footer id="contact">
+      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+    </footer>
 
-  <div class="container" data-aos="zoom-in">
-    <div class="signup-box">
-      <div class="logo">LocoTranz</div>
-      <div class="title">Create Your Account</div>
-
-      <form action="../pages/login.html">
-        <div class="input-group">
-          <input type="text" placeholder="Full Name" required />
-          <input type="email" placeholder="Email Address" required />
-          <input type="password" placeholder="Password" required />
-          <input type="password" placeholder="Confirm Password" required />
-        </div>
-
-        <button class="btn" type="submit">Sign Up</button>
-
-        <div class="links">
-          Already have an account? <a href="../pages/login.html">Login here</a>
-        </div>
-      </form>
-    </div>
-  </div>
-
-
-      <footer id="contact">
-    <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000 });
-  </script>
-
-
-</body>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000 });
+    </script>
+  </body>
 </html>
