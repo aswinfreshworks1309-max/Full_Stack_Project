@@ -1,0 +1,25 @@
+# Ignore Python virtual environment and interpreter files
+Lib/
+Include/
+Scripts/
+
+# Bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+venv/
+venv*/
+
+# pip metadata
+pip-wheel-metadata/
