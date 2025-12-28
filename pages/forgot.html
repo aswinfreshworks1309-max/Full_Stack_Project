@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forget Password - MyBus</title>
-    <link rel="stylesheet" href="
-        ../Styles/forgot.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="
+        ../Styles/forgot.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
     <div class="container">
-        <div class="form-box">
-            <h1 class="glow-text">Forget Password</h1>
-            <p class="glow-subtext">Enter your registered email to reset your password</p>
-            
-            <form id="forgetForm">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="example@mail.com" required>
-                </div>
-                
-                <button type="submit" class="glow-btn">Reset Password</button>
-            </form>
+      <div class="form-box" data-aos="zoom-in">
+        <h1 class="glow-text">Forget Password</h1>
+        <p class="glow-subtext">
+          Enter your registered email to reset your password
+        </p>
 
-            <p class="back-login">Remembered your password? <a href="login.html">Login</a></p>
-        </div>
+        <form id="forgetForm">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="example@mail.com" required />
+          </div>
+
+          <button type="submit" class="glow-btn">Reset Password</button>
+        </form>
+
+        <p class="back-login">
+          Remembered your password? <a href="login.html">Login</a>
+        </p>
+      </div>
     </div>
 
-  
-</body>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
+  </body>
 </html>

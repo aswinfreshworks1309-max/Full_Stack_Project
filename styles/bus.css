@@ -12,6 +12,55 @@ body {
   background: radial-gradient(circle at top, #0a0a0a 0%, #111 100%);
 }
 
+/* Header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+}
+span a {
+  color: #ffcc00;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+header .logo span {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.logo-icon {
+  width: 14px;
+  height: 14px;
+  background: #ffcc00;
+  border-radius: 50%;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ffcc00;
+}
+
 /* Container */
 .container {
   max-width: 1200px;
@@ -22,9 +71,8 @@ body {
   margin-bottom: 150px;
 }
 
-.price-label{
+.price-label {
   color: white;
-  
 }
 /* Header Card */
 .bus_list {
@@ -85,7 +133,6 @@ h1 {
   top: 100%;
 }
 .bus-card:hover {
-  
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
 }
 
@@ -181,7 +228,6 @@ h1 {
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
 }
 
-
 /* Footer */
 footer {
   text-align: center;
@@ -199,5 +245,64 @@ footer {
   .bus-footer {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 15px 20px;
+  }
+  .container {
+    left: 0;
+    top: 0;
+    margin: 80px auto 50px;
+    padding: 0 15px;
+    width: 100%;
+  }
+  .bus_list {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .route-info {
+    font-size: 14px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .arrow {
+    transform: rotate(90deg);
+  }
+  .bus-card {
+    padding: 15px;
+  }
+  .bus-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .bus-type {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+  .time {
+    font-size: 18px;
+  }
+  .detail-value {
+    font-size: 16px;
+  }
+  .price-value {
+    font-size: 24px;
+  }
+  .book-btn {
+    width: 100%;
+    padding: 10px;
+  }
+  .bus-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 15px;  
+    
   }
 }

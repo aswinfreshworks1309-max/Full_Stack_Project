@@ -18,8 +18,6 @@ body {
   margin: 0 auto;
 }
 
-
-
 /* HEADER */
 header {
   background: #1a1a1a;
@@ -69,15 +67,7 @@ header {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
 }
-.stat-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 100%;
-  background: #f7c843;
-}
+
 .stat-title {
   font-size: 14px;
   color: #ccc;
@@ -187,17 +177,25 @@ header {
   color: #ffb74d;
 }
 
+/* ACTION BUTTONS CONTAINER */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 /* ACTION BUTTONS */
 .action-btn {
-  padding: 8px 16px;
+  padding: 8px 12px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
   transition: all 0.3s;
-  margin-right: 8px;
+  /* margin-right removed in favor of gap in flex container */
 }
+
 .btn-edit {
   background: #f7c843;
   color: #1a1a1a;
@@ -206,6 +204,25 @@ header {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
+
+.btn-delete {
+  background: #ff4444;
+  color: #fff;
+}
+.btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
+}
+
+.btn-reset {
+  background: #ff9800;
+  color: #fff;
+}
+.btn-reset:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+}
+
 .btn-view {
   background: #555;
   color: #fff;
@@ -297,3 +314,47 @@ header {
   background: #555;
 }
 
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+    text-align: center;
+  }
+  .admin-info {
+    flex-direction: column;
+  }
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .filter-controls {
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    flex: 1;
+    text-align: center;
+  }
+  .main-content {
+    padding: 15px;
+    overflow-x: auto; /* Allow horizontal scroll for table */
+  }
+  .bus-table {
+    min-width: 600px; /* Ensure table doesn't squash too much */
+  }
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+  .stat-card {
+    padding: 20px;
+  }
+  .stat-value {
+    font-size: 28px;
+  }
+}

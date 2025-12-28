@@ -1,0 +1,358 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #111;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* HEADER */
+.header {
+  background: #000;
+  padding: 20px 50px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: #f7c843;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #f7c843;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #f7c843;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 12px #f7c843;
+}
+
+.btn a {
+  color: #000;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  bottom: 550px;
+}
+
+.hero h1 {
+  font-size: 50px;
+  font-weight: 800;
+  color: #f7c843;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: #ddd;
+}
+
+.hero-btn {
+  padding: 12px 30px;
+  background: #f7c843;
+  color: #000;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  box-shadow: 0 0 12px #f7c843;
+}
+
+/* BOOKING SECTION */
+.booking-section {
+  padding: 60px 0;
+  text-align: center;
+  
+}
+
+.booking-section h2 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  color: #f7c843;
+}
+
+.booking-form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  padding: 25px;
+  border-radius: 12px;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 15px;
+}
+#profile {
+  font-size: 40px;
+}
+#profile:hover {
+  color: #f7c843;
+  cursor: pointer;
+}
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+  border: 1px solid #444;
+  background: #222;
+  color: #fff;
+}
+
+.search-btn {
+  grid-column: span 1;
+  background: #f7c843;
+  color: #000;
+}
+
+/* FEATURES */
+.features {
+  padding: 70px 40px;
+  text-align: center;
+}
+
+.features h2 {
+  margin-bottom: 35px;
+  color: #f7c843;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.feature-card {
+  background: #222;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.1);
+}
+
+.feature-card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.feature-card h3 {
+  color: #f7c843;
+  margin-bottom: 10px;
+}
+
+/* EXPLORE */
+.explore {
+  padding: 70px;
+  text-align: center;
+}
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.route-card {
+  background: #222;
+  padding: 25px;
+  border-radius: 12px;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.route-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #f7c843;
+}
+
+.route-card h4 {
+  color: #f7c843;
+  margin-bottom: 10px;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  padding: 60px;
+}
+.testimonial {
+  transition: 0.3s;
+}
+
+.testimonial:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #f7c843;
+}
+
+.testimonials h2 {
+  text-align: center;
+  color: #f7c843;
+  margin-bottom: 30px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.testimonial {
+  background: #222;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  font-style: italic;
+}
+
+.testimonial span {
+  color: #f7c843;
+  display: block;
+  margin-top: 10px;
+}
+
+/* FOOTER */
+footer {
+  background: #000;
+  padding: 20px;
+  text-align: center;
+  color: #ccc;
+  margin-top: 30px;
+}
+.profile-header {
+  margin-top: 10px;
+  color: black;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  body {
+    width: 100%;
+    overflow-x: hidden;
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    display: none; /* Keep hidden or implement hamburger if desired, matching current behavior */
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .hero-btn {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  /* Booking Form */
+  .booking-form {
+    width: 90%;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+  }
+  .search-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Grids */
+  .features-grid,
+  .routes-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .features h2,
+  .explore h2,
+  .testimonials h2 {
+    font-size: 1.5rem;
+  }
+
+  footer {
+    padding: 30px 20px;
+  }
+}

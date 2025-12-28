@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>LocoTranz • Seat Selection</title>
     <link rel="stylesheet" href="../Styles/seat.css" />
-    <link rel="stylesheet" href="../Styles/header.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <!-- NAV / HEADER -->
     <header>
       <div class="logo">
         <div class="logo-icon"></div>
-        LocoTranz
+        <span><a href="./index.html">LocoTranz</a></span>
       </div>
       <nav>
         <ul>
           <li><a href="../index.html">Home</a></li>
-
-          <li><a href="../pages/about.html">About</a></li>
-          <li><a href="../pages/help.html" style="color: #ffcc33">Help</a></li>
+          <li><a href="../pages/bus.html">Back</a></li>
+          <li><a href="../pages/help.html">Help?</a></li>
         </ul>
       </nav>
     </header>
@@ -157,22 +156,6 @@
                 </div>
               </div>
 
-              <div class="boarding-points">
-                <div class="boarding-label">Boarding Point</div>
-                <select id="boardingSelect" class="boarding-select" required>
-                  <option value="">Select boarding point</option>
-                  <option>Red hills - 05:45 AM</option>
-                  <option>Ambattur - 06:00 AM</option>
-                </select>
-
-                <div class="boarding-label">Dropping Point</div>
-                <select id="droppingSelect" class="boarding-select" required>
-                  <option value="">Select dropping point</option>
-                  <option>Avadi - 09:30 AM</option>
-                  <option>Thirumulai vayal - 09:45 AM</option>
-                </select>
-              </div>
-
               <div class="price-breakdown">
                 <div class="price-row">
                   <span>Base Fare</span><span id="baseFare">₹0</span>
@@ -200,5 +183,10 @@
     <footer id="contact">
       <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
     </footer>
+    <script src="../js/seat_connection.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
   </body>
 </html>

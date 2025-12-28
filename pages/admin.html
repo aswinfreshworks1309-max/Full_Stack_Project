@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyBus Admin Dashboard</title>
     <link rel="stylesheet" href="../Styles/admin.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
+
   <body>
     <div class="container">
       <!-- HEADER -->
-      <header>
-        <div class="logo glow-text">🚌 MyBus Admin</div>
+      <header data-aos="fade-down">
+        <div class="logo glow-text"> Admin</div>
+
         <div class="admin-info">
           <div>
             <div style="font-weight: bold">Admin Dashboard</div>
@@ -22,34 +25,50 @@
         </div>
       </header>
 
-      <!-- STATS CARDS -->
+      <!-- STATS -->
       <div class="stats-container">
-        <div class="stat-card glow-card">
+        <div class="stat-card glow-card" data-aos="zoom-in" data-aos-delay="0">
           <div class="stat-title">Running Today</div>
-          <div class="stat-value">24</div>
+          <div class="stat-value">0</div>
           <div class="stat-icon">🚌</div>
         </div>
-        <div class="stat-card glow-card">
+
+        <div
+          class="stat-card glow-card"
+          data-aos="zoom-in"
+          data-aos-delay="100"
+        >
           <div class="stat-title">Total Buses</div>
-          <div class="stat-value">42</div>
+          <div class="stat-value">0</div>
           <div class="stat-icon">🚍</div>
         </div>
-        <div class="stat-card glow-card">
+
+        <div
+          class="stat-card glow-card"
+          data-aos="zoom-in"
+          data-aos-delay="200"
+        >
           <div class="stat-title">Scheduled</div>
-          <div class="stat-value">15</div>
+          <div class="stat-value">0</div>
           <div class="stat-icon">📅</div>
         </div>
-        <div class="stat-card glow-card">
+
+        <div
+          class="stat-card glow-card"
+          data-aos="zoom-in"
+          data-aos-delay="300"
+        >
           <div class="stat-title">Maintenance</div>
-          <div class="stat-value">3</div>
+          <div class="stat-value">0</div>
           <div class="stat-icon">🔧</div>
         </div>
       </div>
 
       <!-- MAIN CONTENT -->
-      <div class="main-content">
+      <div class="main-content" data-aos="fade-up">
         <div class="section-header">
           <h2 class="section-title glow-text">Bus Fleet Management</h2>
+
           <div class="filter-controls">
             <button class="filter-btn active glow-btn">All Buses</button>
             <button class="filter-btn glow-btn">Running</button>
@@ -58,6 +77,7 @@
           </div>
         </div>
 
+        <!-- TABLE -->
         <table class="bus-table">
           <thead>
             <tr>
@@ -66,46 +86,14 @@
               <th>Departure Time</th>
               <th>Arrival Time</th>
               <th>Status</th>
+              <th>Price</th>
               <th>Capacity</th>
               <th>Actions</th>
             </tr>
           </thead>
+
           <tbody>
-            <tr>
-              <td><span class="bus-number glow-text">MB-101</span></td>
-              <td>Chennai → Bangalore</td>
-              <td>06:00 AM</td>
-              <td>12:30 PM</td>
-              <td><span class="status-badge status-running">Running</span></td>
-              <td>45/50</td>
-              <td>
-                <button
-                  class="action-btn btn-edit glow-btn"
-                  onclick="openModal('MB-101', 'Chennai → Bangalore', '06:00', '12:30')"
-                >
-                  Edit
-                </button>
-                <button class="action-btn btn-view">View</button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="bus-number glow-text">MB-102</span></td>
-              <td>Chennai → Coimbatore</td>
-              <td>07:30 AM</td>
-              <td>02:00 PM</td>
-              <td><span class="status-badge status-running">Running</span></td>
-              <td>38/50</td>
-              <td>
-                <button
-                  class="action-btn btn-edit glow-btn"
-                  onclick="openModal('MB-102', 'Chennai → Coimbatore', '07:30', '14:00')"
-                >
-                  Edit
-                </button>
-                <button class="action-btn btn-view">View</button>
-              </td>
-            </tr>
-            <!-- Add more rows as needed -->
+            <!-- Rows populated by JS -->
           </tbody>
         </table>
       </div>
@@ -115,35 +103,66 @@
     <div class="modal" id="editModal">
       <div class="modal-content">
         <div class="modal-header glow-text">Edit Bus Route & Timing</div>
+
         <form>
+          <!-- BUS NUMBER -->
           <div class="form-group">
             <label class="form-label">Bus Number</label>
-            <input type="text" class="form-input" id="busNumber" readonly />
+            <select class="form-input" id="busNumber">
+              <option value="">Loading...</option>
+            </select>
           </div>
+
+          <!-- DEPARTURE -->
           <div class="form-group">
             <label class="form-label">Departure Location</label>
             <input type="text" class="form-input" id="departureLocation" />
           </div>
+
+          <!-- ARRIVAL -->
           <div class="form-group">
             <label class="form-label">Arrival Location</label>
             <input type="text" class="form-input" id="arrivalLocation" />
           </div>
+
+          <!-- TIME -->
           <div class="form-group">
             <label class="form-label">Departure Time</label>
-            <input type="time" class="form-input" id="departureTime" />
+            <input
+              type="datetime-local"
+              class="form-input"
+              id="departureTime"
+            />
           </div>
+
           <div class="form-group">
             <label class="form-label">Arrival Time</label>
-            <input type="time" class="form-input" id="arrivalTime" />
+            <input type="datetime-local" class="form-input" id="arrivalTime" />
           </div>
+
+          <!-- STATUS -->
+          <div class="form-group">
+            <label class="form-label">Price (₹)</label>
+            <input
+              type="number"
+              class="form-input"
+              id="schedulePrice"
+              placeholder="500"
+            />
+          </div>
+
           <div class="form-group">
             <label class="form-label">Bus Status</label>
             <select class="form-input" id="busStatus">
-              <option value="running">Running</option>
-              <option value="scheduled">Scheduled</option>
-              <option value="maintenance">Maintenance</option>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Running">Running</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
             </select>
           </div>
+
+          <!-- ACTIONS -->
           <div class="modal-actions">
             <button
               type="button"
@@ -152,6 +171,7 @@
             >
               Cancel
             </button>
+
             <button
               type="button"
               class="btn-save glow-btn"
@@ -163,5 +183,71 @@
         </form>
       </div>
     </div>
+
+    <!-- ADD BUS MODAL -->
+    <div class="modal" id="addBusModal">
+      <div class="modal-content">
+        <div class="modal-header glow-text">Add New Bus</div>
+        <form id="addBusForm">
+          <div class="form-group">
+            <label class="form-label">Bus Number (e.g., MB-101)</label>
+            <input type="text" class="form-input" id="newBusNumber" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Plate Number</label>
+            <input
+              type="text"
+              class="form-input"
+              id="newPlateNumber"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bus Type</label>
+            <select class="form-input" id="newBusType">
+              <option value="AC Seater">AC Seater</option>
+              <option value="AC Sleeper">AC Sleeper</option>
+              <option value="Non-AC Seater">Non-AC Seater</option>
+              <option value="Non-AC Sleeper">Non-AC Sleeper</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Seats</label>
+            <input
+              type="number"
+              class="form-input"
+              id="newTotalSeats"
+              value="40"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Operator Name</label>
+            <input
+              type="text"
+              class="form-input"
+              id="newOperatorName"
+              required
+            />
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="btn-cancel glow-btn"
+              onclick="closeAddBusModal()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn-save glow-btn">Create Bus</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/admin_connection.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800, once: true });
+    </script>
   </body>
 </html>

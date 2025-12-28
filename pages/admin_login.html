@@ -7,7 +7,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="../styles/login.css" />
   </head>
-
+ 
   <body>
     <!-- 🎥 BACKGROUND VIDEO -->
     <video autoplay loop muted playsinline class="bg-video">
@@ -20,6 +20,7 @@
         <div class="logo-icon"></div>
         <span>LocoTranz</span>
       </div>
+  
     </header>
 
     <!-- LOGIN FORM -->
@@ -30,7 +31,7 @@
           alt="Bus Icon"
         />
       </div>
-      <h1>Welcome Back!</h1>
+      <h1>Welcome Back Aswin!</h1>
       <p class="subtitle">Book your next journey with ease</p>
 
       <form>
@@ -52,18 +53,20 @@
             required
           />
         </div>
-        <div class="forgot-password">
-          <a href="#">Forgot Password?</a>
-        </div>
-        <button type="submit" class="login-btn">Login</button>
+ 
+        <button
+          type="submit"
+          class="login-btn"
+          onclick="window.location.href=' ../pages/admin.html'"
+        >
+          Login
+        </button>
+
+         
       </form>
+ 
 
-      <div class="divider">OR</div>
-
-      <div class="signup-link">
-        Don’t have an account? <a href="./signup.html">Sign Up</a>
-      </div>
-    </div>
+ 
 
     <footer id="contact">
       <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
@@ -73,6 +76,8 @@
     <script>
       AOS.init({ duration: 1000 });
     </script>
-    <script src="../js/login_connection.js"></script>
+    <script>
+        
+    </script>
   </body>
 </html>

@@ -4,62 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LocoTranz | Luxury Travel Booking</title>
-    <link rel="stylesheet" href="./styles/style.css" />
-  
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Header -->
     <header class="header">
       <nav class="navbar">
-        <div class="logo">LocoTranz</div>
+        <div class="logo"><a href="./index.html">LocoTranz</a></div>
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#booking">Booking</a></li>
+          <li><a href="#" id="myTicketsBtn">My Tickets</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#explore">Explore</a></li>
-         
         </ul>
-        <div class="nav-actions">
-          <button class="btn login">
-            <a href="./pages/login.html">Login</a>
-          </button>
-          <button class="btn signup" type="submit">
-            <a href="./pages/signup.html">Sign Up</a>
-          </button>
-        </div>
+        <div><i class="fa-solid fa-circle-user" id="profile"></i></div>
       </nav>
     </header>
 
     <!-- Hero -->
     <section id="home" class="hero">
-      <div class="overlay"><img src="./assests/bus image 4.jpg" alt=""></div>
-      <div class="hero-content" data-aos="zoom-in">
-        <h1>Your Journey Begins in Luxury</h1>
-        <p>Travel smart, travel classy — with LocoTranz.</p>
-        <a href="#booking" class="hero-btn">Explore Now</a>
+      <div class="overlay">
+        <img src="../assests/bus image 4.jpg" alt="Bus image" />
+
+        <div class="hero-content" data-aos="zoom-in">
+          <h1>Your Journey Begins in Luxury</h1>
+          <p>Travel smart, travel classy — with LocoTranz.</p>
+          <a href="#book" class="hero-btn">Explore Now</a>
+        </div>
       </div>
     </section>
 
     <!-- Booking -->
+     <div id="book"></div><br><br>
     <section id="booking" class="booking-section" data-aos="fade-up">
       <h2>Find Your Route</h2>
-      <form class="booking-form glass" action="./pages/bus.html">
+      <form class="booking-form glass" action="./bus.html">
         <div class="form-group">
-          <label>From</label><input type="text" placeholder="Departure City" required/>
+          <label>From</label
+          ><input
+            type="text"
+            name="source"
+            placeholder="Departure City"
+            required
+          />
         </div>
         <div class="form-group">
-          <label>To</label><input type="text" placeholder="Destination" required />
+          <label>To</label
+          ><input
+            type="text"
+            name="destination"
+            placeholder="Destination"
+            required
+          />
         </div>
-        <div class="form-group"><label>Date</label><input type="date" required /></div>
-        <div class="form-group">
-          <label>Passengers</label>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4+</option>
-          </select>
-        </div>
+
         <button class="btn search-btn" type="submit">Search Buses</button>
       </form>
     </section>
@@ -94,22 +101,23 @@
     <!-- Explore -->
     <section id="explore" class="explore">
       <h2 data-aos="zoom-in">Explore Popular Routes</h2>
+      <br /><br />
       <div class="routes-grid">
         <div class="route-card" data-aos="flip-left">
-          <h4>Chennai → Bangalore</h4>
-          <p>Starting ₹ 799</p>
+          <h4>Redhills → Tambaram</h4>
+          <p>Starting ₹ 69</p>
         </div>
         <div class="route-card" data-aos="flip-up">
-          <h4>Coimbatore → Madurai</h4>
-          <p>Starting ₹ 499</p>
+          <h4>Ambattur → Avadi</h4>
+          <p>Starting ₹ 59</p>
         </div>
         <div class="route-card" data-aos="flip-right">
-          <h4>Trichy → Chennai</h4>
-          <p>Starting ₹ 599</p>
+          <h4>Kelambakkam → Vadapalani</h4>
+          <p>Starting ₹ 59</p>
         </div>
         <div class="route-card" data-aos="flip-up">
-          <h4>Salem → Pondicherry</h4>
-          <p>Starting ₹ 699</p>
+          <h4>T-nagar → Perumbakam</h4>
+          <p>Starting ₹ 69</p>
         </div>
       </div>
     </section>
@@ -138,6 +146,25 @@
       <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
     </footer>
 
-    
+    <!-- My Tickets Modal -->
+    <div id="ticketsModal" class="modal-overlay">
+      <div class="tickets-modal">
+        <div class="modal-header">
+          <h2>My Journeys</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div id="ticketsContainer">
+          <!-- Data populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts and Styles for Modal -->
+    <link rel="stylesheet" href="../styles/modal.css" />
+    <script src="../js/home_connection.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
   </body>
 </html>

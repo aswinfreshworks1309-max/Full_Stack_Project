@@ -5,39 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LocoTranz Ticket</title>
     <link rel="stylesheet" href="../styles/ticket.css" />
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <!-- HEADER -->
     <header>
       <nav>
-        <div class="logo">LocoTranz</div>
+        <div class="logo"><a href="./index.html"></a>LocoTranz</div>
 
         <ul class="nav-links">
           <li><a href="../index.html">Home</a></li>
-
-          <li><a href="../pages/about.html">About</a></li>
           <li><a href="../pages/help.html">Help</a></li>
         </ul>
-
-        <div class="header-buttons">
-          <button class="btn download-btn">📥 Download PDF</button>
-          <button class="btn print-btn">🖨️ Print Ticket</button>
-        </div>
-
-        <div class="menu-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
       </nav>
     </header>
-    
 
     <div class="container">
       <!-- SUCCESS BANNER -->
-      <div class="success-banner">
-        <div class="success-icon">✓</div>
+      <div class="success-banner" data-aos="fade-down">
+        <div class="success-icon" data-aos="zoom-in" data-aos-delay="200">
+          ✓
+        </div>
         <div class="success-title">Booking Confirmed!</div>
         <div class="success-message">
           Your bus ticket has been successfully booked. A confirmation email has
@@ -47,7 +35,7 @@
       </div>
 
       <!-- TICKET -->
-      <div class="ticket-container">
+      <div class="ticket-container" data-aos="fade-up" data-aos-delay="400">
         <div class="ticket-header">
           <div class="ticket-logo">LocoTranz</div>
           <div class="ticket-type">E-TICKET</div>
@@ -82,42 +70,14 @@
             </div>
           </div>
 
-          <div class="section-title">Passenger Details</div>
-          <table class="passenger-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Seat</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Rajesh Kumar</td>
-                <td>32</td>
-                <td>Male</td>
-                <td><span class="seat-badge">1A</span></td>
-              </tr>
-              <tr>
-                <td>Priya Sharma</td>
-                <td>28</td>
-                <td>Female</td>
-                <td><span class="seat-badge">1B</span></td>
-              </tr>
-            </tbody>
-          </table>
-
           <div class="price-breakdown">
             <div class="price-row">
-              <span>Base Fare (2 × ₹450)</span><span>₹900</span>
+              <span>Base Fare (2 × ₹45)</span><span>₹90</span>
             </div>
-            <div class="price-row"><span>GST (5%)</span><span>₹45</span></div>
-            <div class="price-row">
-              <span>Convenience Fee</span><span>₹30</span>
-            </div>
+            <div class="price-row"><span>GST (5%)</span><span>₹5</span></div>
+
             <div class="price-row total">
-              <span>Total Paid</span><span>₹975</span>
+              <span>Total Paid</span><span>₹95</span>
             </div>
           </div>
         </div>
@@ -127,5 +87,10 @@
     <footer id="contact">
       <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
     </footer>
+    <script src="../js/ticket_connection.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
   </body>
 </html>

@@ -107,3 +107,16 @@ body {
 .back-login a:hover {
   text-shadow: 0 0 5px gold, 0 0 10px gold;
 }
+
+@media (max-width: 480px) {
+  .form-box {
+    padding: 25px 20px;
+  }
+  .glow-text {
+    font-size: 26px;
+  }
+  .glow-subtext {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+}

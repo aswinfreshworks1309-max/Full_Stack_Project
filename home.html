@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+    <link rel="stylesheet" href="./styles/home.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <video autoplay loop muted playsinline class="bg-video">
+      <source src="./assests/background video.mp4" type="video/mp4" />
+    </video>
+    <header>
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <span>LocoTranz</span>
+      </div>
+    </header>
+    <main>
+      <h1 data-aos="fade-down">Your Journey Begins with LocoTranz</h1>
+      <p data-aos="fade-up" data-aos-delay="200">
+        Travel smart, travel classy — with LocoTranz.
+      </p>
+      <div class="button" data-aos="zoom-in" data-aos-delay="400">
+        <button
+          class="center"
+          onclick="window.location.href='./pages/admin.html'"
+        >
+          Login as Admin
+        </button>
+        <button
+          class="center"
+          onclick="window.location.href='./pages/login.html'"
+        >
+          Login as User
+        </button>
+      </div>
+    </main>
+    <footer id="contact">
+      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
+  </body>
+</html>
