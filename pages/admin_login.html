@@ -31,8 +31,8 @@
           alt="Bus Icon"
         />
       </div>
-      <h1>Welcome Back Aswin!</h1>
-      <p class="subtitle">Book your next journey with ease</p>
+      <h1>Welcome Back Admin!</h1>
+      <p class="subtitle">Login to your account</p>
 
       <form>
         <div class="form-group">
@@ -57,7 +57,7 @@
         <button
           type="submit"
           class="login-btn"
-          onclick="window.location.href=' ../pages/admin.html'"
+         
         >
           Login
         </button>
@@ -68,15 +68,27 @@
 
  
 
-    <footer id="contact">
-      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
-    </footer>
-
+      
+      <footer id="contact">
+        <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+      </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({ duration: 1000 });
     </script>
     <script>
+
+      const form = document.querySelector('form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        if (email === 'admin@locotranz.com' && password === 'admin') {
+          window.location.href = '../pages/admin.html';
+        } else {
+          alert('Invalid email or password');
+        }
+      });
         
     </script>
   </body>
