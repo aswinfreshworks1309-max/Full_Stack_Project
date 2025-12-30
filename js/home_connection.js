@@ -7,21 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //profile icon code
 
-profileIcon.addEventListener("click", () => {
-  const userJson = localStorage.getItem("user"); 
-  if (!userJson) return;
+  profileIcon.addEventListener("click", () => {
+    const userJson = localStorage.getItem("user");
+    if (!userJson) return;
 
-  const user = JSON.parse(userJson);
+    const user = JSON.parse(userJson);
 
-  // already popup irundha remove pannum
+    // already popup irundha remove pannum
 
-  
-  const oldPopup = document.getElementById("profilePopup");
-  if (oldPopup) oldPopup.remove();
+    const oldPopup = document.getElementById("profilePopup");
+    if (oldPopup) oldPopup.remove();
 
-  const div = document.createElement("div");
-  div.id = "profilePopup";
-  div.innerHTML = `
+    const div = document.createElement("div");
+    div.id = "profilePopup";
+    div.innerHTML = `
     <div style="
       position: fixed;
       top:50%;
@@ -60,12 +59,11 @@ profileIcon.addEventListener("click", () => {
     "></div>
   `;
 
-  document.body.appendChild(div);
+    document.body.appendChild(div);
 
-  document.getElementById("closePopup").onclick = () => div.remove();
-  document.getElementById("overlay").onclick = () => div.remove();
-});
-
+    document.getElementById("closePopup").onclick = () => div.remove();
+    document.getElementById("overlay").onclick = () => div.remove();
+  });
 
   // Close Modal Logic
   if (closeModal) {
@@ -91,7 +89,7 @@ profileIcon.addEventListener("click", () => {
         window.location.href = "./pages/login.html";
         return;
       }
-      const user = JSON.parse(userJson);  
+      const user = JSON.parse(userJson);
 
       // Show Modal & Loader
       modal.style.display = "flex";
@@ -101,7 +99,7 @@ profileIcon.addEventListener("click", () => {
       try {
         // Fetch Bookings
         const res = await fetch(
-          `http://127.0.0.1:8000/api/bookings/?user_id=${user.id}`
+          `https://project-backend-rose-nine.vercel.app/api/bookings/?user_id=${user.id}`
         );
         const bookings = await res.json();
 
@@ -110,22 +108,22 @@ profileIcon.addEventListener("click", () => {
             '<div class="loading">No booking history found.</div>';
           return;
         }
- 
 
         const ticketsHtml = await Promise.all(
           bookings.map(async (booking) => {
             try {
               // Parallel fetch for schedule and seat
-              const [schedRes, seatRes] = await Promise.all([ 
+              const [schedRes, seatRes] = await Promise.all([
                 fetch(
-                  `http://127.0.0.1:8000/api/schedules/${booking.schedule_id}`
+                  `https://project-backend-rose-nine.vercel.app/api/schedules/${booking.schedule_id}`
                 ),
-                fetch(`http://127.0.0.1:8000/api/seats/`), // We need to filter by ID on client or add backend endpoint
+                fetch(
+                  `https://project-backend-rose-nine.vercel.app/api/seats/`
+                ), // We need to filter by ID on client or add backend endpoint
               ]);
 
               const schedule = await schedRes.json();
-              const allSeats = await seatRes.json();  
-
+              const allSeats = await seatRes.json();
 
               // schedule.bus_id
               const seat = allSeats.find((s) => s.id === booking.seat_id);

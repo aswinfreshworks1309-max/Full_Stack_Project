@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // Construct API URL with query parameters
-    let apiUrl = "http://127.0.0.1:8000/api/schedules/";
+    let apiUrl = "https://project-backend-rose-nine.vercel.app/api/schedules/";
     const searchParams = new URLSearchParams();
     if (source) searchParams.append("source", source);
     if (destination) searchParams.append("destination", destination);

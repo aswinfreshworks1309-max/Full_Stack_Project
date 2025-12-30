@@ -13,13 +13,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   let bus = null;
   try {
     const schedRes = await fetch(
-      `http://127.0.0.1:8000/api/schedules/${scheduleId}`
+      `https://project-backend-rose-nine.vercel.app/api/schedules/${scheduleId}`
     );
     if (!schedRes.ok) throw new Error("Schedule not found");
     schedule = await schedRes.json();
 
     const busRes = await fetch(
-      `http://127.0.0.1:8000/api/buses/${schedule.bus_id}`
+      `https://project-backend-rose-nine.vercel.app/api/buses/${schedule.bus_id}`
     );
     if (busRes.ok) bus = await busRes.json();
 
@@ -33,13 +33,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Fetch all seats for this bus
     const seatsRes = await fetch(
-      `http://127.0.0.1:8000/api/seats/?bus_id=${schedule.bus_id}`
+      `https://project-backend-rose-nine.vercel.app/api/seats/?bus_id=${schedule.bus_id}`
     );
     const seats = await seatsRes.json();
 
     // Fetch all bookings for this schedule
     const bookingsRes = await fetch(
-      `http://127.0.0.1:8000/api/bookings/?schedule_id=${scheduleId}`
+      `https://project-backend-rose-nine.vercel.app/api/bookings/?schedule_id=${scheduleId}`
     );
     const bookings = await bookingsRes.json();
 

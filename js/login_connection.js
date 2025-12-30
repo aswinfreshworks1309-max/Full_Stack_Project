@@ -17,19 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         // Using the specific login endpoint we just added
-        const response = await fetch("http://127.0.0.1:8000/api/users/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: "ignored", // Schema requires it but logic uses email
-            email: email,
-            password: password,
-            full_name: "ignored",
-            role: "ignored",
-          }),
-        });
+        const response = await fetch(
+          "https://project-backend-rose-nine.vercel.app/api/users/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: "ignored", // Schema requires it but logic uses email
+              email: email,
+              password: password,
+              full_name: "ignored",
+              role: "ignored",
+            }),
+          }
+        );
 
         if (response.ok) {
           const user = await response.json();

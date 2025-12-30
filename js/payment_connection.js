@@ -64,11 +64,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           };
           console.log("Sending booking request with payload:", payload);
 
-          return fetch("http://127.0.0.1:8000/api/bookings/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
+          return fetch(
+            "https://project-backend-rose-nine.vercel.app/api/bookings/",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            }
+          );
         });
 
         const results = await Promise.all(promises);

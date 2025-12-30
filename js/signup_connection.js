@@ -19,19 +19,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/users/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: email.split("@")[0], // Generate username from email
-            email: email,
-            password: password,
-            full_name: fullName,
-            role: "user",
-          }),
-        });
+        const response = await fetch(
+          "https://project-backend-rose-nine.vercel.app/api/users/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: email.split("@")[0], // Generate username from email
+              email: email,
+              password: password,
+              full_name: fullName,
+              role: "user",
+            }),
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
