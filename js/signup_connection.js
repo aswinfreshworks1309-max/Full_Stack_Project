@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const response = await fetch(
-          "https://project-backend-rose-nine.vercel.app/api/users/",
+          "https://project-backend-rose-nine.vercel.app/users/",
           {
             method: "POST",
             headers: {
