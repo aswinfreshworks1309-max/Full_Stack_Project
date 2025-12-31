@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Fetch first booking to get context
     const mainRes = await fetch(
-      `https://project-backend-rose-nine.vercel.app/api/bookings/${bookingIds[0]}`
+      `${API_BASE_URL}/api/bookings/${bookingIds[0]}`
     );
     if (!mainRes.ok) throw new Error("Booking not found");
     const mainBooking = await mainRes.json();
 
     // Fetch Schedule & Bus
     const schedRes = await fetch(
-      `https://project-backend-rose-nine.vercel.app/api/schedules/${mainBooking.schedule_id}`
+      `${API_BASE_URL}/api/schedules/${mainBooking.schedule_id}`
     );
     const schedule = await schedRes.json();
 
@@ -123,10 +123,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch Seats for labels
     const seatPromises = bookingIds.map((id) =>
-      fetch(`https://project-backend-rose-nine.vercel.app/api/bookings/${id}`)
+      fetch(`${API_BASE_URL}/api/bookings/${id}`)
         .then((r) => r.json())
         .then((booking) =>
-          fetch(`https://project-backend-rose-nine.vercel.app/api/seats/`)
+          fetch(`${API_BASE_URL}/api/seats/`)
             .then((r) => r.json())
             .then((seats) => seats.find((s) => s.id === booking.seat_id))
         )

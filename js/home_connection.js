@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         // Fetch Bookings
         const res = await fetch(
-          `https://project-backend-rose-nine.vercel.app/api/bookings/?user_id=${user.id}`
+          `${API_BASE_URL}/api/bookings/?user_id=${user.id}`
         );
         const bookings = await res.json();
 
@@ -114,12 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
               // Parallel fetch for schedule and seat
               const [schedRes, seatRes] = await Promise.all([
-                fetch(
-                  `https://project-backend-rose-nine.vercel.app/api/schedules/${booking.schedule_id}`
-                ),
-                fetch(
-                  `https://project-backend-rose-nine.vercel.app/api/seats/`
-                ), // We need to filter by ID on client or add backend endpoint
+                fetch(`${API_BASE_URL}/api/schedules/${booking.schedule_id}`),
+                fetch(`${API_BASE_URL}/api/seats/`), // We need to filter by ID on client or add backend endpoint
               ]);
 
               const schedule = await schedRes.json();
