@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function fetchStats() {
     try {
       // 1. Total Buses
-      const busRes = await fetch(`${API_BASE_URL}/buses/`);
+      const busRes = await fetch(`${API_BASE_URL}/api/buses/`);
       const buses = await busRes.json();
       const totalBuses = buses.length;
 
       // 2. Schedules
-      const schedRes = await fetch(`${API_BASE_URL}/schedules/`);
+      const schedRes = await fetch(`${API_BASE_URL}/api/schedules/`);
       const schedules = await schedRes.json();
 
       let runningCount = 0;
@@ -165,14 +165,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       '<tr><td colspan="8" style="text-align:center;">Loading schedules...</td></tr>';
 
     try {
-      const response = await fetch(`${API_BASE_URL}/schedules/`);
+      const response = await fetch(`${API_BASE_URL}/api/schedules/`);
       if (!response.ok) throw new Error("Failed to fetch schedules");
       currentSchedules = await response.json();
 
       // Fetch Bookings to calculate booked seats
       let counts = {};
       try {
-        const bRes = await fetch(`${API_BASE_URL}/bookings/`);
+        const bRes = await fetch(`${API_BASE_URL}/api/bookings/`);
         if (bRes.ok) {
           const bookings = await bRes.json();
           bookings.forEach((b) => {
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         operator_name: document.getElementById("newOperatorName").value,
       };
       try {
-        const res = await fetch(`${API_BASE_URL}/buses/`, {
+        const res = await fetch(`${API_BASE_URL}/api/buses/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newBus),
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.deleteSchedule = async function (id) {
     if (!confirm("Are you sure you want to delete this schedule?")) return;
     try {
-      const res = await fetch(`${API_BASE_URL}/schedules/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/schedules/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/seats/reset/${scheduleId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/seats/reset/${scheduleId}`, {
         method: "POST",
       });
 
@@ -504,10 +504,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
 
       try {
-        let url = `${API_BASE_URL}/schedules/`;
+        let url = `${API_BASE_URL}/api/schedules/`;
         let method = "POST";
         if (isEditing && editId) {
-          url = `${API_BASE_URL}/schedules/${editId}`;
+          url = `${API_BASE_URL}/api/schedules/${editId}`;
           method = "PUT";
         }
 

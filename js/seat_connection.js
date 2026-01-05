@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   let schedule = null;
   let bus = null;
   try {
-    const schedRes = await fetch(`${API_BASE_URL}/schedules/${scheduleId}`);
+    const schedRes = await fetch(`${API_BASE_URL}/api/schedules/${scheduleId}`);
     if (!schedRes.ok) throw new Error("Schedule not found");
     schedule = await schedRes.json();
 
-    const busRes = await fetch(`${API_BASE_URL}/buses/${schedule.bus_id}`);
+    const busRes = await fetch(`${API_BASE_URL}/api/buses/${schedule.bus_id}`);
     if (busRes.ok) bus = await busRes.json();
 
     updateSeatPageInfo(schedule, bus);
@@ -29,13 +29,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Fetch all seats for this bus
     const seatsRes = await fetch(
-      `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`
+      `${API_BASE_URL}/api/seats/?bus_id=${schedule.bus_id}`
     );
     const seats = await seatsRes.json();
 
     // Fetch all bookings for this schedule
     const bookingsRes = await fetch(
-      `${API_BASE_URL}/bookings/?schedule_id=${scheduleId}`
+      `${API_BASE_URL}/api/bookings/?schedule_id=${scheduleId}`
     );
     const bookings = await bookingsRes.json();
 
