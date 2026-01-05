@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           };
           console.log("Sending booking request with payload:", payload);
 
-          return fetch(`${API_BASE_URL}/api/bookings/`, {
+          return fetch(`${API_BASE_URL}/bookings/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),

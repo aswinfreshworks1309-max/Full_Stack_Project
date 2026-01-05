@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // Construct API URL with query parameters
-    let apiUrl = `${API_BASE_URL}/api/schedules/`;
+    let apiUrl = `${API_BASE_URL}/schedules/`;
     const searchParams = new URLSearchParams();
     if (source) searchParams.append("source", source);
     if (destination) searchParams.append("destination", destination);
