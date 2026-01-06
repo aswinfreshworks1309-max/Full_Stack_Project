@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // valid login
           localStorage.setItem("user", JSON.stringify(user));
           alert(`Welcome back, ${user.full_name}!`);
-          window.location.href = "./pages/home.html";
+          window.location.href = "../pages/home.html";
         } else {
           alert("Invalid email or password.");
         }
