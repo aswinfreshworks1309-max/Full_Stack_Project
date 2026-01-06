@@ -45,7 +45,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     console.log(`Fetching buses from: ${apiUrl}`);
-    const response = await fetch(apiUrl);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const headers = user?.access_token
+      ? { Authorization: `Bearer ${user.access_token}` }
+      : {};
+
+    const response = await fetch(apiUrl, { headers });
 
     if (!response.ok) {
       throw new Error(`API Error: ${response.status}`);

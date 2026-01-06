@@ -66,7 +66,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           return fetch(`${API_BASE_URL}/bookings/`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.access_token}`,
+            },
             body: JSON.stringify(payload),
           });
         });

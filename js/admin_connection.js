@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   let editId = null;
   let activeFilter = "all";
 
+  const getAuthHeaders = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user?.access_token
+      ? { Authorization: `Bearer ${user.access_token}` }
+      : {};
+  };
+
   // --- UTILS ---
   function getScheduleStatus(schedule) {
     const now = new Date();
@@ -26,12 +33,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function fetchStats() {
     try {
       // 1. Total Buses
-      const busRes = await fetch(`${API_BASE_URL}/buses/`);
+      const busRes = await fetch(`${API_BASE_URL}/buses/`, {
+        headers: getAuthHeaders(),
+      });
       const buses = await busRes.json();
       const totalBuses = buses.length;
 
       // 2. Schedules
-      const schedRes = await fetch(`${API_BASE_URL}/schedules/`);
+      const schedRes = await fetch(`${API_BASE_URL}/schedules/`, {
+        headers: getAuthHeaders(),
+      });
       const schedules = await schedRes.json();
 
       let runningCount = 0;
@@ -165,14 +176,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       '<tr><td colspan="8" style="text-align:center;">Loading schedules...</td></tr>';
 
     try {
-      const response = await fetch(`${API_BASE_URL}/schedules/`);
+      const response = await fetch(`${API_BASE_URL}/schedules/`, {
+        headers: getAuthHeaders(),
+      });
       if (!response.ok) throw new Error("Failed to fetch schedules");
       currentSchedules = await response.json();
 
       // Fetch Bookings to calculate booked seats
       let counts = {};
       try {
-        const bRes = await fetch(`${API_BASE_URL}/bookings/`);
+        const bRes = await fetch(`${API_BASE_URL}/bookings/`, {
+          headers: getAuthHeaders(),
+        });
         if (bRes.ok) {
           const bookings = await bRes.json();
           bookings.forEach((b) => {
@@ -242,7 +257,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/buses/`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { ...getAuthHeaders(), "Content-Type": "application/json" },
           body: JSON.stringify(newBus),
         });
         if (res.ok) {
@@ -318,6 +333,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/schedules/${id}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
       });
       if (res.ok) {
         alert("Schedule Deleted!");
@@ -343,6 +359,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/seats/reset/${scheduleId}`, {
         method: "POST",
+        headers: getAuthHeaders(),
       });
 
       if (res.ok) {
@@ -513,8 +530,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const res = await fetch(url, {
           method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newSchedule),
+          headers: { ...getAuthHeaders(), "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         });
 
         if (res.ok) {
