@@ -6,9 +6,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    return user?.access_token
-      ? { Authorization: `Bearer ${user.access_token}` }
-      : {};
+    if (!user || !user.access_token) {
+      window.location.href = "login.html";
+      return {};
+    }
+    return { Authorization: `Bearer ${user.access_token}` };
+  };
+
+  const handleAuthError = (res) => {
+    if (res.status === 401) {
+      localStorage.removeItem("user");
+      alert("Session expired. Please login again.");
+      window.location.href = "login.html";
+      return true;
+    }
+    return false;
   };
 
   // --- UTILS ---
@@ -36,13 +48,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       const busRes = await fetch(`${API_BASE_URL}/buses/`, {
         headers: getAuthHeaders(),
       });
+      if (handleAuthError(busRes)) return;
       const buses = await busRes.json();
-      const totalBuses = buses.length;
+      const totalBuses = Array.isArray(buses) ? buses.length : 0;
 
       // 2. Schedules
       const schedRes = await fetch(`${API_BASE_URL}/schedules/`, {
         headers: getAuthHeaders(),
       });
+      if (handleAuthError(schedRes)) return;
       const schedules = await schedRes.json();
 
       let runningCount = 0;
@@ -51,21 +65,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       const activeBusIds = new Set();
       const maintenanceBusIds = new Set();
 
-      schedules.forEach((s) => {
-        // Use DB status if explicitly set, else fallback
-        let status = s.status || getScheduleStatus(s);
-        status = status.toLowerCase();
+      if (Array.isArray(schedules)) {
+        schedules.forEach((s) => {
+          // Use DB status if explicitly set, else fallback
+          let status = s.status || getScheduleStatus(s);
+          status = status.toLowerCase();
 
-        if (status === "running") {
-          runningCount++;
-          activeBusIds.add(s.bus_id);
-        } else if (status === "scheduled") {
-          scheduledCount++;
-          activeBusIds.add(s.bus_id);
-        } else if (status === "maintenance") {
-          maintenanceBusIds.add(s.bus_id);
-        }
-      });
+          if (status === "running") {
+            runningCount++;
+            activeBusIds.add(s.bus_id);
+          } else if (status === "scheduled") {
+            scheduledCount++;
+            activeBusIds.add(s.bus_id);
+          } else if (status === "maintenance") {
+            maintenanceBusIds.add(s.bus_id);
+          }
+        });
+      }
 
       maintenanceCount = maintenanceBusIds.size;
 
@@ -99,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tbody = document.querySelector(".bus-table tbody");
     tbody.innerHTML = "";
 
-    if (schedules.length === 0) {
+    if (!Array.isArray(schedules) || schedules.length === 0) {
       tbody.innerHTML =
         '<tr><td colspan="8" style="text-align:center;">No schedules found.</td></tr>';
       return;
@@ -179,6 +195,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const response = await fetch(`${API_BASE_URL}/schedules/`, {
         headers: getAuthHeaders(),
       });
+      if (handleAuthError(response)) return;
       if (!response.ok) throw new Error("Failed to fetch schedules");
       currentSchedules = await response.json();
 
@@ -190,9 +207,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         if (bRes.ok) {
           const bookings = await bRes.json();
-          bookings.forEach((b) => {
-            counts[b.schedule_id] = (counts[b.schedule_id] || 0) + 1;
-          });
+          if (Array.isArray(bookings)) {
+            bookings.forEach((b) => {
+              counts[b.schedule_id] = (counts[b.schedule_id] || 0) + 1;
+            });
+          }
         }
       } catch (e) {
         console.warn("Failed to fetch bookings count", e);
@@ -431,8 +450,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       headers: getAuthHeaders(),
     })
       .then((res) => {
+        if (handleAuthError(res)) return;
         if (!res.ok) throw new Error("Failed to fetch buses");
-        return res.json();  
+        return res.json();
       })
       .then((buses) => {
         select.innerHTML = "";
@@ -533,7 +553,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const res = await fetch(url, {
           method: method,
           headers: { ...getAuthHeaders(), "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(newSchedule),
         });
 
         if (res.ok) {
