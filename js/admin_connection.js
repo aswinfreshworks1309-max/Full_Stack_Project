@@ -427,10 +427,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!select) return;
 
     select.innerHTML = '<option value="">Loading buses...</option>';
-    fetch(`${API_BASE_URL}/buses/`)
+    fetch(`${API_BASE_URL}/buses/`, {
+      headers: getAuthHeaders(),
+    })
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch buses");
-        return res.json();
+        return res.json();  
       })
       .then((buses) => {
         select.innerHTML = "";
