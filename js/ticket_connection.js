@@ -8,49 +8,71 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
   const bookingIds = bookingIdsStr.split(",");
-
   if (bookingIds.length === 0) return;
 
-  // 2. Fetch Data using the first booking ID to get Schedule info
-  // (Ideally we define an endpoint to get multiple bookings or just loop)
+  const getAuthHeaders = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.access_token) {
+      window.location.href = "login.html";
+      return {};
+    }
+    return { Authorization: `Bearer ${user.access_token}` };
+  };
+
+  const handleAuthError = (res) => {
+    if (res.status === 401) {
+      localStorage.removeItem("user");
+      alert("Session expired. Please login again.");
+      window.location.href = "login.html";
+      return true;
+    }
+    return false;
+  };
+
+  // 2. Fetch Data
   try {
+    const headers = getAuthHeaders();
+
     // Fetch first booking to get context
-    const mainRes = await fetch(`${API_BASE_URL}/bookings/${bookingIds[0]}`);
+    const mainRes = await fetch(`${API_BASE_URL}/bookings/${bookingIds[0]}`, {
+      headers,
+    });
+    if (handleAuthError(mainRes)) return;
     if (!mainRes.ok) throw new Error("Booking not found");
     const mainBooking = await mainRes.json();
 
-    // Fetch Schedule & Bus
+    // Fetch Schedule
     const schedRes = await fetch(
-      `${API_BASE_URL}/schedules/${mainBooking.schedule_id}`
+      `${API_BASE_URL}/schedules/${mainBooking.schedule_id}`,
+      { headers }
     );
+    if (handleAuthError(schedRes)) return;
     const schedule = await schedRes.json();
 
-    // Fetch User (if needed) - we have local user
-    const user = JSON.parse(localStorage.getItem("user"));
+    // Fetch All Seats once (for labels)
+    const seatsRes = await fetch(`${API_BASE_URL}/seats/`, { headers });
+    if (handleAuthError(seatsRes)) return;
+    const allSeats = await seatsRes.json();
 
     // 3. Update UI
-
-    // Random Booking Ref ID for visual flair
+    const user = JSON.parse(localStorage.getItem("user"));
     const refId = `LOCO${new Date().getFullYear()}${String(Date.now()).slice(
       -6
     )}`;
     document.querySelector(".booking-id").textContent = `Booking ID: ${refId}`;
 
-    // Dates
     const dep = new Date(schedule.departure_time);
     const arr = new Date(schedule.arrival_time);
 
     // Update Journey
     const points = document.querySelectorAll(".journey-point");
     if (points.length >= 2) {
-      // Source
       points[0].querySelector(".journey-city").textContent = schedule.source;
       points[0].querySelector(".journey-time").textContent =
         dep.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
       points[0].querySelector(".journey-date").textContent =
         dep.toLocaleDateString();
 
-      // Dest
       points[1].querySelector(".journey-city").textContent =
         schedule.destination;
       points[1].querySelector(".journey-time").textContent =
@@ -77,32 +99,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Price Breakdown
-    // We know the count and price
     const count = bookingIds.length;
     const totalBase = count * schedule.price;
     const gst = totalBase * 0.05;
     const total = totalBase + gst;
 
     const priceRows = document.querySelectorAll(".price-row");
-    // Base
-    if (priceRows[0]) {
+    if (priceRows[0])
       priceRows[0].innerHTML = `<span>Base Fare (${count} × ₹${schedule.price})</span><span>₹${totalBase}</span>`;
-    }
-    // GST
-    if (priceRows[1]) {
+    if (priceRows[1])
       priceRows[1].innerHTML = `<span>GST (5%)</span><span>₹${gst.toFixed(
         2
       )}</span>`;
-    }
-    // Total
+
     const totalRow = document.querySelector(".price-row.total");
-    if (totalRow) {
+    if (totalRow)
       totalRow.innerHTML = `<span>Total Paid</span><span>₹${total.toFixed(
         2
       )}</span>`;
-    }
 
-    // Add Passenger Name if possible
+    // Passenger Info
     const ticketBody = document.querySelector(".ticket-body");
     const passengerDiv = document.createElement("div");
     passengerDiv.className = "info-grid";
@@ -119,22 +135,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
     ticketBody.appendChild(passengerDiv);
 
-    // Fetch Seats for labels
-    const seatPromises = bookingIds.map((id) =>
-      fetch(`${API_BASE_URL}/bookings/${id}`)
-        .then((r) => r.json())
-        .then((booking) =>
-          fetch(`${API_BASE_URL}/seats/`)
-            .then((r) => r.json())
-            .then((seats) => seats.find((s) => s.id === booking.seat_id))
-        )
-    );
-
-    const seatObjects = await Promise.all(seatPromises);
-    const labels = seatObjects.map((s) => (s ? s.seat_label : "?")).join(", ");
-    document.getElementById("seatLabels").textContent = labels;
+    // Map Booking IDs to Seat Labels
+    const labels = [];
+    for (const bId of bookingIds) {
+      const bRes = await fetch(`${API_BASE_URL}/bookings/${bId}`, { headers });
+      if (bRes.ok) {
+        const bData = await bRes.json();
+        const seat = allSeats.find((s) => s.id === bData.seat_id);
+        if (seat) labels.push(seat.seat_label);
+      }
+    }
+    document.getElementById("seatLabels").textContent =
+      labels.join(", ") || "N/A";
   } catch (e) {
     console.error(e);
-    alert("Error loading ticket details.");
+    alert("Error loading ticket details: " + e.message);
   }
 });
