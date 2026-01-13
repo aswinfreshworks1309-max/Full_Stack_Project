@@ -35,14 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
           const user = await response.json();
           // valid login
           localStorage.setItem("user", JSON.stringify(user));
-          alert(`Welcome back, ${user.full_name}!`);
-          window.location.href = "../pages/home.html";
+          showToast(`Welcome back, ${user.full_name}!`, "success");
+          setTimeout(() => {
+            window.location.href = "../pages/home.html";
+          }, 1000); // Give time for toast to show
         } else {
-          alert("Invalid email or password.");
+          showToast("Invalid email or password.", "error");
         }
       } catch (err) {
         console.error(err);
-        alert("Login failed. Is the backend running?");
+        showToast("Login failed. Is the backend running?", "error");
       }
     });
   }

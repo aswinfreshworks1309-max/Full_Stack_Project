@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const bookingIdsStr = params.get("booking_ids");
   if (!bookingIdsStr) {
     console.error("No booking_ids param found in URL");
-    alert("No ticket found. URL Debug: " + window.location.href);
+    showToast("No ticket found. Referencing URL debug info.", "error");
     return;
   }
   const bookingIds = bookingIdsStr.split(",");
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
-      alert("Session expired. Please login again.");
+      showToast("Session expired. Please login again.", "error");
       window.location.href = "login.html";
       return true;
     }
@@ -149,6 +149,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       labels.join(", ") || "N/A";
   } catch (e) {
     console.error(e);
-    alert("Error loading ticket details: " + e.message);
+    showToast("Error loading ticket details: " + e.message, "error");
   }
 });

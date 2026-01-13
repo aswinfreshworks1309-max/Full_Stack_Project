@@ -6,6 +6,7 @@
     <title>LocoTranz | Login</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../css/toast.css" />
   </head>
  
   <body>
@@ -52,6 +53,8 @@
             placeholder="Enter your password"
             required
           />
+          <p style="color: rgb(197, 194, 194);font-size: 12px;margin-top: 10px;margin-left: 70px;">Email : admin@locotranz.com</p>
+          <p style="color: rgb(197, 194, 194);font-size: 12px;margin-left: 70px">Password : admin</p>
         </div>
  
         <button
@@ -77,20 +80,22 @@
     <script>
       AOS.init({ duration: 1000 });
     </script>
+    <script src="../js/toast.js"></script>
     <script>
-
       const form = document.querySelector('form');
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         if (email === 'admin@locotranz.com' && password === 'admin') {
-          window.location.href = '../pages/admin.html';
+          showToast('Welcome back, Admin!', 'success');
+          setTimeout(() => {
+            window.location.href = '../pages/admin.html';
+          }, 1000);
         } else {
-          alert('Invalid email or password');
+          showToast('Invalid email or password', 'error');
         }
       });
-        
     </script>
   </body>
 </html>

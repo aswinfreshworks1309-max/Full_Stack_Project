@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const scheduleId = params.get("schedule_id");
 
   if (!scheduleId) {
-    alert("No schedule selected.");
+    showToast("No schedule selected.", "error");
     window.location.href = "../index.html";
     return;
   }
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateSeatPageInfo(schedule, bus);
   } catch (err) {
     console.error(err);
-    alert("Failed to load schedule info.");
+    showToast("Failed to load schedule info.", "error");
   }
 
   // 2. Fetch Seats and Bookings to determine availability
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     continueBtn.removeAttribute("onclick"); // remove inline nav
     continueBtn.addEventListener("click", () => {
       if (selectedSeats.size === 0) {
-        alert("Please select at least one seat.");
+        showToast("Please select at least one seat.", "error");
         return;
       }
       // Save to localStorage

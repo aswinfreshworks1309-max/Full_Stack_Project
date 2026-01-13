@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const confirmPassword = inputs[3].value;
 
       if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+        showToast("Passwords do not match!", "error");
         return;
       }
 
@@ -35,15 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.ok) {
           const data = await response.json();
-          alert("Account created successfully! Please login.");
-          window.location.href = "../pages/login.html";
+          showToast("Account created successfully! Please login.", "success");
+          setTimeout(() => {
+            window.location.href = "../pages/login.html";
+          }, 1500);
         } else {
           const error = await response.json();
-          alert("Signup failed: " + (error.detail || "Unknown error"));
+          showToast(
+            "Signup failed: " + (error.detail || "Unknown error"),
+            "error"
+          );
         }
       } catch (err) {
         console.error(err);
-        alert("Network error. Is the backend running?");
+        showToast("Network error. Is the backend running?", "error");
       }
     });
   }

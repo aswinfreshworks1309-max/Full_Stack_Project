@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
-      alert("Session expired. Please login again.");
+      showToast("Session expired. Please login again.", "error");
       window.location.href = "login.html";
       return true;
     }
@@ -280,17 +280,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           body: JSON.stringify(newBus),
         });
         if (res.ok) {
-          alert("Bus Created Successfully!");
+          showToast("Bus Created Successfully!", "success");
           window.closeAddBusModal();
           fetchBusesForDropdown();
           fetchStats(); // Update bus count
         } else {
           const err = await res.json();
-          alert("Error: " + JSON.stringify(err));
+          showToast("Error: " + JSON.stringify(err), "error");
         }
       } catch (e) {
         console.error(e);
-        alert("Network Error");
+        showToast("Network Error", "error");
       }
     });
   }
@@ -355,14 +355,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         headers: getAuthHeaders(),
       });
       if (res.ok) {
-        alert("Schedule Deleted!");
+        showToast("Schedule Deleted!", "success");
         window.location.reload(); // Simple reload implies fetching again
       } else {
-        alert("Failed to delete schedule.");
+        showToast("Failed to delete schedule.", "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Error deleting schedule.");
+      showToast("Error deleting schedule.", "error");
     }
   };
 
@@ -382,16 +382,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       if (res.ok) {
-        alert("Seats and Bookings have been reset successfully!");
+        showToast(
+          "Seats and Bookings have been reset successfully!",
+          "success"
+        );
         fetchStats();
         fetchSchedules();
       } else {
         const err = await res.json();
-        alert("Error: " + (err.detail || "Failed to reset"));
+        showToast("Error: " + (err.detail || "Failed to reset"), "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Network Error. Ensure Backend is running.");
+      showToast("Network Error. Ensure Backend is running.", "error");
     }
   };
 
@@ -511,7 +514,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const busId = busSelect ? busSelect.value : null;
 
       if (!busId) {
-        alert("Please select a bus");
+        showToast("Please select a bus", "error");
         return;
       }
       const source = document.getElementById("departureLocation").value;
@@ -526,7 +529,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const status = statusInput ? statusInput.value : "Scheduled";
 
       if (!depTime || !arrTime) {
-        alert("Please select dates");
+        showToast("Please select dates", "error");
         return;
       }
 
@@ -557,17 +560,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         if (res.ok) {
-          alert(isEditing ? "Schedule Updated!" : "Schedule Added!");
+          showToast(
+            isEditing ? "Schedule Updated!" : "Schedule Added!",
+            "success"
+          );
           document.getElementById("editModal").style.display = "none";
           fetchSchedules(); // Refresh table
           fetchStats(); // Refresh stats
         } else {
           const err = await res.json();
-          alert("Error: " + JSON.stringify(err));
+          showToast("Error: " + JSON.stringify(err), "error");
         }
       } catch (e) {
         console.error(e);
-        alert("Network Error");
+        showToast("Network Error", "error");
       }
     });
   }

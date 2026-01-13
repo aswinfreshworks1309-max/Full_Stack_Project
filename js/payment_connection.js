@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 1. Check Auth (Simple check)
   const userJson = localStorage.getItem("user");
   if (!userJson) {
-    alert("Please login to complete booking.");
+    showToast("Please login to complete booking.", "error");
     window.location.href = "./login.html";
     return;
   }
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 2. Load Booking Data
   const bookingDataJson = localStorage.getItem("currentBooking");
   if (!bookingDataJson) {
-    alert("No booking in progress.");
+    showToast("No booking in progress.", "error");
     window.location.href = "../index.html";
     return;
   }
@@ -95,8 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           console.log("Created Booking IDs:", validIds);
 
           if (validIds.length === 0) {
-            alert(
-              "Booking processed, but Logic Error: No Ticket IDs received. Please contact support."
+            showToast(
+              "Booking processed, but Logic Error: No Ticket IDs received. Please contact support.",
+              "error"
             );
             newPayBtn.disabled = false;
             newPayBtn.textContent = "Retry";
@@ -105,28 +106,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const bookingIds = validIds.join(",");
 
-          alert(
-            `Booking Success! Redirecting to ticket... (IDs: ${bookingIds})`
-          );
+          showToast(`Booking Success! Redirecting to ticket...`, "success");
           localStorage.removeItem("currentBooking");
-          window.location.replace(`./ticket.html?booking_ids=${bookingIds}`);
+          setTimeout(() => {
+            window.location.replace(`./ticket.html?booking_ids=${bookingIds}`);
+          }, 1500);
         } else {
           // Try to read error messages
           try {
             const errorRes = results.find((r) => !r.ok);
             const errorData = await errorRes.json();
             console.error("Backend error:", errorData);
-            alert("Booking Failed: " + JSON.stringify(errorData));
+            showToast("Booking Failed: " + JSON.stringify(errorData), "error");
           } catch (e) {
             console.error("Error parsing error response:", e);
-            alert("Server returned an error. Please try again.");
+            showToast("Server returned an error. Please try again.", "error");
           }
           newPayBtn.disabled = false;
           newPayBtn.textContent = "Retry Payment";
         }
       } catch (err) {
         console.error("Payment error:", err);
-        alert("Payment Logic Error: " + err.message);
+        showToast("Payment Logic Error: " + err.message, "error");
         newPayBtn.disabled = false;
         newPayBtn.textContent = "Retry Payment";
       }

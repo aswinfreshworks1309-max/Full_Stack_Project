@@ -85,8 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Check Auth
       const userJson = localStorage.getItem("user");
       if (!userJson) {
-        alert("Please login to view your tickets.");
-        window.location.href = "./pages/login.html";
+        showToast("Please login to view your tickets.", "error");
+        setTimeout(() => {
+          window.location.href = "./pages/login.html";
+        }, 1500);
         return;
       }
       const user = JSON.parse(userJson);
