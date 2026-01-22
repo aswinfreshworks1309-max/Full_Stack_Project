@@ -1,3 +1,4 @@
+// Recap: Displays a temporary toast notification message on the screen.
 function showToast(message, type = "success") {
   // Create container if it doesn't exist
   let container = document.getElementById("toast-container");

@@ -1,3 +1,4 @@
+// Recap: Manages bus seat selection, fetches availability, and calculates pricing.
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const scheduleId = params.get("schedule_id");
@@ -39,14 +40,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Fetch all seats for this bus
     const seatsRes = await fetch(
       `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
-      { headers }
+      { headers },
     );
     const seats = await seatsRes.json();
 
     // Fetch all bookings for this schedule
     const bookingsRes = await fetch(
       `${API_BASE_URL}/bookings/?schedule_id=${scheduleId}`,
-      { headers }
+      { headers },
     );
     const bookings = await bookingsRes.json();
 
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // UI Updates
+  // Recap: Updates the UI with schedule and bus information.
   function updateSeatPageInfo(schedule, bus) {
     if (bus) {
       document.querySelector(".bus-name").textContent =
@@ -85,6 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("baseFare").textContent = "₹0";
   }
 
+  // Recap: Renders the interactive bus seat layout based on backend data.
   function renderSeats(seats, bookedSet) {
     // Warning: This replaces the hardcoded layout with a dynamic one.
     // If the backend has no seats, the layout will be empty.
@@ -94,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (seats.length === 0) {
       console.warn(
-        "No seats found in DB for this bus. Using static layout for visual demo, but they won't be submittable."
+        "No seats found in DB for this bus. Using static layout for visual demo, but they won't be submittable.",
       );
       return;
     }
@@ -159,6 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const gstEl = document.getElementById("gst");
   const totalEl = document.getElementById("totalAmount");
 
+  // Recap: Toggles the selection state of a seat and updates the summary.
   function toggleSeat(seatDiv) {
     if (seatDiv.classList.contains("booked")) return;
 
@@ -176,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateSummary(price);
   }
 
+  // Recap: Recalculates and displays the booking price summary.
   function updateSummary(pricePerSeat) {
     const count = selectedSeats.size;
 
@@ -204,6 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const continueBtn = document.getElementById("continueBtn");
   if (continueBtn) {
     continueBtn.removeAttribute("onclick"); // remove inline nav
+    // Recap: Saves selected booking details to storage and redirects to payment.
     continueBtn.addEventListener("click", () => {
       if (selectedSeats.size === 0) {
         showToast("Please select at least one seat.", "error");

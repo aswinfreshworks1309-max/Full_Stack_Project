@@ -1,3 +1,4 @@
+// Recap: Fetches and displays available bus schedules based on search criteria.
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Get query parameters from the URL
   const params = new URLSearchParams(window.location.search);

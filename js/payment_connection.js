@@ -1,3 +1,4 @@
+// Recap: Handlers the final payment step and creates booking records.
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Check Auth (Simple check)
   const userJson = localStorage.getItem("user");
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     oldPayBtn.parentNode.replaceChild(newPayBtn, oldPayBtn);
 
+    // Recap: Sends booking requests to the server and handles the response.
     newPayBtn.addEventListener("click", async (e) => {
       e.preventDefault(); // Stop any default behavior
 
@@ -79,14 +81,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Log all responses
         console.log(
           "Received responses:",
-          results.map((r) => ({ ok: r.ok, status: r.status }))
+          results.map((r) => ({ ok: r.ok, status: r.status })),
         );
 
         const allOk = results.every((r) => r.ok);
 
         if (allOk) {
           const createdBookings = await Promise.all(
-            results.map((r) => r.json())
+            results.map((r) => r.json()),
           );
 
           console.log("Created bookings:", createdBookings);
@@ -97,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (validIds.length === 0) {
             showToast(
               "Booking processed, but Logic Error: No Ticket IDs received. Please contact support.",
-              "error"
+              "error",
             );
             newPayBtn.disabled = false;
             newPayBtn.textContent = "Retry";

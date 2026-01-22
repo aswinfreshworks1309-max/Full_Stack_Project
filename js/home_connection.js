@@ -1,3 +1,4 @@
+// Recap: Initializes the home page functionalities and event listeners.
 document.addEventListener("DOMContentLoaded", () => {
   const myTicketsBtn = document.getElementById("myTicketsBtn");
   const modal = document.getElementById("ticketsModal");
@@ -7,12 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //profile icon code
 
+  // Recap: Displays the user profile information in a popup.
   profileIcon.addEventListener("click", () => {
     const userJson = localStorage.getItem("user");
     if (!userJson) return;
 
     const user = JSON.parse(userJson);
- 
 
     const oldPopup = document.getElementById("profilePopup");
     if (oldPopup) oldPopup.remove();
@@ -77,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Recap: Fetches and displays the booking history for the logged-in user.
   if (myTicketsBtn) {
     myTicketsBtn.addEventListener("click", async (e) => {
       e.preventDefault();
@@ -102,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const headers = { Authorization: `Bearer ${user.access_token}` };
         const res = await fetch(
           `${API_BASE_URL}/bookings/?user_id=${user.id}`,
-          { headers }
+          { headers },
         );
         const bookings = await res.json();
 
@@ -137,15 +139,15 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="ticket-info">
                                 <label>Route</label>
                                 <div>${schedule.source} → ${
-                schedule.destination
-              }</div>
+                                  schedule.destination
+                                }</div>
                             </div>
                             <div class="ticket-info">
                                 <label>Date & Time</label>
                                 <div>${depDate.toLocaleDateString()} ${depDate.toLocaleTimeString(
-                [],
-                { hour: "2-digit", minute: "2-digit" }
-              )}</div>
+                                  [],
+                                  { hour: "2-digit", minute: "2-digit" },
+                                )}</div>
                             </div>
                             <div class="ticket-info">
                                 <label>Seat</label>
@@ -172,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
               console.error(err);
               return `<div class="ticket-card" style="color:red">Error loading ticket ${booking.id}</div>`;
             }
-          })
+          }),
         );
 
         container.innerHTML = ticketsHtml.join("");

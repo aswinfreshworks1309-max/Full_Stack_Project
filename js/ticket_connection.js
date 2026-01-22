@@ -1,3 +1,4 @@
+// Recap: Fetches and displays booking details and seat information for the ticket page.
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Get Params
   const params = new URLSearchParams(window.location.search);
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const bookingIds = bookingIdsStr.split(",");
   if (bookingIds.length === 0) return;
 
+  // Recap: Retrieves authentication headers from local storage.
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.access_token) {
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { Authorization: `Bearer ${user.access_token}` };
   };
 
+  // Recap: Handles 401 Unauthorized errors by redirecting to login.
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Fetch Schedule
     const schedRes = await fetch(
       `${API_BASE_URL}/schedules/${mainBooking.schedule_id}`,
-      { headers }
+      { headers },
     );
     if (handleAuthError(schedRes)) return;
     const schedule = await schedRes.json();
@@ -57,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 3. Update UI
     const user = JSON.parse(localStorage.getItem("user"));
     const refId = `LOCO${new Date().getFullYear()}${String(Date.now()).slice(
-      -6
+      -6,
     )}`;
     document.querySelector(".booking-id").textContent = `Booking ID: ${refId}`;
 
@@ -109,13 +112,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       priceRows[0].innerHTML = `<span>Base Fare (${count} × ₹${schedule.price})</span><span>₹${totalBase}</span>`;
     if (priceRows[1])
       priceRows[1].innerHTML = `<span>GST (5%)</span><span>₹${gst.toFixed(
-        2
+        2,
       )}</span>`;
 
     const totalRow = document.querySelector(".price-row.total");
     if (totalRow)
       totalRow.innerHTML = `<span>Total Paid</span><span>₹${total.toFixed(
-        2
+        2,
       )}</span>`;
 
     // Passenger Info

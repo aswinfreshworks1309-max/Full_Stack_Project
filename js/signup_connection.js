@@ -1,8 +1,10 @@
+// Recap: Manages user registration and account creation.
 document.addEventListener("DOMContentLoaded", () => {
   // Signup Form Handling
   const signupForm = document.querySelector("form");
   // Ensure it's the right form by checking inputs or context if needed
 
+  // Recap: Collects user data and sends a registration request to the server.
   if (signupForm) {
     signupForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -17,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast("Passwords do not match!", "error");
         return;
       }
+
+      // Show loading spinner and disable button
+      const signupBtn = signupForm.querySelector(".btn");
+      const loadingSpinner = document.getElementById("loadingSpinner");
+      loadingSpinner.classList.add("show");
+      signupBtn.disabled = true;
 
       try {
         const response = await fetch(`${API_BASE_URL}/users/`, {
@@ -43,12 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
           const error = await response.json();
           showToast(
             "Signup failed: " + (error.detail || "Unknown error"),
-            "error"
+            "error",
           );
+          // Hide loading spinner and re-enable button
+          loadingSpinner.classList.remove("show");
+          signupBtn.disabled = false;
         }
       } catch (err) {
         console.error(err);
         showToast("Network error. Is the backend running?", "error");
+        // Hide loading spinner and re-enable button
+        loadingSpinner.classList.remove("show");
+        signupBtn.disabled = false;
       }
     });
   }
