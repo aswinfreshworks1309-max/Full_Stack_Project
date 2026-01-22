@@ -166,11 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                   booking.status
                                 }">${booking.status}</span></div>
                             </div>
-                             <div class="ticket-info" style="display:flex; align-items:flex-end;">
-                                <a href="./pages/ticket.html?booking_ids=${
-                                  booking.id
-                                }" style="color:blue; text-decoration:underline; font-size:0.9rem;">View Ticket</a>
-                            </div>
+                         
                         </div>
                         `;
             } catch (err) {
