@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!userJson) return;
 
     const user = JSON.parse(userJson);
-
-    // already popup irundha remove pannum
+ 
 
     const oldPopup = document.getElementById("profilePopup");
     if (oldPopup) oldPopup.remove();

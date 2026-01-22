@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let editId = null;
   let activeFilter = "all";
 
+  // Recap: Retrieves authentication headers from local storage.
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.access_token) {
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { Authorization: `Bearer ${user.access_token}` };
   };
 
+  // Recap: Handles 401 Unauthorized errors by redirecting to login.
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // --- UTILS ---
+  // Recap: Determines bus status (running, scheduled, completed) based on time.
   function getScheduleStatus(schedule) {
     const now = new Date();
     const dep = new Date(schedule.departure_time);
@@ -34,6 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return "completed";
   }
 
+  // Recap: Formats a date string into a localized readable format.
   function formatDate(dateStr) {
     return new Date(dateStr).toLocaleString([], {
       dateStyle: "short",
@@ -42,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // --- STATS FUNCTIONS ---
+  // Recap: Fetches and updates dashboard statistics for buses and schedules.
   async function fetchStats() {
     try {
       // 1. Total Buses
@@ -100,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- LOGIN TIME ---
   const lastLoginEl = document.querySelector(
-    ".admin-info div:nth-child(1) div:nth-child(2)"
+    ".admin-info div:nth-child(1) div:nth-child(2)",
   );
   if (lastLoginEl) {
     const now = new Date();
@@ -111,6 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // --- TABLE RENDERING ---
+  // Recap: Dynamically renders the schedule table based on provided data.
   function renderTable(schedules, bookingCounts = {}) {
     const tbody = document.querySelector(".bus-table tbody");
     tbody.innerHTML = "";
@@ -186,6 +192,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // --- SCHEDULE FETCH ---
+  // Recap: Fetches all schedules and associated booking counts from the API.
   async function fetchSchedules() {
     const tbody = document.querySelector(".bus-table tbody");
     tbody.innerHTML =
@@ -251,12 +258,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   fetchBusesForDropdown();
 
   // --- BUS FUNCTIONS ---
+  // Recap: Opens the modal to add a new bus.
   window.openAddBusModal = function () {
     const modal = document.getElementById("addBusModal");
     modal.style.display = "flex";
     document.getElementById("addBusForm").reset();
   };
 
+  // Recap: Closes the add bus modal.
   window.closeAddBusModal = function () {
     const modal = document.getElementById("addBusModal");
     modal.style.display = "none";
@@ -296,6 +305,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // --- SCHEDULE FUNCTIONS ---
+  // Recap: Opens the edit modal and populates it with existing schedule data.
   window.openEditModal = function (id) {
     const schedule = currentSchedules.find((s) => s.id === id);
     if (!schedule) return;
@@ -347,6 +357,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.style.display = "flex";
   };
 
+  // Recap: Deletes a specific schedule after confirmation.
   window.deleteSchedule = async function (id) {
     if (!confirm("Are you sure you want to delete this schedule?")) return;
     try {
@@ -366,10 +377,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
+  // Recap: Resets all seats and deletes bookings for a specific schedule.
   window.resetSeats = async function (scheduleId) {
     if (
       !confirm(
-        "⚠️ Are you sure? This will DELETE all bookings for this schedule and make all seats available again."
+        "⚠️ Are you sure? This will DELETE all bookings for this schedule and make all seats available again.",
       )
     ) {
       return;
@@ -384,7 +396,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (res.ok) {
         showToast(
           "Seats and Bookings have been reset successfully!",
-          "success"
+          "success",
         );
         fetchStats();
         fetchSchedules();
@@ -398,6 +410,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
+  // Recap: Opens the modal to add a new travel schedule.
   window.openAddModal = function () {
     isEditing = false;
     editId = null;
@@ -425,11 +438,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.style.display = "flex";
   };
 
+  // Recap: Closes the schedule edit/add modal.
   window.closeModal = function () {
     document.getElementById("editModal").style.display = "none";
   };
 
   // 3. Modal Logic - Bus Dropdown
+  // Recap: Fetches the list of buses to populate the dropdown menu.
   function fetchBusesForDropdown() {
     let select = document.getElementById("busSelect");
     if (!select) {
@@ -562,7 +577,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (res.ok) {
           showToast(
             isEditing ? "Schedule Updated!" : "Schedule Added!",
-            "success"
+            "success",
           );
           document.getElementById("editModal").style.display = "none";
           fetchSchedules(); // Refresh table
