@@ -56,8 +56,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     )}&am=${amount}&cu=INR`;
 
     qr.makeCode(upiLink);
-    document.getElementById("qr-section").style.display = "block";
+    document.getElementById("qr-overlay").style.display = "flex";
   }
+
+  // Handle Close QR
+  const closeQrBtn = document.getElementById("close-qr");
+  if (closeQrBtn) {
+    closeQrBtn.addEventListener("click", () => {
+      document.getElementById("qr-overlay").style.display = "none";
+    });
+  }
+
+  // Close when clicking outside the box
+  document.getElementById("qr-overlay").addEventListener("click", (e) => {
+    if (e.target.id === "qr-overlay") {
+      document.getElementById("qr-overlay").style.display = "none";
+    }
+  });
 
   // Handle UPI app selection
   const appButtons = ["gpay-btn", "phonepe-btn", "paytm-btn"];

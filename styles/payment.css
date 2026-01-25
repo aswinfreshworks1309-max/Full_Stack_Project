@@ -170,34 +170,84 @@ nav ul li a:hover {
   box-shadow: none;
 }
 
-/* 🧾 QR Section */
+/* 🧾 QR Modal Overlay */
+#qr-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none; /* Controlled by JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
 #qr-section {
-  margin-top: 30px;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border: 1px solid #333;
-  display: none;
+  position: relative;
+  background: #111;
+  border: 2px solid gold;
+  padding: 40px;
+  border-radius: 20px;
   text-align: center;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  max-width: 350px;
+  width: 90%;
+  animation: modalScale 0.3s ease-out;
+}
+
+@keyframes modalScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 #qr-section h3 {
   color: gold;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+#qrcode {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  display: inline-block;
   margin-bottom: 15px;
 }
 
-#qr-section canvas {
+#qrcode img {
   display: block;
-  margin: 0 auto;
-  border: 1px solid #333;
-  border-radius: 10px;
-  background: #000;
+}
+
+#close-qr {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: gold;
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+#close-qr:hover {
+  color: white;
+  transform: scale(1.1);
 }
 
 .note {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #aaa;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #bbb;
 }
 
 /* FOOTER */
@@ -233,9 +283,9 @@ footer {
     padding: 12px;
   }
   nav ul {
-    display: none;  
+    display: none;
   }
   footer {
-    display: none; 
+    display: none;
   }
 }
