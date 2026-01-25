@@ -30,8 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            name: "ignored", // Schema requires it but logic uses email
             email: email,
             password: password,
+            full_name: "ignored",
+            role: "ignored",
           }),
         });
 
