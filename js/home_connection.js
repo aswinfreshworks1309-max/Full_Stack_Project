@@ -123,7 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("logoutBtn").onclick = () => {
       localStorage.removeItem("user");
       showToast("Logged out successfully!", "success");
-      setTimeout(() => window.location.reload(), 1000);
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1000);
     };
   });
 
