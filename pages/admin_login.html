@@ -80,82 +80,23 @@
     <script>
       AOS.init({ duration: 1000 });
     </script>
-    <script src="../js/config.js"></script>
     <script src="../js/toast.js"></script>
     <script>
       const form = document.querySelector('form');
-      form.addEventListener('submit', async (e) => {
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         
-        // Show loading state on button
-        const loginBtn = document.querySelector('.login-btn');
-        const originalText = loginBtn.textContent;
-        loginBtn.textContent = 'Authenticating...';
-        loginBtn.disabled = true;
-
-        try {
-          // 1. Attempt real backend login to get a valid token
-          const response = await fetch(`${API_BASE_URL}/users/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: "admin", 
-              email: email,
-              password: password,
-              full_name: "Admin",
-              role: "admin"
-            })
-          });
-
-          if (response.ok) {
-            const user = await response.json();
-            // Optional: Force role check if your backend doesn't handle it
-            // if (user.role !== 'admin') { throw new Error('Not an admin'); }
-            
-            localStorage.setItem('user', JSON.stringify(user));
-            showToast('Welcome back, Admin!', 'success');
-            setTimeout(() => {
-              window.location.href = 'admin.html';
-            }, 1000);
-          } else {
-            // 2. Fallback to hardcoded credentials for demo/backdoor purposes
-            if (email === 'admin@locotranz.com' && password === 'admin') {
-              showToast('Admin logged in (Offline Mode - Backend failed)', 'success');
-              const dummyAdmin = {
-                full_name: "Administrator",
-                email: email,
-                access_token: "dummy_token",
-                role: "admin"
-              };
-              localStorage.setItem('user', JSON.stringify(dummyAdmin));
-              setTimeout(() => {
-                window.location.href = 'admin.html';
-              }, 1000);
-            } else {
-              showToast('Invalid admin credentials', 'error');
-            }
-          }
-        } catch (err) {
-          console.error(err);
-          // 3. Fallback on network error
-          if (email === 'admin@locotranz.com' && password === 'admin') {
-            const dummyAdmin = {
-              full_name: "Administrator",
-              email: email,
-              access_token: "dummy_token",
-              role: "admin"
-            };
-            localStorage.setItem('user', JSON.stringify(dummyAdmin));
-            showToast('Admin logged in (Network Offline)', 'success');
-            setTimeout(() => { window.location.href = 'admin.html'; }, 1000);
-          } else {
-            showToast('Login failed. Please check backend connection.', 'error');
-          }
-        } finally {
-          loginBtn.textContent = originalText;
-          loginBtn.disabled = false;
+        if (email === 'admin@locotranz.com' && password === 'admin') {
+          showToast('Welcome back, Admin!', 'success');
+          // Set a simple flag for the dashboard
+          localStorage.setItem('adminLoggedIn', 'true');
+          setTimeout(() => {
+            window.location.href = './admin.html';
+          }, 1000);
+        } else {
+          showToast('Invalid email or password', 'error');
         }
       });
     </script>
