@@ -28,14 +28,58 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 4. Handle Payment Submission
   const oldPayBtn = document.getElementById("pay-btn");
+  let qr = null;
+
+  // Recap: Generates a UPI QR code based on the current booking amount.
+  function generateUPIQR() {
+    const qrContainer = document.getElementById("qrcode");
+    if (!qrContainer) return;
+
+    // Initialize QR if not already done
+    if (!qr) {
+      qr = new QRCode(qrContainer, {
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+      });
+    }
+
+    // Amount cleaning (remove ₹ and commas)
+    let amountStr = bookingData.total_amount || "0";
+    const amount = amountStr.replace(/[^\d.]/g, "");
+
+    const upiId = "aswinvivo1309@okhdfcbank";
+    const payeeName = "LocoTranz";
+    const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
+      payeeName,
+    )}&am=${amount}&cu=INR`;
+
+    qr.makeCode(upiLink);
+    document.getElementById("qr-section").style.display = "block";
+  }
+
+  // Handle UPI app selection
+  const appButtons = ["gpay-btn", "phonepe-btn", "paytm-btn"];
+  appButtons.forEach((id) => {
+    const btn = document.getElementById(id);
+    if (btn) {
+      btn.addEventListener("click", () => {
+        // Remove active class from others
+        appButtons.forEach((otherId) => {
+          document.getElementById(otherId).classList.remove("active");
+        });
+        btn.classList.add("active");
+        generateUPIQR();
+      });
+    }
+  });
+
   if (oldPayBtn) {
     // Robustly replace button to strip any cached inline listeners
     const newPayBtn = oldPayBtn.cloneNode(true);
-
-    // Nuke inline handlers
     newPayBtn.removeAttribute("onclick");
     newPayBtn.onclick = null;
-
     oldPayBtn.parentNode.replaceChild(newPayBtn, oldPayBtn);
 
     // Recap: Sends booking requests to the server and handles the response.

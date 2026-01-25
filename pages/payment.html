@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/payment.css" />
     <link rel="stylesheet" href="../css/toast.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   </head>
   <body>
     <!-- NAV / HEADER -->
@@ -58,7 +59,7 @@
 
       <div id="qr-section">
         <h3>Scan QR Code to Pay</h3>
-        <canvas id="qr-canvas"></canvas>
+        <div id="qrcode"></div>
         <p class="note">Open any UPI app and scan this QR code</p>
       </div>
     </div>
