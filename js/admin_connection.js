@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.access_token) {
-      window.location.href = "login.html";
+      window.location.href = "admin_login.html";
       return {};
     }
     return { Authorization: `Bearer ${user.access_token}` };
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (res.status === 401) {
       localStorage.removeItem("user");
       showToast("Session expired. Please login again.", "error");
-      window.location.href = "login.html";
+      window.location.href = "admin_login.html";
       return true;
     }
     return false;
