@@ -8,7 +8,7 @@ a {
   text-decoration: none;
 }
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Outfit", sans-serif;
   background: radial-gradient(circle at top, #0a0a0a 0%, #111 100%);
 }
 
@@ -298,11 +298,10 @@ footer {
     width: 100%;
     padding: 10px;
   }
-  .bus-details{
+  .bus-details {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    gap: 15px;  
-    
+    gap: 15px;
   }
 }

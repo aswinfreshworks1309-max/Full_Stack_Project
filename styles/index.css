@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Outfit", sans-serif;
   background: #111;
   color: #fff;
 }
@@ -127,7 +127,6 @@ a {
 .booking-section {
   padding: 60px 0;
   text-align: center;
-  
 }
 
 .booking-section h2 {

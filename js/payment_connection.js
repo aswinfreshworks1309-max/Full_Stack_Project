@@ -35,19 +35,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const qrContainer = document.getElementById("qrcode");
     if (!qrContainer) return;
 
-    // Initialize QR if not already done
-    if (!qr) {
-      qr = new QRCode(qrContainer, {
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-      });
-    }
+    // Clear previous QR
+    qrContainer.innerHTML = "";
 
-    // Amount cleaning (remove ₹ and commas)
-    let amountStr = bookingData.total_amount || "0";
-    const amount = amountStr.replace(/[^\d.]/g, "");
+    // Amount cleaning (remove ₹, commas, and any non-numeric chars except .)
+    let rawAmount = bookingData.total_amount || "0";
+    let amount = rawAmount.toString().replace(/[^0-9.]/g, "");
+
+    // If amount still looks empty or invalid, try to parse what's there
+    if (!amount || isNaN(parseFloat(amount))) {
+      // Fallback: check if it has numbers at all
+      const match = rawAmount.toString().match(/\d+(\.\d+)?/);
+      amount = match ? match[0] : "0";
+    }
 
     const upiId = "aswinvivo1309@okhdfcbank";
     const payeeName = "LocoTranz";
@@ -55,8 +55,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       payeeName,
     )}&am=${amount}&cu=INR`;
 
-    qr.makeCode(upiLink);
-    document.getElementById("qr-overlay").style.display = "flex";
+    console.log("Generating QR for:", upiLink);
+
+    // Create new instance every time to ensure it renders in the cleared container
+    setTimeout(() => {
+      try {
+        new QRCode(qrContainer, {
+          text: upiLink,
+          width: 220,
+          height: 220,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M,
+        });
+        document.getElementById("qr-overlay").style.display = "flex";
+      } catch (e) {
+        console.error("QRCode Error:", e);
+        showToast("QR generation failed. Please try again.", "error");
+      }
+    }, 50);
   }
 
   // Handle Close QR
@@ -68,11 +85,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Close when clicking outside the box
-  document.getElementById("qr-overlay").addEventListener("click", (e) => {
-    if (e.target.id === "qr-overlay") {
-      document.getElementById("qr-overlay").style.display = "none";
-    }
-  });
+  const qrOverlay = document.getElementById("qr-overlay");
+  if (qrOverlay) {
+    qrOverlay.addEventListener("click", (e) => {
+      if (e.target.id === "qr-overlay") {
+        qrOverlay.style.display = "none";
+      }
+    });
+  }
 
   // Handle UPI app selection
   const appButtons = ["gpay-btn", "phonepe-btn", "paytm-btn"];

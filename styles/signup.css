@@ -1,8 +1,8 @@
-RESET * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 /* ===== HEADER ===== */
 header {
@@ -148,7 +148,9 @@ body::before {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .btn:hover {

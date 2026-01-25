@@ -8,61 +8,123 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //profile icon code
 
-  // Recap: Displays the user profile information in a popup.
+  // Recap: Displays the user profile information in a premium popup.
   profileIcon.addEventListener("click", () => {
     const userJson = localStorage.getItem("user");
-    if (!userJson) return;
+    if (!userJson) {
+      showToast("Please login to see profile.", "info");
+      return;
+    }
 
     const user = JSON.parse(userJson);
 
-    const oldPopup = document.getElementById("profilePopup");
-    if (oldPopup) oldPopup.remove();
+    const oldOverlay = document.getElementById("profilePopupOverlay");
+    if (oldOverlay) oldOverlay.remove();
 
-    const div = document.createElement("div");
-    div.id = "profilePopup";
-    div.innerHTML = `
-    <div style="
+    const overlay = document.createElement("div");
+    overlay.id = "profilePopupOverlay";
+    overlay.style.cssText = `
       position: fixed;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      width: 300px;
-      height:280px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-    ">
-    <h3 style = "color:black;position:absolute;top:25px;right:120px;">  Profile</h3>
-    <img src="../assests/profile.png" alt="Profile" style="width:40px;height:40px;border-radius:50%;margin-right:10px;position:absolute;top:20px;left:70px;">
-    <div style = "margin-top:70px;">
-      <p style = "color:black; margin:5px;padding:5px;"><b>Username :</b> ${user.full_name}</p>
-      <p style = "color:black;margin:5px;padding:5px;"><b>Email :</b> ${user.email}</p>
-      <p style = "color:black;margin:5px;padding:5px;"><b>Status :</b> Active</p>
-      <button id="closePopup" style="
-        margin-top:10px;
-        padding:6px 12px;
-        cursor:pointer;
-        margin-left:90px;
-        
-      ">Close</button>
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `;
+
+    overlay.innerHTML = `
+      <div style="
+        background: rgba(20, 20, 20, 0.95);
+        border: 2px solid #ffcc00;
+        border-radius: 20px;
+        padding: 40px;
+        width: 350px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255, 204, 0, 0.2);
+        position: relative;
+        color: white;
+      ">
+        <button id="closeProfileX" style="
+          position: absolute;
+          top: 15px; right: 20px;
+          background: none; border: none;
+          color: #ffcc00; font-size: 28px;
+          cursor: pointer;
+        ">&times;</button>
+
+        <div style="
+          width: 80px; height: 80px;
+          background: #ffcc00;
+          border-radius: 50%;
+          margin: 0 auto 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 35px;
+          color: black;
+          font-weight: bold;
+          box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+        ">
+          ${user.full_name ? user.full_name.charAt(0).toUpperCase() : "U"}
+        </div>
+
+        <h2 style="color: #ffcc00; margin-bottom: 5px;">${user.full_name}</h2>
+        <p style="color: #888; margin-bottom: 25px;">${user.role || "Traveler"}</p>
+
+        <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 25px;">
+          <p style="margin-bottom: 10px; font-size: 14px;">
+            <span style="color: #ffcc00; font-weight: 600;">Email:</span> ${user.email}
+          </p>
+          <p style="font-size: 14px;">
+            <span style="color: #ffcc00; font-weight: 600;">Account Status:</span> 
+            <span style="color: #4CAF50;">Active</span>
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button id="logoutBtn" style="
+            flex: 1;
+            padding: 12px;
+            background: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+          ">Logout</button>
+          <button id="closeProfileBtn" style="
+            flex: 1;
+            padding: 12px;
+            background: #ffcc00;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+          ">Close</button>
+        </div>
       </div>
-    </div>
+    `;
 
-    <div id="overlay" style="
-      position:fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background:rgba(0,0,0,0.5);
-      z-index:999;
-    "></div>
-  `;
+    document.body.appendChild(overlay);
 
-    document.body.appendChild(div);
+    const closePopup = () => overlay.remove();
+    document.getElementById("closeProfileX").onclick = closePopup;
+    document.getElementById("closeProfileBtn").onclick = closePopup;
+    overlay.onclick = (e) => {
+      if (e.target === overlay) closePopup();
+    };
 
-    document.getElementById("closePopup").onclick = () => div.remove();
-    document.getElementById("overlay").onclick = () => div.remove();
+    document.getElementById("logoutBtn").onclick = () => {
+      localStorage.removeItem("user");
+      showToast("Logged out successfully!", "success");
+      setTimeout(() => window.location.reload(), 1000);
+    };
   });
 
   // Close Modal Logic

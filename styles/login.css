@@ -1,9 +1,8 @@
-/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 /* ===== BODY ===== */
@@ -70,33 +69,32 @@ nav ul li a {
   transition: color 0.3s ease;
 }
 
-  .admin{    
+.admin {
   padding: 10px 20px;
   background: #f7c843;
   border-radius: 6px;
   font-weight: bold;
   border: none;
   cursor: pointer;
-  transition: 0.3s;  
-    }
-    .admin a{
-      color:black ;
-    }
-  .admin:hover{
-  box-shadow: 0 0 12px #f7c843; 
-  }
-  .admin a:hover{
-    color:black ;
-  }
+  transition: 0.3s;
+}
+.admin a {
+  color: black;
+}
+.admin:hover {
+  box-shadow: 0 0 12px #f7c843;
+}
+.admin a:hover {
+  color: black;
+}
 
 nav ul li a:hover {
   color: #ffcc00;
 }
-#admin{
+#admin {
   position: relative;
   bottom: 440px;
   left: 140px;
-
 }
 
 /* ===== LOGIN CONTAINER ===== */
@@ -184,7 +182,9 @@ nav ul li a:hover {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .login-btn:hover {
@@ -197,7 +197,7 @@ nav ul li a:hover {
   cursor: not-allowed;
   transform: none;
 }
-  
+
 /* Loading Spinner */
 .loading-spinner {
   display: none;
@@ -286,10 +286,7 @@ footer {
   color: #aaa;
 }
 
-
-
 @media (max-width: 480px) {
-
   .login-container {
     margin: 2rem 1rem;
     padding: 1.5rem 1rem;
@@ -317,7 +314,7 @@ footer {
   .bus-icon img {
     width: 50px;
   }
-  footer{
+  footer {
     font-size: 15px;
     margin-top: 50px;
   }
