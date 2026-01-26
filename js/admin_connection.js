@@ -495,9 +495,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
   }
 
-  // Add Bus Button logic if missing
+  // 4. Save Handler for Schedules
+  // Add Schedule Button logic if missing
   const headerActions = document.querySelector(".filter-controls");
-  if (!document.getElementById("addBusBtn")) {
+  if (!document.getElementById("addScheduleBtn")) {
     const addBusBtn = document.createElement("button");
     addBusBtn.id = "addBusBtn";
     addBusBtn.className = "filter-btn glow-btn";
@@ -507,6 +508,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     addBusBtn.textContent = "+ Add Bus";
     addBusBtn.onclick = window.openAddBusModal;
     headerActions.appendChild(addBusBtn);
+
+    const addScheduleBtn = document.createElement("button");
+    addScheduleBtn.id = "addScheduleBtn";
+    addScheduleBtn.className = "filter-btn glow-btn";
+    addScheduleBtn.style.backgroundColor = "#f7c843";
+    addScheduleBtn.style.borderColor = "#f7c843";
+    addScheduleBtn.style.color = "#000";
+    addScheduleBtn.style.fontWeight = "bold";
+    addScheduleBtn.textContent = "+ Add Schedule";
+    addScheduleBtn.onclick = window.openAddModal;
+    headerActions.appendChild(addScheduleBtn);
   }
 
   // Save Button Handler
