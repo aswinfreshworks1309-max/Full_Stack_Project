@@ -4,19 +4,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   let editId = null;
   let activeFilter = "all";
 
-  // Recap: Retrieves authentication headers from local storage (Simple check for admin).
+  // Recap: Retrieves authentication headers from local storage.
   const getAuthHeaders = () => {
-    const isAdmin = localStorage.getItem("adminLoggedIn");
-    if (isAdmin !== "true") {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.access_token) {
       window.location.href = "admin_login.html";
       return {};
     }
-    return {}; // No JWT headers needed for simple admin
+    return { Authorization: `Bearer ${user.access_token}` };
   };
 
-  // Recap: Handles errors (No session check needed for simple admin).
+  // Recap: Handles 401 Unauthorized errors by redirecting to login.
   const handleAuthError = (res) => {
-    // We ignore 401s for the simple admin process
+    if (res.status === 401) {
+      localStorage.removeItem("user");
+      showToast("Session expired. Please login again.", "error");
+      window.location.href = "admin_login.html";
+      return true;
+    }
     return false;
   };
 
