@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.access_token) {
-      window.location.href = "admin_login.html";
       return {};
     }
     return { Authorization: `Bearer ${user.access_token}` };
@@ -50,18 +49,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function fetchStats() {
     try {
       // 1. Total Buses
-      const busRes = await fetch(`${API_BASE_URL}/buses/`, {
-        headers: getAuthHeaders(),
-      });
-      if (handleAuthError(busRes)) return;
+      const busRes = await fetch(`${API_BASE_URL}/buses/`);
+      if (busRes.status === 401) {
+        console.warn("Buses locked");
+      }
       const buses = await busRes.json();
       const totalBuses = Array.isArray(buses) ? buses.length : 0;
 
       // 2. Schedules
-      const schedRes = await fetch(`${API_BASE_URL}/schedules/`, {
-        headers: getAuthHeaders(),
-      });
-      if (handleAuthError(schedRes)) return;
+      const schedRes = await fetch(`${API_BASE_URL}/schedules/`);
+      if (schedRes.status === 401) {
+        console.warn("Schedules locked");
+      }
       const schedules = await schedRes.json();
 
       let runningCount = 0;
@@ -199,21 +198,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       '<tr><td colspan="8" style="text-align:center;">Loading schedules...</td></tr>';
 
     try {
-      const response = await fetch(`${API_BASE_URL}/schedules/`, {
-        headers: getAuthHeaders(),
-      });
-      if (handleAuthError(response)) return;
-      if (!response.ok) throw new Error("Failed to fetch schedules");
+      console.log("Fetching schedules from:", `${API_BASE_URL}/schedules/`);
+      const response = await fetch(`${API_BASE_URL}/schedules/`);
+      console.log("Schedules response status:", response.status);
+
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("Schedule fetch error detail:", errText);
+        throw new Error("Failed to fetch schedules");
+      }
+
       currentSchedules = await response.json();
+      console.log("Current Schedules:", currentSchedules);
 
       // Fetch Bookings to calculate booked seats
       let counts = {};
       try {
-        const bRes = await fetch(`${API_BASE_URL}/bookings/`, {
-          headers: getAuthHeaders(),
-        });
+        const bRes = await fetch(`${API_BASE_URL}/bookings/`);
         if (bRes.ok) {
           const bookings = await bRes.json();
+          console.log("Bookings refetched:", bookings.length);
           if (Array.isArray(bookings)) {
             bookings.forEach((b) => {
               counts[b.schedule_id] = (counts[b.schedule_id] || 0) + 1;
@@ -226,9 +230,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       renderTable(currentSchedules, counts);
     } catch (e) {
-      console.error(e);
+      console.error("Dashboard Error:", e);
       tbody.innerHTML =
-        '<tr><td colspan="8" style="text-align:center; color:red;">Error loading data.</td></tr>';
+        '<tr><td colspan="8" style="text-align:center; color:red;">Error loading data. Check console.</td></tr>';
     }
   }
 
