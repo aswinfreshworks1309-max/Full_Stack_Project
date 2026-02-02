@@ -97,21 +97,32 @@
         loginBtn.disabled = true;
 
         try {
-          // admin login
-          if (email === 'admin@locotranz.com' && password === 'admin') {
-            showToast('Admin logged in successfully', 'success');
-            const dummyAdmin = {
-              full_name: "Administrator",
+          const response = await fetch(`${API_BASE_URL}/users/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: "admin", // Dummy for schema
               email: email,
-              access_token: "dummy_token",
-              role: "admin"
-            };
-            localStorage.setItem('user', JSON.stringify(dummyAdmin));
+              password: password,
+              full_name: "admin", // Dummy for schema
+              role: "admin" // Requesting admin role
+            })
+          });
+
+          if (response.ok) {
+            const user = await response.json();
+            if (user.role !== 'admin') {
+              showToast('Access denied: User is not an admin', 'error');
+              return;
+            }
+            showToast('Admin logged in successfully', 'success');
+            localStorage.setItem('user', JSON.stringify(user));
             setTimeout(() => {
               window.location.href = './admin.html';
             }, 1000);
           } else {
-            showToast('Invalid admin credentials', 'error');
+            const errData = await response.json();
+            showToast(errData.detail || 'Invalid admin credentials', 'error');
           }
         } catch (err) {
           console.error(err);
