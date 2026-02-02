@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showToast("Please login to see profile.", "info");
       return;
     }
-
+    //converting string to json object  
     const user = JSON.parse(userJson);
 
     const oldOverlay = document.getElementById("profilePopupOverlay");

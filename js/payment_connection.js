@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       } catch (err) {
         console.error("Payment error:", err);
-        showToast("Payment Logic Error: " + err.message, "error");
+        showToast("Payment Logic Error: " + 'please contant the admin', "error");
         newPayBtn.disabled = false;
         newPayBtn.textContent = "Retry Payment";
       }

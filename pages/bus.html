@@ -1,14 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LocoTranz | Luxury Bus List</title>
-  <link rel="stylesheet" href="../styles/bus.css" />
-  
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocoTranz | Luxury Bus List</title>
+    <link rel="stylesheet" href="../styles/bus.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="../js/auth_check.js"></script>
+  </head>
+  <body>
     <header>
       <div class="logo">
         <div class="logo-icon"></div>
@@ -23,161 +24,32 @@
       </nav>
     </header>
 
-  <section class="container" data-aos="fade-up">
-    <div class="bus_list" data-aos="zoom-in">
-      <h1>Available Buses</h1>
-      <div class="route-info">
-        <span>Avadi</span><span class="arrow">→</span><span>Red Hills</span>
-        <div class="date-info">October 24, 2025</div>
-      </div>
-    </div>
-
-    <div class="bus-list">
-      <!-- Bus 1 -->
-      <div class="bus-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="bus-header">
-          <div class="bus-name">MTC Ordinary</div>
-          <div class="bus-type">AC Seater</div>
-        </div>
-        <div class="bus-details">
-          <div class="detail-item">
-            <div class="detail-label">Departure</div>
-            <div class="time">06:00 AM</div>
-            <div class="route-path">Avadi</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Duration</div>
-            <div class="detail-value">3h 30m</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Arrival</div>
-            <div class="time">09:30 AM</div>
-            <div class="route-path">Red Hills</div>
-          </div>
-        </div>
-        <div class="bus-footer">
-          <div class="price-section">
-            <div class="price-label">Fare per seat</div>
-            <div class="price-value">₹45</div>
-          </div>
-          <div class="seats-available">18 Seats Available</div>
-          <button class="book-btn">
-            <a href="./seat.html">Select Seats</a>
-          </button>
+    <section class="container" data-aos="fade-up">
+      <div class="bus_list" data-aos="zoom-in">
+        <h1>Available Buses</h1>
+        <div class="route-info">
+          <span>Avadi</span><span class="arrow">→</span><span>Red Hills</span>
+          <div class="date-info">October 24, 2025</div>
         </div>
       </div>
 
-      <!-- Bus 2 -->
-
-      <div class="bus-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="bus-header">
-          <div class="bus-name">MTC Deluxe A/C</div>
-          <div class="bus-type">AC Sleeper</div>
-        </div>
-        <div class="bus-details">
-          <div class="detail-item">
-            <div class="detail-label">Departure</div>
-            <div class="time">08:30 AM</div>
-            <div class="route-path">Avadi</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Duration</div>
-            <div class="detail-value">3h 45m</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Arrival</div>
-            <div class="time">12:15 PM</div>
-            <div class="route-path">Red Hills</div>
-          </div>
-        </div>
-        <div class="bus-footer">
-          <div class="price-section">
-            <div class="price-label">Fare per seat</div>
-            <div class="price-value">₹65</div>
-          </div>
-          <div class="seats-available">12 Seats Available</div>
-          <button class="book-btn">
-            <a href="../pages/seat.html">Select Seats</a>
+      <div class="bus-list">
+        <div style="text-align: center; color: white; padding: 50px">
+          <h2 class="glow-text">Searching for Luxury Rides...</h2>
+          <p>Please wait while we fetch the best routes for you.</p>
         </div>
       </div>
+    </section>
 
-      <!-- Bus 3 -->
+    <footer>
+      <p>© 2025 LocoTranz. All Rights Reserved | support@locotranz.com</p>
+    </footer>
 
-      <div class="bus-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="bus-header">
-          <div class="bus-name">MTC Deluxe A/C</div>
-          <div class="bus-type">AC Sleeper</div>
-        </div>
-        <div class="bus-details">
-          <div class="detail-item">
-            <div class="detail-label">Departure</div>
-            <div class="time">08:30 AM</div>
-            <div class="route-path">Avadi</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Duration</div>
-            <div class="detail-value">3h 45m</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Arrival</div>
-            <div class="time">12:15 PM</div>
-            <div class="route-path">Red Hills</div>
-          </div>
-        </div>
-        <div class="bus-footer">
-          <div class="price-section">
-            <div class="price-label">Fare per seat</div>
-            <div class="price-value">₹65</div>
-          </div>
-          <div class="seats-available">12 Seats Available</div>
-          <button class="book-btn">
-            <a href="../pages/seat.html">Select Seats</a>
-        </div>
-      </div>
-      <!-- Bus 4 -->
-      <div class="bus-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="bus-header">
-          <div class="bus-name">MTC Deluxe A/C</div>
-          <div class="bus-type">AC Sleeper</div>
-        </div>
-        <div class="bus-details">
-          <div class="detail-item">
-            <div class="detail-label">Departure</div>
-            <div class="time">08:30 AM</div>
-            <div class="route-path">Avadi</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Duration</div>
-            <div class="detail-value">3h 45m</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-label">Arrival</div>
-            <div class="time">12:15 PM</div>
-            <div class="route-path">Red Hills</div>
-          </div>
-        </div>
-        <div class="bus-footer">
-          <div class="price-section">
-            <div class="price-label">Fare per seat</div>
-            <div class="price-value">₹65</div>
-          </div>
-          <div class="seats-available">12 Seats Available</div>
-          <button class="book-btn">
-            <a href="../pages/seat.html">Select Seats</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 LocoTranz. All Rights Reserved | support@locotranz.com</p>
-  </footer>
-
-  <script src="../js/config.js"></script>
-  <script src="../js/buses.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
-</body>
+    <script src="../js/config.js"></script>
+    <script src="../js/buses.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
+  </body>
 </html>

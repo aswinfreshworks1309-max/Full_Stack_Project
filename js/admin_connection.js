@@ -49,18 +49,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function fetchStats() {
     try {
       // 1. Total Buses
-      const busRes = await fetch(`${API_BASE_URL}/buses/`);
-      if (busRes.status === 401) {
-        console.warn("Buses locked");
-      }
+      const busRes = await fetch(`${API_BASE_URL}/buses/`, {
+        headers: getAuthHeaders(),
+      });
+      if (handleAuthError(busRes)) return;
+
       const buses = await busRes.json();
       const totalBuses = Array.isArray(buses) ? buses.length : 0;
 
       // 2. Schedules
-      const schedRes = await fetch(`${API_BASE_URL}/schedules/`);
-      if (schedRes.status === 401) {
-        console.warn("Schedules locked");
-      }
+      const schedRes = await fetch(`${API_BASE_URL}/schedules/`, {
+        headers: getAuthHeaders(),
+      });
+      if (handleAuthError(schedRes)) return;
+
       const schedules = await schedRes.json();
 
       let runningCount = 0;
@@ -112,6 +114,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       hour: "2-digit",
       minute: "2-digit",
     })}`;
+  }
+
+  // --- LOGOUT ---
+  const logoutBtn = document.getElementById("adminLogout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("user");
+      showToast("Logged out successfully!", "success");
+      setTimeout(() => {
+        window.location.href = "admin_login.html";
+      }, 1000);
+    });
   }
 
   // --- TABLE RENDERING ---
@@ -199,7 +214,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       console.log("Fetching schedules from:", `${API_BASE_URL}/schedules/`);
-      const response = await fetch(`${API_BASE_URL}/schedules/`);
+      const response = await fetch(`${API_BASE_URL}/schedules/`, {
+        headers: getAuthHeaders(),
+      });
+      if (handleAuthError(response)) return;
       console.log("Schedules response status:", response.status);
 
       if (!response.ok) {
@@ -214,7 +232,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Fetch Bookings to calculate booked seats
       let counts = {};
       try {
-        const bRes = await fetch(`${API_BASE_URL}/bookings/`);
+        const bRes = await fetch(`${API_BASE_URL}/bookings/`, {
+          headers: getAuthHeaders(),
+        });
+        if (handleAuthError(bRes)) return;
         if (bRes.ok) {
           const bookings = await bRes.json();
           console.log("Bookings refetched:", bookings.length);

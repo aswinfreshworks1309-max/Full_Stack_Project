@@ -1,4 +1,4 @@
-// Recap: Manages bus seat selection, fetches availability, and calculates pricing.
+// Manages bus seat selection, fetches availability, and calculates pricing.
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const scheduleId = params.get("schedule_id");
@@ -87,13 +87,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("baseFare").textContent = "₹0";
   }
 
-  // Recap: Renders the interactive bus seat layout based on backend data.
+  //   Renders the interactive bus seat layout based on backend data.
   function renderSeats(seats, bookedSet) {
-    // Warning: This replaces the hardcoded layout with a dynamic one.
-    // If the backend has no seats, the layout will be empty.
-    // For 'demo' purposes, if backend has 0 seats, we might want to keep the hardcoded one?
-    // But user asked to CONNECT. So we should use real data if possible.
-    // Assuming the backend has seats populated.
+
 
     if (seats.length === 0) {
       console.warn(
@@ -108,8 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     layoutContainer.innerHTML = "";
     layoutContainer.appendChild(driverSection);
 
-    // Group seats by row (simple logic: assuming logic based on seat label or just chunks of 4)
-    // Let's just grid them for now or try to parse label like "1A", "1B"
+  
 
     // Simple 2-2 layout logic
     let currentRow = document.createElement("div");

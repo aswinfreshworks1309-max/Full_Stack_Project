@@ -1,4 +1,4 @@
-// Recap: Manages user authentication and session storage.
+//   Manages user authentication and session storage.
 document.addEventListener("DOMContentLoaded", () => {
   // Login Form Handling
   const loginForm = document.querySelector("form");
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loginBtn.removeAttribute("onclick");
   }
 
-  // Recap: Submits user credentials for authentication and handles redirection.
+  //   Submits user credentials for authentication and handles redirection.
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -44,7 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem("user", JSON.stringify(user));
           showToast(`Welcome back, ${user.full_name}!`, "success");
           setTimeout(() => {
-            window.location.href = "../pages/home.html";
+            if (user.role === "admin") {
+              window.location.href = "../pages/admin.html";
+            } else {
+              window.location.href = "../pages/home.html";
+            }
           }, 1000); // Give time for toast to show
         } else {
           showToast("Invalid email or password.", "error");

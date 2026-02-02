@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,6 +6,7 @@
     <title>Home page</title>
     <link rel="stylesheet" href="./styles/home.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="./js/auth_check.js"></script>
   </head>
   <body>
     <video autoplay loop muted playsinline class="bg-video">
@@ -25,13 +26,13 @@
       <div class="button" data-aos="zoom-in" data-aos-delay="400">
         <button
           class="center"
-          onclick="window.location.href='./pages/admin_login.html'"
+          onclick="window.location.href = './pages/admin_login.html'"
         >
           Login as Admin
         </button>
         <button
           class="center"
-          onclick="window.location.href='./pages/login.html'"
+          onclick="window.location.href = './pages/login.html'"
         >
           Login as User
         </button>
@@ -40,7 +41,7 @@
     <footer id="contact">
       <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
     </footer>
-  
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({ duration: 1000, once: true });

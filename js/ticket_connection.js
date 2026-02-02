@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { Authorization: `Bearer ${user.access_token}` };
   };
 
-  // Recap: Handles 401 Unauthorized errors by redirecting to login.
+  // Recap: Handles 401 Unauthorized errors by redirecting to login. 
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
