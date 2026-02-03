@@ -12,6 +12,7 @@
     "signup.html",
     "forgot.html",
     "admin_login.html",
+    "admin_signup.html",
     "index.html",
   ];
 
@@ -44,7 +45,8 @@
       page === "login.html" ||
       page === "signup.html" ||
       page === "index.html" ||
-      page === "admin_login.html"
+      page === "admin_login.html" ||
+      page === "admin_signup.html"
     ) {
       if (user.role === "admin") {
         window.location.href = getPath("admin.html");

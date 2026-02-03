@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "success",
           );
           setTimeout(() => {
-            window.location.href = "../pages/admin_login.html";
+            window.location.href = "admin_login.html";
           }, 1500);
         } else {
           const error = await response.json();
