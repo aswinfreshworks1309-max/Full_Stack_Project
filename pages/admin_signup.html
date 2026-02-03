@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocoTranz - Admin Signup</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/signup.css" />
+    <link rel="stylesheet" href="../css/toast.css" />
+    <!-- Reuse the same auth_check logic -->
+    <script src="../js/auth_check.js"></script>
+  </head>
+  <body>
+    <video autoplay loop muted playsinline class="bg-video">
+      <source src="../assests/background video.mp4" type="video/mp4" />
+    </video>
+    <header>
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <span>LocoTranz Portal</span>
+      </div>
+    </header>
+
+    <div class="container" data-aos="zoom-in">
+      <div class="signup-box">
+        <div class="logo">Admin Portal</div>
+        <div class="title">Create Administrator Account</div>
+
+        <form id="adminSignupForm">
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="Admin Full Name"
+              id="fullName"
+              required
+            />
+            <input type="email" placeholder="Admin Email" id="email" required />
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              id="confirmPassword"
+              required
+            />
+          </div>
+
+          <button class="btn" type="submit">Sign Up as Admin</button>
+
+          <!-- Loading Spinner -->
+          <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Creating Admin Account...</p>
+          </div>
+
+          <div class="links">
+            Already have an admin account?
+            <a href="../pages/admin_login.html">Login here</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer id="contact">
+      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000 });
+    </script>
+    <script src="../js/toast.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/admin_signup_connection.js"></script>
+  </body>
+</html>

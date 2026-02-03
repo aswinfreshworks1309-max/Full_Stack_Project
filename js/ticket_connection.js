@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { Authorization: `Bearer ${user.access_token}` };
   };
 
-  // Recap: Handles 401 Unauthorized errors by redirecting to login. 
+  // Recap: Handles 401 Unauthorized errors by redirecting to login.
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
@@ -52,6 +52,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (handleAuthError(schedRes)) return;
     const schedule = await schedRes.json();
 
+    // Fetch Bus
+    const busRes = await fetch(`${API_BASE_URL}/buses/${schedule.bus_id}`, {
+      headers,
+    });
+    if (handleAuthError(busRes)) return;
+    const bus = await busRes.json();
+
     // Fetch All Seats once (for labels)
     const seatsRes = await fetch(`${API_BASE_URL}/seats/`, { headers });
     if (handleAuthError(seatsRes)) return;
@@ -64,24 +71,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     )}`;
     document.querySelector(".booking-id").textContent = `Booking ID: ${refId}`;
 
+    // Update Bus Number
+    const busNumEl = document.getElementById("busNumber");
+    if (busNumEl)
+      busNumEl.textContent = bus.bus_number || `LocoTranz #${bus.id}`;
+
     const dep = new Date(schedule.departure_time);
     const arr = new Date(schedule.arrival_time);
 
     // Update Journey
     const points = document.querySelectorAll(".journey-point");
     if (points.length >= 2) {
+      const dateOptions = { day: "numeric", month: "short", year: "numeric" };
+      const timeOptions = { hour: "2-digit", minute: "2-digit" };
+
       points[0].querySelector(".journey-city").textContent = schedule.source;
       points[0].querySelector(".journey-time").textContent =
-        dep.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        dep.toLocaleTimeString([], timeOptions);
       points[0].querySelector(".journey-date").textContent =
-        dep.toLocaleDateString();
+        dep.toLocaleDateString("en-GB", dateOptions);
 
       points[1].querySelector(".journey-city").textContent =
         schedule.destination;
       points[1].querySelector(".journey-time").textContent =
-        arr.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        arr.toLocaleTimeString([], timeOptions);
       points[1].querySelector(".journey-date").textContent =
-        arr.toLocaleDateString();
+        arr.toLocaleDateString("en-GB", dateOptions);
+
+      // Calculate and display duration
+      const durationMs = arr - dep;
+      const hours = Math.floor(durationMs / 3600000);
+      const mins = Math.floor((durationMs % 3600000) / 60000);
+      const durationEl = document.querySelector(".journey-duration");
+      if (durationEl) durationEl.textContent = `${hours}h ${mins}m`;
     }
 
     // Info Grid

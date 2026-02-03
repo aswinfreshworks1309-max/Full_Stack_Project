@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showToast("Please login to see profile.", "info");
       return;
     }
-    //converting string to json object  
+    //converting string to json object
     const user = JSON.parse(userJson);
 
     const oldOverlay = document.getElementById("profilePopupOverlay");
@@ -231,7 +231,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                   booking.status
                                 }">${booking.status}</span></div>
                             </div>
-                         
+                            <div class="ticket-info" style="display: flex; align-items: flex-end;">
+                                <button class="view-ticket-btn" onclick="window.location.href='./ticket.html?booking_ids=${booking.id}'" style="
+                                    background: #ffcc00;
+                                    color: black;
+                                    border: none;
+                                    padding: 8px 15px;
+                                    border-radius: 8px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    transition: 0.3s;
+                                    font-size: 13px;
+                                ">View Ticket</button>
+                            </div>
                         </div>
                         `;
             } catch (err) {
