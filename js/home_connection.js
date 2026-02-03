@@ -178,61 +178,67 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
+        // Group bookings by schedule_id to show multi-seat bookings as one ticket
+        const groupedBookings = bookings.reduce((acc, booking) => {
+          if (!acc[booking.schedule_id]) {
+            acc[booking.schedule_id] = {
+              schedule_id: booking.schedule_id,
+              booking_ids: [],
+              seat_ids: [],
+              status: booking.status,
+            };
+          }
+          acc[booking.schedule_id].booking_ids.push(booking.id);
+          acc[booking.schedule_id].seat_ids.push(booking.seat_id);
+          return acc;
+        }, {});
+
+        const allSeatsRes = await fetch(`${API_BASE_URL}/seats/`, { headers });
+        const allSeats = await allSeatsRes.json();
+
         const ticketsHtml = await Promise.all(
-          bookings.map(async (booking) => {
+          Object.values(groupedBookings).map(async (group) => {
             try {
-              // Parallel fetch for schedule and seat
-              const [schedRes, seatRes] = await Promise.all([
-                fetch(`${API_BASE_URL}/schedules/${booking.schedule_id}`, {
+              const schedRes = await fetch(
+                `${API_BASE_URL}/schedules/${group.schedule_id}`,
+                {
                   headers,
-                }),
-                fetch(`${API_BASE_URL}/seats/`, { headers }), // We need to filter by ID on client or add backend endpoint
-              ]);
-
+                },
+              );
               const schedule = await schedRes.json();
-              const allSeats = await seatRes.json();
-
-              // schedule.bus_id
-              const seat = allSeats.find((s) => s.id === booking.seat_id);
 
               const depDate = new Date(schedule.departure_time);
-              const arrDate = new Date(schedule.arrival_time);
+              const seats = group.seat_ids
+                .map((sid) => {
+                  const s = allSeats.find((seat) => seat.id === sid);
+                  return s ? s.seat_label : `ID: ${sid}`;
+                })
+                .sort();
 
               return `
                         <div class="ticket-card">
                             <div class="ticket-info">
                                 <label>Route</label>
-                                <div>${schedule.source} → ${
-                                  schedule.destination
-                                }</div>
+                                <div>${schedule.source} → ${schedule.destination}</div>
                             </div>
                             <div class="ticket-info">
                                 <label>Date & Time</label>
-                                <div>${depDate.toLocaleDateString()} ${depDate.toLocaleTimeString(
-                                  [],
-                                  { hour: "2-digit", minute: "2-digit" },
-                                )}</div>
+                                <div>${depDate.toLocaleDateString()} ${depDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
                             </div>
                             <div class="ticket-info">
-                                <label>Seat</label>
-                                <div>${
-                                  seat
-                                    ? seat.seat_label
-                                    : `ID: ${booking.seat_id}`
-                                }</div>
+                                <label>Seats</label>
+                                <div>${seats.join(", ")}</div>
                             </div>
                             <div class="ticket-info">
-                                <label>Price</label>
-                                <div>₹${schedule.price}</div>
+                                <label>Total Price</label>
+                                <div>₹${schedule.price * group.seat_ids.length}</div>
                             </div>
                             <div class="ticket-info">
                                 <label>Status</label>
-                                <div><span class="status-badge status-${
-                                  booking.status
-                                }">${booking.status}</span></div>
+                                <div><span class="status-badge status-${group.status}">${group.status}</span></div>
                             </div>
                             <div class="ticket-info" style="display: flex; align-items: flex-end;">
-                                <button class="view-ticket-btn" onclick="window.location.href='./ticket.html?booking_ids=${booking.id}'" style="
+                                <button class="view-ticket-btn" onclick="window.location.href='./ticket.html?booking_ids=${group.booking_ids.join(",")}'" style="
                                     background: #ffcc00;
                                     color: black;
                                     border: none;
@@ -242,13 +248,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                     cursor: pointer;
                                     transition: 0.3s;
                                     font-size: 13px;
-                                ">View Ticket</button>
+                                ">View Combined Ticket</button>
                             </div>
                         </div>
-                        `;
+              `;
             } catch (err) {
               console.error(err);
-              return `<div class="ticket-card" style="color:red">Error loading ticket ${booking.id}</div>`;
+              return `<div class="ticket-card" style="color:red">Error loading journey info.</div>`;
             }
           }),
         );

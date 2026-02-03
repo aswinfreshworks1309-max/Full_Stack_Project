@@ -71,10 +71,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     )}`;
     document.querySelector(".booking-id").textContent = `Booking ID: ${refId}`;
 
-    // Update Bus Number
+    // Update Bus Info
     const busNumEl = document.getElementById("busNumber");
+    const plateNumEl = document.getElementById("plateNumber");
     if (busNumEl)
       busNumEl.textContent = bus.bus_number || `LocoTranz #${bus.id}`;
+    if (plateNumEl) plateNumEl.textContent = bus.plate_number || "N/A";
 
     const dep = new Date(schedule.departure_time);
     const arr = new Date(schedule.arrival_time);
@@ -143,35 +145,42 @@ document.addEventListener("DOMContentLoaded", async () => {
         2,
       )}</span>`;
 
-    // Passenger Info
-    const ticketBody = document.querySelector(".ticket-body");
-    const passengerDiv = document.createElement("div");
-    passengerDiv.className = "info-grid";
-    passengerDiv.style.marginTop = "1rem";
-    passengerDiv.innerHTML = `
-            <div class="info-item">
-               <div class="info-label">Passenger</div>
-               <div class="info-value">${user ? user.full_name : "Guest"}</div>
-            </div>
-            <div class="info-item">
-               <div class="info-label">Seats</div>
-               <div class="info-value" id="seatLabels">Loading...</div>
-            </div>
-        `;
-    ticketBody.appendChild(passengerDiv);
+    // Passenger and Seat Labels
+    const passengerNameEl = document.getElementById("passengerName");
+    const seatLabelsEl = document.getElementById("seatLabels");
+
+    if (passengerNameEl)
+      passengerNameEl.textContent = user ? user.full_name : "Traveler";
 
     // Map Booking IDs to Seat Labels
-    const labels = [];
-    for (const bId of bookingIds) {
-      const bRes = await fetch(`${API_BASE_URL}/bookings/${bId}`, { headers });
-      if (bRes.ok) {
-        const bData = await bRes.json();
-        const seat = allSeats.find((s) => s.id === bData.seat_id);
-        if (seat) labels.push(seat.seat_label);
+    const seatLabels = [];
+    try {
+      const busSeatsRes = await fetch(
+        `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
+        { headers },
+      );
+      if (busSeatsRes.ok) {
+        const busSeats = await busSeatsRes.json();
+
+        await Promise.all(
+          bookingIds.map(async (bId) => {
+            const bRes = await fetch(`${API_BASE_URL}/bookings/${bId}`, {
+              headers,
+            });
+            if (bRes.ok) {
+              const bData = await bRes.json();
+              const seat = busSeats.find((s) => s.id === bData.seat_id);
+              if (seat) seatLabels.push(seat.seat_label);
+            }
+          }),
+        );
       }
+    } catch (err) {
+      console.error("Error fetching seat labels:", err);
     }
-    document.getElementById("seatLabels").textContent =
-      labels.join(", ") || "N/A";
+
+    if (seatLabelsEl)
+      seatLabelsEl.textContent = seatLabels.sort().join(", ") || "N/A";
   } catch (e) {
     console.error(e);
     showToast("Error loading ticket details: " + e.message, "error");
