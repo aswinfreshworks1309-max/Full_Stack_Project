@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show Modal & Loader
       modal.style.display = "flex";
       container.innerHTML =
-        '<div class="loading">Loading your journeys...</div>';
+        '<div class="loading"><img src="../assests/loading image.gif" alt="Loading..." height="50px" width="50px" style="background: transparent; color:rgba(255, 255, 255,0.015) ; object-fit: cover;"></div>';
 
       try {
         // Fetch Bookings
