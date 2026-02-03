@@ -66,10 +66,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 3. Update UI
     const user = JSON.parse(localStorage.getItem("user"));
-    const refId = `LOCO${new Date().getFullYear()}${String(Date.now()).slice(
-      -6,
-    )}`;
-    document.querySelector(".booking-id").textContent = `Booking ID: ${refId}`;
 
     // Update Bus Info
     const busNumEl = document.getElementById("busNumber");
@@ -109,21 +105,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Info Grid
-    const infoValues = document.querySelectorAll(".info-value");
-    if (infoValues.length >= 2) {
-      infoValues[0].textContent = `${
-        schedule.source
-      } - ${dep.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}`;
-      infoValues[1].textContent = `${
-        schedule.destination
-      } - ${arr.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}`;
+    const boardingEl = document.getElementById("boardingPoint");
+    const droppingEl = document.getElementById("droppingPoint");
+    const bookingDateEl = document.getElementById("bookingDate");
+    const bookingTimeEl = document.getElementById("bookingTime");
+
+    if (boardingEl) {
+      boardingEl.textContent = `${schedule.source}`;
     }
+    if (droppingEl) {
+      droppingEl.textContent = `${schedule.destination}`;
+    }
+
+    const bDate = mainBooking.booking_date
+      ? new Date(mainBooking.booking_date)
+      : new Date();
+
+    if (bookingDateEl) {
+      bookingDateEl.textContent = bDate.toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
+    }
+    if (bookingTimeEl) {
+      bookingTimeEl.textContent = bDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+
+    // Update Booking ID to be slightly more "real" based on booking date
+    const year = bDate.getFullYear();
+    const month = String(bDate.getMonth() + 1).padStart(2, "0");
+    const day = String(bDate.getDate()).padStart(2, "0");
+    const refId = `LOCO${year}${month}${day}${String(mainBooking.id).padStart(
+      4,
+      "0",
+    )}`;
+    const bookingIdEl = document.querySelector(".booking-id");
+    if (bookingIdEl) bookingIdEl.textContent = `Booking ID: ${refId}`;
 
     // Price Breakdown
     const count = bookingIds.length;

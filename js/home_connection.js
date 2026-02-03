@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     cursor: pointer;
                                     transition: 0.3s;
                                     font-size: 13px;
-                                ">View Combined Ticket</button>
+                                ">View Ticket</button>
                             </div>
                         </div>
               `;
