@@ -193,25 +193,27 @@ document.addEventListener("DOMContentLoaded", () => {
           return acc;
         }, {});
 
-        const allSeatsRes = await fetch(`${API_BASE_URL}/seats/`, { headers });
-        const allSeats = await allSeatsRes.json();
-
         const ticketsHtml = await Promise.all(
           Object.values(groupedBookings).map(async (group) => {
             try {
               const schedRes = await fetch(
                 `${API_BASE_URL}/schedules/${group.schedule_id}`,
-                {
-                  headers,
-                },
+                { headers },
               );
               const schedule = await schedRes.json();
+
+              // Fetch seats for this specific bus to get labels
+              const busSeatsRes = await fetch(
+                `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
+                { headers },
+              );
+              const busSeats = await busSeatsRes.json();
 
               const depDate = new Date(schedule.departure_time);
               const seats = group.seat_ids
                 .map((sid) => {
-                  const s = allSeats.find((seat) => seat.id === sid);
-                  return s ? s.seat_label : `ID: ${sid}`;
+                  const s = busSeats.find((seat) => seat.id === sid);
+                  return s ? s.seat_label : ` ${sid}`;
                 })
                 .sort();
 
