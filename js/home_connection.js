@@ -9,14 +9,27 @@ document.addEventListener("DOMContentLoaded", () => {
   //profile icon code
 
   // Recap: Displays the user profile information in a premium popup.
-  profileIcon.addEventListener("click", () => {
+  // Recap: Displays the user profile information in a premium popup.
+  profileIcon.addEventListener("click", async () => {
     const userJson = localStorage.getItem("user");
     if (!userJson) {
       showToast("Please login to see profile.", "info");
       return;
     }
-    //converting string to json object
     const user = JSON.parse(userJson);
+
+    // Fetch total journeys for the profile
+    let totalJourneys = 0;
+    try {
+      const headers = { Authorization: `Bearer ${user.access_token}` };
+      const res = await fetch(`${API_BASE_URL}/bookings/?user_id=${user.id}`, {
+        headers,
+      });
+      const bookings = await res.json();
+      totalJourneys = bookings.length;
+    } catch (e) {
+      console.error("Error fetching journeys for profile:", e);
+    }
 
     const oldOverlay = document.getElementById("profilePopupOverlay");
     if (oldOverlay) oldOverlay.remove();
@@ -27,86 +40,125 @@ document.addEventListener("DOMContentLoaded", () => {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
       z-index: 2000;
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: fadeIn 0.4s ease-out;
     `;
 
     overlay.innerHTML = `
-      <div style="
-        background: rgba(20, 20, 20, 0.95);
-        border: 2px solid #ffcc00;
-        border-radius: 20px;
-        padding: 40px;
-        width: 350px;
-        text-align: center;
-        box-shadow: 0 0 30px rgba(255, 204, 0, 0.2);
-        position: relative;
-        color: white;
-      ">
-        <button id="closeProfileX" style="
-          position: absolute;
-          top: 15px; right: 20px;
-          background: none; border: none;
-          color: #ffcc00; font-size: 28px;
-          cursor: pointer;
-        ">&times;</button>
-
-        <div style="
-          width: 80px; height: 80px;
-          background: #ffcc00;
+      <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .profile-card {
+          background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+          border: 1px solid rgba(255, 204, 0, 0.3);
+          border-radius: 24px;
+          padding: 40px;
+          width: 400px;
+          text-align: center;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 204, 0, 0.1);
+          animation: slideUp 0.5s ease-out;
+          color: white;
+          position: relative;
+        }
+        .profile-avatar {
+          width: 100px; height: 100px;
+          background: linear-gradient(45deg, #ffcc00, #ff9900);
           border-radius: 50%;
           margin: 0 auto 20px;
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: 35px;
+          font-size: 45px;
           color: black;
-          font-weight: bold;
-          box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
-        ">
+          font-weight: 800;
+          box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+          border: 4px solid #000;
+        }
+        .stats-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+          margin: 25px 0;
+        }
+        .stat-box {
+          background: rgba(255, 255, 255, 0.03);
+          padding: 15px;
+          border-radius: 15px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .stat-value { color: #ffcc00; font-size: 20px; font-weight: 700; }
+        .stat-label { color: #888; font-size: 12px; text-transform: uppercase; margin-top: 5px; }
+      </style>
+      <div class="profile-card">
+        <button id="closeProfileX" style="
+          position: absolute;
+          top: 20px; right: 25px;
+          background: none; border: none;
+          color: #ffcc00; font-size: 32px;
+          cursor: pointer; opacity: 0.7; transition: 0.3s;
+        ">&times;</button>
+
+        <div class="profile-avatar">
           ${user.full_name ? user.full_name.charAt(0).toUpperCase() : "U"}
         </div>
 
-        <h2 style="color: #ffcc00; margin-bottom: 5px;">${user.full_name}</h2>
-        <p style="color: #888; margin-bottom: 25px;">${user.role || "Traveler"}</p>
+        <h2 style="color: #ffcc00; margin-bottom: 5px; font-size: 28px;">${
+          user.full_name
+        }</h2>
+        <p style="color: #aaa; margin-bottom: 30px; letter-spacing: 1px;">${
+          user.role ? user.role.toUpperCase() : "TRAVELER"
+        }</p>
 
-        <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 25px;">
-          <p style="margin-bottom: 10px; font-size: 14px;">
-            <span style="color: #ffcc00; font-weight: 600;">Email:</span> ${user.email}
-          </p>
-          <p style="font-size: 14px;">
-            <span style="color: #ffcc00; font-weight: 600;">Account Status:</span> 
-            <span style="color: #4CAF50;">Active</span>
-          </p>
+        <div style="text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 18px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="margin-bottom: 15px;">
+            <span style="color: #444; font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase;">Email Address</span>
+            <span style="color: #eee; font-size: 15px;">${user.email}</span>
+          </div>
+          <div>
+            <span style="color: #444; font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase;">Membership</span>
+            <span style="color: #4CAF50; font-size: 15px; font-weight: 600;">Active Premium</span>
+          </div>
         </div>
 
-        <div style="display: flex; gap: 10px;">
+        <div class="stats-grid">
+          <div class="stat-box">
+             <div class="stat-value">${totalJourneys}</div>
+             <div class="stat-label">Total Rides</div>
+          </div>
+          <div class="stat-box">
+             <div class="stat-value">Elite</div>
+             <div class="stat-label">Status</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 15px;">
           <button id="logoutBtn" style="
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             background: #cc0000;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 14px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: 0.3s;
-          ">Logout</button>
-          <button id="closeProfileBtn" style="
-            flex: 1;
-            padding: 12px;
+          ">Log out</button>
+          <button id="viewHistBtn" style="
+            flex: 1.5;
+            padding: 14px;
             background: #ffcc00;
             color: black;
             border: none;
-            border-radius: 10px;
+            border-radius: 14px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: 0.3s;
-          ">Close</button>
+          ">My Journeys</button>
         </div>
       </div>
     `;
@@ -115,9 +167,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closePopup = () => overlay.remove();
     document.getElementById("closeProfileX").onclick = closePopup;
-    document.getElementById("closeProfileBtn").onclick = closePopup;
+    document.getElementById("closeProfileX").onmouseover = (e) =>
+      (e.target.style.opacity = "1");
+    document.getElementById("closeProfileX").onmouseout = (e) =>
+      (e.target.style.opacity = "0.7");
+
     overlay.onclick = (e) => {
       if (e.target === overlay) closePopup();
+    };
+
+    document.getElementById("viewHistBtn").onclick = () => {
+      closePopup();
+      document.getElementById("myTicketsBtn").click();
     };
 
     document.getElementById("logoutBtn").onclick = () => {
@@ -178,18 +239,26 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Group bookings by schedule_id to show multi-seat bookings as one ticket
+        // Group bookings by schedule_id AND time to show multi-seat bookings as one ticket,
+        // but separate booking sessions as different tickets.
         const groupedBookings = bookings.reduce((acc, booking) => {
-          if (!acc[booking.schedule_id]) {
-            acc[booking.schedule_id] = {
+          // Use schedule + minute-level timestamp to group items booked together
+          const bookingTime = booking.booking_date
+            ? booking.booking_date.substring(0, 16)
+            : "unknown";
+          const groupKey = `${booking.schedule_id}_${bookingTime}`;
+
+          if (!acc[groupKey]) {
+            acc[groupKey] = {
               schedule_id: booking.schedule_id,
               booking_ids: [],
               seat_ids: [],
               status: booking.status,
+              booking_date: booking.booking_date,
             };
           }
-          acc[booking.schedule_id].booking_ids.push(booking.id);
-          acc[booking.schedule_id].seat_ids.push(booking.seat_id);
+          acc[groupKey].booking_ids.push(booking.id);
+          acc[groupKey].seat_ids.push(booking.seat_id);
           return acc;
         }, {});
 
