@@ -43,17 +43,15 @@
             amenities to ensure your journey is seamless.
           </p>
           <div class="about-stats">
+          <div class="about-stats">
             <div class="stat">
-              <span class="counter" data-target="500">0</span
-              ><label>Buses</label>
+              <span id="busCount">0</span><label>Buses</label>
             </div>
             <div class="stat">
-              <span class="counter" data-target="1000000">0</span
-              ><label>Travelers</label>
+              <span id="travelerCount">0</span><label>Travelers</label>
             </div>
             <div class="stat">
-              <span class="counter" data-target="50">0</span
-              ><label>Cities</label>
+              <span id="cityCount">0</span><label>Cities</label>
             </div>
           </div>
         </div>
@@ -74,49 +72,29 @@
     <script>
       AOS.init({ duration: 1000, once: true });
 
-      // Counter Animation Logic
-      const counters = document.querySelectorAll(".counter");
-      const speed = 200; // lower is slower
-
-      const startCounters = () => {
-        counters.forEach((counter) => {
-          const updateCount = () => {
-            const target = +counter.getAttribute("data-target");
-            const count = +counter.innerText.replace(/[+,M]/g, "");
-            const inc = target / speed;
-
-            if (count < target) {
-              const nextVal = Math.ceil(count + inc);
-              if (target >= 1000000) {
-                counter.innerText = (nextVal / 1000000).toFixed(1) + "M+";
-              } else {
-                counter.innerText = nextVal + "+";
-              }
-              setTimeout(updateCount, 1);
-            } else {
-              if (target >= 1000000) {
-                counter.innerText = target / 1000000 + "M+";
-              } else {
-                counter.innerText = target + "+";
-              }
-            }
-          };
-          updateCount();
-        });
-      };
-
-      // Start when visible
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            startCounters();
-            observer.disconnect();
+      function runCounter(id, endValue, suffix) {
+        let current = 0;
+        let steps = 100;
+        let increment = endValue / steps;
+        let timer = setInterval(() => {
+          current += increment;
+          if (current >= endValue) {
+            document.getElementById(id).innerText = endValue + suffix;
+            clearInterval(timer);
+          } else {
+            // Show decimals for Travelers to make it look active
+            let displayValue = (id === "travelerCount") ? current.toFixed(1) : Math.floor(current);
+            document.getElementById(id).innerText = displayValue + suffix;
           }
-        },
-        { threshold: 0.5 },
-      );
+        }, 20);
+      }
 
-      observer.observe(document.querySelector(".about-stats"));
+      // Initialize counters
+      window.onload = () => {
+        runCounter("busCount", 500, "+");
+        runCounter("travelerCount", 1, "M+");
+        runCounter("cityCount", 50, "+");
+      };
     </script>
   </body>
 </html>
