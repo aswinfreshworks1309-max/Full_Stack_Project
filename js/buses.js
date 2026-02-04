@@ -65,9 +65,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (schedules.length > 0) {
       busListContainer.innerHTML = ""; // Clear hardcoded buses only if we have results
 
+      // Fetch all buses for mapping labels/types
+      const busesRes = await fetch(`${API_BASE_URL}/buses/`, { headers });
+      const allBuses = await busesRes.json();
+
       schedules.forEach((schedule) => {
         const dep = new Date(schedule.departure_time);
         const arr = new Date(schedule.arrival_time);
+
+        // Find bus info
+        const busInfo = allBuses.find((b) => b.id === schedule.bus_id);
+        const busName = busInfo
+          ? busInfo.bus_number
+          : `Bus #${schedule.bus_id}`;
+        const busType = busInfo ? busInfo.bus_type : "Luxury Service";
 
         // Calculate duration
         const distinctMs = arr - dep;
@@ -77,8 +88,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const busCard = `
                 <div class="bus-card" data-aos="fade-up">
                     <div class="bus-header">
-                        <div class="bus-name">Bus #${schedule.bus_id}</div>
-                        <div class="bus-type">Luxury Service</div>
+                        <div class="bus-name">${busName}</div>
+                        <div class="bus-type">${busType}</div>
                     </div>
                     <div class="bus-details">
                         <div class="detail-item">
