@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | LocoTranz</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo"><a href="./home.html">LocoTranz</a></div>
+        <ul class="nav-links">
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="./home.html#booking">Booking</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./contact.html" style="color: #f7c843">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="contact-section" style="min-height: 80vh">
+      <h2 data-aos="fade-down">Get In Touch</h2>
+      <p style="color: #888; margin-bottom: 50px">
+        Have questions? We're here to help you 24/7.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-card" data-aos="zoom-in" data-aos-delay="100">
+          <i class="fa-solid fa-location-dot"></i>
+          <h3>Our Head Office</h3>
+          <p>123 Luxury Lane, Metro City, India</p>
+        </div>
+        <div class="contact-card" data-aos="zoom-in" data-aos-delay="200">
+          <i class="fa-solid fa-phone"></i>
+          <h3>Call Us</h3>
+          <p>+91 98765 43210</p>
+        </div>
+        <div class="contact-card" data-aos="zoom-in" data-aos-delay="300">
+          <i class="fa-solid fa-envelope"></i>
+          <h3>Email Us</h3>
+          <p>support@locotranz.com</p>
+        </div>
+      </div>
+
+      <!-- Optional: Simple Contact Form -->
+      <div
+        style="
+          max-width: 600px;
+          margin: 60px auto;
+          padding: 30px;
+          background: #111;
+          border-radius: 15px;
+          border: 1px solid #222;
+        "
+        data-aos="fade-up"
+      >
+        <form style="display: flex; flex-direction: column; gap: 15px">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea
+            placeholder="Your Message"
+            style="
+              width: 100%;
+              padding: 10px;
+              border-radius: 6px;
+              background: #222;
+              color: #fff;
+              border: 1px solid #444;
+              min-height: 120px;
+              font-family: inherit;
+            "
+          ></textarea>
+          <button type="submit" class="btn" style="width: 100%">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+    </script>
+  </body>
+</html>
