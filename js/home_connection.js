@@ -26,7 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
         headers,
       });
       const bookings = await res.json();
-      totalJourneys = bookings.length;
+
+      // Group bookings to count actual journey sessions (not individual seats)
+      const groups = bookings.reduce((acc, b) => {
+        const time = b.booking_date ? b.booking_date.substring(0, 16) : "00";
+        const key = `${b.schedule_id}_${time}`;
+        acc[key] = true;
+        return acc;
+      }, {});
+      totalJourneys = Object.keys(groups).length;
     } catch (e) {
       console.error("Error fetching journeys for profile:", e);
     }
@@ -120,8 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <span style="color: #eee; font-size: 15px;">${user.email}</span>
           </div>
           <div>
-            <span style="color: #444; font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase;">Membership</span>
-            <span style="color: #4CAF50; font-size: 15px; font-weight: 600;">Active Premium</span>
+            <span style="color: #444; font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase;">Travel Mode</span>
+            <span style="color: #ffcc00; font-size: 15px; font-weight: 600;">Executive Class</span>
           </div>
         </div>
 
@@ -131,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
              <div class="stat-label">Total Rides</div>
           </div>
           <div class="stat-box">
-             <div class="stat-value">Elite</div>
+             <div class="stat-value" style="color: #4CAF50;">Active</div>
              <div class="stat-label">Status</div>
           </div>
         </div>
