@@ -58,7 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (err) {
         console.error(err);
-        showToast("Login failed. Is the backend running?", "error");
+        showToast(
+          "Connection failed. The server might be waking up, please wait a few seconds and try again.",
+          "error",
+        );
         // Hide loading spinner and re-enable button
         loadingSpinner.classList.remove("show");
         loginBtn.disabled = false;

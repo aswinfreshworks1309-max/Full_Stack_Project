@@ -3,7 +3,11 @@
   const user = userJson ? JSON.parse(userJson) : null;
   const path = window.location.pathname;
   const segments = path.split("/");
-  const page = segments.pop() || "index.html";
+  let page = segments.pop() || "index.html";
+
+  // Strip query parameters and hashes
+  page = page.split("?")[0].split("#")[0];
+
   const isRoot = !path.includes("/pages/");
 
   // Pages that don't require authentication
@@ -14,6 +18,8 @@
     "admin_login.html",
     "admin_signup.html",
     "index.html",
+    "about.html",
+    "contact.html",
   ];
 
   // Pages specifically for admin
