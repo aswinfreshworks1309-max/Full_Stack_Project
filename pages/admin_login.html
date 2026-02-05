@@ -126,7 +126,7 @@
           }
         } catch (err) {
           console.error(err);
-          showToast('Connection failed. The server might be waking up, please wait a few seconds and try again.', 'error');
+          showToast('An unexpected error occurred', 'error');
         } finally {
           loginBtn.textContent = originalText;
           loginBtn.disabled = false;

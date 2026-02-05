@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           showToast("Account created successfully! Please login.", "success");
           setTimeout(() => {
-            window.location.href = "login.html";
+            window.location.href = "../pages/login.html";
           }, 1500);
         } else {
           const error = await response.json();
@@ -59,10 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (err) {
         console.error(err);
-        showToast(
-          "Connection failed. The server might be waking up, please wait a few seconds and try again.",
-          "error",
-        );
+        showToast("Network error. Is the backend running?", "error");
         // Hide loading spinner and re-enable button
         loadingSpinner.classList.remove("show");
         signupBtn.disabled = false;

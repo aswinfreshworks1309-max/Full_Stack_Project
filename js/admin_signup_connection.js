@@ -57,10 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (err) {
         console.error(err);
-        showToast(
-          "Connection failed. The server might be waking up, please wait a few seconds and try again.",
-          "error",
-        );
+        showToast("Network error. Is the backend running?", "error");
         loadingSpinner.classList.remove("show");
         signupBtn.disabled = false;
       }
