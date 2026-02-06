@@ -1,19 +1,31 @@
 // Recap: Manages user registration and account creation.
 document.addEventListener("DOMContentLoaded", () => {
   // Signup Form Handling
-  const signupForm = document.querySelector("form");
-  // Ensure it's the right form by checking inputs or context if needed
+  const signupForm =
+    document.getElementById("signupForm") || document.querySelector("form");
 
   // Recap: Collects user data and sends a registration request to the server.
   if (signupForm) {
     signupForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const inputs = signupForm.querySelectorAll("input");
-      const fullName = inputs[0].value;
-      const email = inputs[1].value;
-      const password = inputs[2].value;
-      const confirmPassword = inputs[3].value;
+      const fullNameInput =
+        document.getElementById("fullName") ||
+        signupForm.querySelectorAll("input")[0];
+      const emailInput =
+        document.getElementById("email") ||
+        signupForm.querySelectorAll("input")[1];
+      const passwordInput =
+        document.getElementById("password") ||
+        signupForm.querySelectorAll("input")[2];
+      const confirmPasswordInput =
+        document.getElementById("confirmPassword") ||
+        signupForm.querySelectorAll("input")[3];
+
+      const fullName = fullNameInput.value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
 
       if (password !== confirmPassword) {
         showToast("Passwords do not match!", "error");
@@ -23,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show loading spinner and disable button
       const signupBtn = signupForm.querySelector(".btn");
       const loadingSpinner = document.getElementById("loadingSpinner");
-      loadingSpinner.classList.add("show");
-      signupBtn.disabled = true;
+      if (loadingSpinner) loadingSpinner.classList.add("show");
+      if (signupBtn) signupBtn.disabled = true;
 
       try {
         const response = await fetch(`${API_BASE_URL}/users/`, {
@@ -54,15 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
             "error",
           );
           // Hide loading spinner and re-enable button
-          loadingSpinner.classList.remove("show");
-          signupBtn.disabled = false;
+          if (loadingSpinner) loadingSpinner.classList.remove("show");
+          if (signupBtn) signupBtn.disabled = false;
         }
       } catch (err) {
         console.error(err);
         showToast("Network error. Is the backend running?", "error");
         // Hide loading spinner and re-enable button
-        loadingSpinner.classList.remove("show");
-        signupBtn.disabled = false;
+        if (loadingSpinner) loadingSpinner.classList.remove("show");
+        if (signupBtn) signupBtn.disabled = false;
       }
     });
   }
