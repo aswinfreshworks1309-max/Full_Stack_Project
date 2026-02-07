@@ -5,39 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModal = document.querySelector(".close-modal");
   const container = document.getElementById("ticketsContainer");
   const profileIcon = document.getElementById("profile");
+  let cachedTotalJourneys = null;
 
   //profile icon code
 
   // Recap: Displays the user profile information in a premium popup.
   // Recap: Displays the user profile information in a premium popup.
-  profileIcon.addEventListener("click", async () => {
+  profileIcon.addEventListener("click", () => {
     const userJson = localStorage.getItem("user");
     if (!userJson) {
       showToast("Please login to see profile.", "info");
       return;
     }
     const user = JSON.parse(userJson);
-
-    // Fetch total journeys for the profile
-    let totalJourneys = 0;
-    try {
-      const headers = { Authorization: `Bearer ${user.access_token}` };
-      const res = await fetch(`${API_BASE_URL}/bookings/?user_id=${user.id}`, {
-        headers,
-      });
-      const bookings = await res.json();
-
-      // Group bookings to count actual journey sessions (not individual seats)
-      const groups = bookings.reduce((acc, b) => {
-        const time = b.booking_date ? b.booking_date.substring(0, 16) : "00";
-        const key = `${b.schedule_id}_${time}`;
-        acc[key] = true;
-        return acc;
-      }, {});
-      totalJourneys = Object.keys(groups).length;
-    } catch (e) {
-      console.error("Error fetching journeys for profile:", e);
-    }
 
     const oldOverlay = document.getElementById("profilePopupOverlay");
     if (oldOverlay) oldOverlay.remove();
@@ -101,6 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         .stat-value { color: #ffcc00; font-size: 20px; font-weight: 700; }
         .stat-label { color: #888; font-size: 12px; text-transform: uppercase; margin-top: 5px; }
+        .dot-flashing { position: relative; width: 10px; height: 10px; border-radius: 5px; background-color: #ffcc00; color: #ffcc00; animation: dot-flashing 1s infinite linear alternate; animation-delay: .5s; margin: 0 auto; }
+        .dot-flashing::before, .dot-flashing::after { content: ''; display: inline-block; position: absolute; top: 0; }
+        .dot-flashing::before { left: -15px; width: 10px; height: 10px; border-radius: 5px; background-color: #ffcc00; color: #ffcc00; animation: dot-flashing 1s infinite alternate; animation-delay: 0s; }
+        .dot-flashing::after { left: 15px; width: 10px; height: 10px; border-radius: 5px; background-color: #ffcc00; color: #ffcc00; animation: dot-flashing 1s infinite alternate; animation-delay: 1s; }
+        @keyframes dot-flashing { 0% { background-color: #ffcc00; } 50%, 100% { background-color: rgba(255, 204, 0, 0.2); } }
       </style>
       <div class="profile-card">
         <button id="closeProfileX" style="
@@ -135,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="stats-grid">
           <div class="stat-box">
-             <div class="stat-value">${totalJourneys}</div>
+             <div class="stat-value" id="totalJourneysCount"><div class="dot-flashing"></div></div>
              <div class="stat-label">Total Rides</div>
           </div>
           <div class="stat-box">
@@ -172,6 +157,44 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     document.body.appendChild(overlay);
+
+    // Background fetch for total journeys
+    (async () => {
+      if (cachedTotalJourneys !== null) {
+        const countEl = document.getElementById("totalJourneysCount");
+        if (countEl) countEl.innerText = cachedTotalJourneys;
+        return;
+      }
+
+      let totalJourneys = 0;
+      try {
+        const headers = { Authorization: `Bearer ${user.access_token}` };
+        const res = await fetch(
+          `${API_BASE_URL}/bookings/?user_id=${user.id}`,
+          {
+            headers,
+          },
+        );
+        const bookings = await res.json();
+
+        // Group bookings to count actual journey sessions (not individual seats)
+        const groups = bookings.reduce((acc, b) => {
+          const time = b.booking_date ? b.booking_date.substring(0, 16) : "00";
+          const key = `${b.schedule_id}_${time}`;
+          acc[key] = true;
+          return acc;
+        }, {});
+        totalJourneys = Object.keys(groups).length;
+        cachedTotalJourneys = totalJourneys;
+
+        const countEl = document.getElementById("totalJourneysCount");
+        if (countEl) countEl.innerText = totalJourneys;
+      } catch (e) {
+        console.error("Error fetching journeys for profile:", e);
+        const countEl = document.getElementById("totalJourneysCount");
+        if (countEl) countEl.innerText = "0";
+      }
+    })();
 
     const closePopup = () => overlay.remove();
     document.getElementById("closeProfileX").onclick = closePopup;

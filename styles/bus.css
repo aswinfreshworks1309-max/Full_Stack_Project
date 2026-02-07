@@ -1,72 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-a {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-}
-body {
-  font-family: "Outfit", sans-serif;
-  background: radial-gradient(circle at top, #0a0a0a 0%, #111 100%);
-}
-
-/* Header */
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 60px;
-}
-span a {
-  color: #ffcc00;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-header .logo span {
-  color: #ffcc00;
-  font-weight: bold;
-}
-
-.logo-icon {
-  width: 14px;
-  height: 14px;
-  background: #ffcc00;
-  border-radius: 50%;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #ddd;
-  font-size: 15px;
-  transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-  color: #ffcc00;
-}
+/* The global and header styles are now handled by index.css */
 
 /* Container */
 .container {
   max-width: 1200px;
   position: relative;
-  left: 150px;
-  top: 100px;
+  /* Adjusting position as index.css header is sticky */
+  margin: 40px auto;
   padding: 0 20px;
   margin-bottom: 150px;
 }

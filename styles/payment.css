@@ -1,63 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Outfit", sans-serif;
-  color: white;
-  background: #000;
-  height: 100vh;
-
-  position: relative;
-}
-
-/* ===== HEADER ===== */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 60px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-header .logo span a {
-  color: #ffcc00;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.logo-icon {
-  width: 14px;
-  height: 14px;
-  background: #ffcc00;
-  border-radius: 50%;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #ddd;
-  font-size: 15px;
-  transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-  color: #ffcc00;
-}
+/* The global and header styles are now handled by index.css */
 
 /* 💳 Payment Card */
 .container {
@@ -68,12 +9,14 @@ nav ul li a:hover {
   width: 90%;
   max-width: 500px;
   position: relative;
-  left: 500px;
-  top: 200px;
+  /* Adjusting position as index.css header is sticky */
+  margin: 100px auto;
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
   animation: fadeIn 1s ease forwards;
-  line-height: 40px;
+  line-height: normal;
+  line-height: 50px;
 }
+
 /* ⚡ UPI Section */
 .payment-options h3 {
   text-align: center;

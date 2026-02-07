@@ -21,6 +21,9 @@
           <li><a href="./about.html" style="color: #f7c843">About</a></li>
           <li><a href="./contact.html">Contact</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
       </nav>
     </header>
 
@@ -32,10 +35,7 @@
         <div class="about-text" data-aos="fade-right">
           <h2>Our Story</h2>
           <p>
-            LocoTranz was founded on a simple principle: travel should be as
-            enjoyable as the destination. What started as a small fleet of
-            luxury coaches has grown into India's premier road travel service,
-            connecting people with comfort and class.
+LocoTranz is a smart and convenient intracity bus ticket booking platform designed to make daily travel simple and hassle-free. Our platform allows commuters to easily book MTC bus tickets, check routes, schedules, and availability—all in one place. We focus on saving time, reducing queues, and improving the everyday travel experience for city passengers. With a user-friendly interface and reliable service, LocoTranz helps you move across the city with ease, comfort, and confidence.
           </p>
           <p>
             We believe in punctuality, safety, and an uncompromising standard of
@@ -51,23 +51,19 @@
               <span id="travelerCount">0</span><label>Travelers</label>
             </div>
             <div class="stat">
-              <span id="cityCount">0</span><label>Cities</label>
+              <span id="cityCount">0</span><label>Routes</label>
             </div>
           </div>
         </div>
-        <div class="about-image" data-aos="fade-left">
-          <img
-            src="../assests/vlog_thumb_2_1770234022830.png"
-            alt="Luxury Interior"
-          />
-        </div>
+
       </div>
     </section>
 
     <footer>
-      <p>&copy; 2025 LocoTranz. Luxury in Motion | support@locotranz.com</p>
+      <p>&copy; 2026 LocoTranz. Luxury in Motion | admin@locotranz.com</p>
     </footer>
 
+    <script src="../js/navbar.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({ duration: 1000, once: true });
@@ -91,8 +87,8 @@
 
       // Initialize counters
       window.onload = () => {
-        runCounter("busCount", 500, "+");
-        runCounter("travelerCount", 1, "M+");
+        runCounter("busCount", 50, "+");
+        runCounter("travelerCount", 1, "K+");
         runCounter("cityCount", 50, "+");
       };
     </script>

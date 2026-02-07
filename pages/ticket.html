@@ -4,22 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LocoTranz Ticket</title>
+    <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/ticket.css" />
     <link rel="stylesheet" href="../css/toast.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="../js/auth_check.js"></script>
   </head>
   <body>
     <!-- HEADER -->
-    <header>
-      <nav>
-        <div class="logo"><a href="../pages/home.html"></a>LocoTranz</div>
-
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo"><a href="../pages/home.html">LocoTranz</a></div>
         <ul class="nav-links">
           <li><a href="../pages/home.html">Home</a></li>
           <li><a href="../pages/about.html">About</a></li>
           <li><a href="../pages/contact.html">Contact</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
       </nav>
     </header>
 
@@ -115,6 +122,7 @@
     <script src="../js/toast.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/ticket_connection.js"></script>
+    <script src="../js/navbar.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({ duration: 1000, once: true });
