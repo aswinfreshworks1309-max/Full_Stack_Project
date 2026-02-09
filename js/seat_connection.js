@@ -89,8 +89,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   //   Renders the interactive bus seat layout based on backend data.
   function renderSeats(seats, bookedSet) {
-
-
     if (seats.length === 0) {
       console.warn(
         "No seats found in DB for this bus. Using static layout for visual demo, but they won't be submittable.",
@@ -103,8 +101,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const driverSection = layoutContainer.querySelector(".driver-section");
     layoutContainer.innerHTML = "";
     layoutContainer.appendChild(driverSection);
-
-  
 
     // Simple 2-2 layout logic
     let currentRow = document.createElement("div");
