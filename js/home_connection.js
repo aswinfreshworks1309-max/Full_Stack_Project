@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                             <div class="ticket-info">
                                 <label>Date & Time</label>
-                                <div>${depDate.toLocaleDateString()} ${depDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
+                                <div>${new Date(group.booking_date).toLocaleDateString()} ${new Date(group.booking_date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
                             </div>
                             <div class="ticket-info">
                                 <label>Seats</label>
