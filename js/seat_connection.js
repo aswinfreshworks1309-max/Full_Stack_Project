@@ -106,8 +106,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentRow = document.createElement("div");
     currentRow.className = "seat-row";
 
-    // Sort seats by label
-    seats.sort((a, b) => a.seat_label.localeCompare(b.seat_label));
+    // Sort seats by label using natural/numeric sorting
+    seats.sort((a, b) =>
+      a.seat_label.localeCompare(b.seat_label, undefined, { numeric: true }),
+    );
 
     let rowCount = 0;
     seats.forEach((seat, index) => {

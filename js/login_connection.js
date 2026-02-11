@@ -1,4 +1,4 @@
-//   Manages user authentication and session storage.
+// Manages user authentication and session storage.
 document.addEventListener("DOMContentLoaded", () => {
   // Login Form Handling
   const loginForm = document.querySelector("form");

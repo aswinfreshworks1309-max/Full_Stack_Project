@@ -1,4 +1,4 @@
-// Recap: Initializes the home page functionalities and event listeners.
+// Initializes the home page functionalities and event listeners.
 document.addEventListener("DOMContentLoaded", () => {
   const myTicketsBtn = document.getElementById("myTicketsBtn");
   const modal = document.getElementById("ticketsModal");
@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let cachedTotalJourneys = null;
 
   //profile icon code
-
-  // Recap: Displays the user profile information in a premium popup.
-  // Recap: Displays the user profile information in a premium popup.
+ 
   profileIcon.addEventListener("click", () => {
     const userJson = localStorage.getItem("user");
     if (!userJson) {
@@ -22,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const oldOverlay = document.getElementById("profilePopupOverlay");
     if (oldOverlay) oldOverlay.remove();
 
-    const overlay = document.createElement("div");
+    const overlay = document.createElement("div"); 
     overlay.id = "profilePopupOverlay";
     overlay.style.cssText = `
       position: fixed;
@@ -113,8 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <span style="color: #eee; font-size: 15px;">${user.email}</span>
           </div>
           <div>
-            <span style="color: #444; font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase;">Travel Mode</span>
-            <span style="color: #ffcc00; font-size: 15px; font-weight: 600;">Executive Class</span>
+            <span style="color: #444; font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase;">Role</span>
+            <span style="color: #ffcc00; font-size: 15px; font-weight: 600;">${user.role}</span>
           </div>
         </div>
 

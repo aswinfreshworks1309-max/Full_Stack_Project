@@ -77,19 +77,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           let status = s.status || getScheduleStatus(s);
           status = status.toLowerCase();
 
-          if (status === "running") {
+          if (status.includes("running")) {
             runningCount++;
             activeBusIds.add(s.bus_id);
-          } else if (status === "scheduled") {
+          } else if (status.includes("scheduled")) {
             scheduledCount++;
             activeBusIds.add(s.bus_id);
-          } else if (status === "maintenance") {
+          } else if (status.includes("mainten") || status.includes("maintan")) {
+            maintenanceCount++;
             maintenanceBusIds.add(s.bus_id);
           }
         });
       }
-
-      maintenanceCount = maintenanceBusIds.size;
 
       // Update UI
       const statCards = document.querySelectorAll(".stat-value");
@@ -144,28 +143,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     schedules.forEach((schedule) => {
       let status = schedule.status || getScheduleStatus(schedule);
 
-      if (
-        activeFilter !== "all" &&
-        status.toLowerCase() !== activeFilter.toLowerCase()
-      )
-        return;
+      const statusLower = status.toLowerCase();
+      const filterLower = activeFilter.toLowerCase();
+
+      if (activeFilter !== "all") {
+        let match = statusLower === filterLower;
+        // Fix for maintenance typos
+        if (filterLower === "maintenance") {
+          match =
+            statusLower.includes("mainten") || statusLower.includes("maintan");
+        }
+        if (!match) return;
+      }
 
       const tr = document.createElement("tr");
 
       let statusLabel =
         status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
-      let statusLower = status.toLowerCase();
 
       let statusStyle = "";
       if (statusLower === "scheduled") {
         statusStyle = "background:#e3f2fd; color:#0d47a1;";
       } else if (statusLower === "completed") {
         statusStyle = "background:#eee; color:#666;";
-      } else if (statusLower === "maintenance") {
+      } else if (
+        statusLower.includes("mainten") ||
+        statusLower.includes("maintan")
+      ) {
         statusStyle = "background:#fff3cd; color:#856404;";
-      } else if (statusLower === "cancelled") {
+      } else if (statusLower.includes("cancel")) {
         statusStyle = "background:#f8d7da; color:#721c24;";
-      } else {
+      } else if (statusLower.includes("run")) {
         // Running
         statusStyle = "background:#e6fffa; color:#2c7a7b;";
       }
