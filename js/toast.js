@@ -1,6 +1,6 @@
-// Recap: Displays a temporary toast notification message on the screen.
+// This function displays a temporary "Toast" message (success or error) on the screen
 function showToast(message, type = "success") {
-  // Create container if it doesn't exist
+  // 1. Find or create the container where all toasts will show up
   let container = document.getElementById("toast-container");
   if (!container) {
     container = document.createElement("div");
@@ -8,28 +8,26 @@ function showToast(message, type = "success") {
     document.body.appendChild(container);
   }
 
-  // Create toast element
+  // 2. Create a new Toast box
   const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
+  toast.className = `toast toast-${type}`; // This adds a class like 'toast-success' or 'toast-error'
 
-  // Set message
-  toast.innerHTML = `
-        <span class="toast-message">${message}</span>
-    `;
+  // 3. Put the message inside the box
+  toast.innerHTML = `<span class="toast-message">${message}</span>`;
 
-  // Add to container
+  // 4. Add the Toast to the screen
   container.appendChild(toast);
 
-    // Auto remove after 4 seconds
-    setTimeout(() => {
-      toast.classList.add("hiding");
-      setTimeout(() => {
-        if (toast.parentNode === container) {
-          container.removeChild(toast);
-        }
-      }, 300);
-    }, 4000);
-  }
+  // 5. Automatically remove the message after 4 seconds
+  setTimeout(() => {
+    // Start the "hiding" animation
+    toast.classList.add("hiding");
 
-// Optional: Override window.alert if needed, but it's better to explicitly call showToast
-// window.alert = (msg) => showToast(msg, 'info');
+    // After the animation finishes (0.3s), remove the element from the page
+    setTimeout(() => {
+      if (toast.parentNode === container) {
+        container.removeChild(toast);
+      }
+    }, 300);
+  }, 4000);
+}
