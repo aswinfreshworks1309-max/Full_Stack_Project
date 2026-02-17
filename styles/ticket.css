@@ -82,9 +82,12 @@
   padding: 35px;
   color: #ccc;
 }
+.map{
+  cursor: pointer;
+}
 .journey-section {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 25px;
   background: #222;

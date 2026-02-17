@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <div class="price-label">Fare per seat</div>
                             <div class="price-value">₹${schedule.price}</div>
                         </div>
-                        <div class="seats-available">${schedule.available_seats} Seats Available</div>
+                        
                         <button class="book-btn">
                             <a href="./seat.html?schedule_id=${schedule.id}">Select Seats</a>
                         </button>

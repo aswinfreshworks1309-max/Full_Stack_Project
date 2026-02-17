@@ -109,6 +109,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     const droppingEl = document.getElementById("droppingPoint");
     const bookingDateEl = document.getElementById("bookingDate");
     const bookingTimeEl = document.getElementById("bookingTime");
+    const board = document.querySelector(".board");
+    const desty = document.querySelector(".disty");
+    // Guard against missing elements to avoid "Cannot read properties of null"
+    if (board && boardingEl) {
+      board.addEventListener("click", () => {
+        const q = encodeURIComponent(
+          (boardingEl.textContent || boardingEl.value || "").trim(),
+        );
+        if (q)
+          window.location.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+      });
+    }
+    if (desty && droppingEl) {
+      desty.addEventListener("click", () => {
+        const q = encodeURIComponent(
+          (droppingEl.textContent || droppingEl.value || "").trim(),
+        );
+        if (q)
+          window.location.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+      });
+    }
 
     if (boardingEl) {
       boardingEl.textContent = `${schedule.source}`;

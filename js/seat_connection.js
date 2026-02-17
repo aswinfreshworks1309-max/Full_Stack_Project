@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       headers,
     });
     const bus = await busRes.json();
-
+ 
     // C. Get All Seats for this bus
     const seatsRes = await fetch(
       `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Updates the text at the top of the page (Bus name, Route, Time)
   function updatePageInfo(schedule, bus) {
     document.querySelector(".bus-name").textContent =
-      bus.name || `Bus #${bus.id}`;
+      bus.bus_number;
     document.querySelector(".bus-type").textContent =
-      bus.type || "Luxury Service";
+      bus.bus_type || "Luxury Service";
 
     // Set Origin and Destination
     const routeLabels = document.querySelectorAll(".journey-value");
