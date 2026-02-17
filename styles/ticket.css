@@ -82,8 +82,28 @@
   padding: 35px;
   color: #ccc;
 }
-.map{
+.board{
   cursor: pointer;
+  position: absolute;
+  left: 100px;
+
+}
+.board img{
+  object-fit: cover;
+  
+}
+.disty img{
+  object-fit: cover;
+  
+}
+.board:hover{
+  box-shadow: white;
+}
+.disty{
+  cursor: pointer;
+  position: absolute;
+  right: 100px;
+
 }
 .journey-section {
   display: flex;
@@ -271,6 +291,14 @@ footer {
 @media (max-width: 480px) {
   header {
     padding: 15px 20px;
+  }
+  .board{
+    left: 50px;
+    top: 50px;
+  }
+  .disty{
+    left: 50px;
+    bottom: 28px;
   }
   .container {
     padding: 0 15px;

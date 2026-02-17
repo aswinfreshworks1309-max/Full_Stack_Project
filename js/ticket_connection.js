@@ -118,7 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           (boardingEl.textContent || boardingEl.value || "").trim(),
         );
         if (q)
-          window.location.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+          window.open(`https://www.google.com/maps/search/?api=1&query=${q}`,"_blank");
+   
       });
     }
     if (desty && droppingEl) {
@@ -127,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           (droppingEl.textContent || droppingEl.value || "").trim(),
         );
         if (q)
-          window.location.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+          window.open(`https://www.google.com/maps/search/?api=1&query=${q}`,"_blank");
       });
     }
 
