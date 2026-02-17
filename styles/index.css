@@ -546,7 +546,7 @@ footer {
   }
 
   .hero-content {
-    bottom: 300px;
+     
   }
 
   .hero h1 {
@@ -593,6 +593,10 @@ footer {
   .hero-content {
     bottom: 250px;
   }
+  .hero-content{
+    position: relative;
+    bottom: 450px;
+  }
 
   .hero h1 {
     font-size: 28px;
@@ -602,4 +606,5 @@ footer {
     flex-direction: column;
     gap: 20px;
   }
+
 }
