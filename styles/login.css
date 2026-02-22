@@ -155,6 +155,18 @@ nav ul li a:hover {
   color: #bbb;
 }
 
+.error-msg {
+  color: #fd0000;
+  font-size: 15px;
+  margin-left: 2px;
+  display: none; /* Hidden by default */
+  margin-top: 5px;
+}
+
+.error-msg.show {
+  display: block;
+}
+
 /* ===== FORGOT PASSWORD ===== */
 .forgot-password {
   text-align: right;

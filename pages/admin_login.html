@@ -45,6 +45,7 @@
             placeholder="Enter your email"
             required
           />
+          <span class="error-msg" id="emailError"></span>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -54,7 +55,7 @@
             placeholder="Enter your password"
             required
           />
- 
+          <span class="error-msg" id="passwordError"></span>
         </div>
  
         <button
@@ -86,10 +87,32 @@
     <script>
       const form = document.querySelector('form');
       form.addEventListener('submit', async (e) => {
+        // Helper functions for inline validation
+        const showError = (id, msg) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.textContent = msg;
+            el.classList.add('show');
+          }
+        };
+        const clearErrors = () => {
+          document.querySelectorAll('.error-msg').forEach(el => {
+            el.textContent = '';
+            el.classList.remove('show');
+          });
+        };
+
         e.preventDefault();
-        const email = document.getElementById('email').value;
+        clearErrors();
+
+        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         
+        let hasError = false;
+        if (!email) { showError('emailError', 'Email is required'); hasError = true; }
+        if (!password) { showError('passwordError', 'Password is required'); hasError = true; }
+        if (hasError) return;
+
         // Show loading state on button
         const loginBtn = document.querySelector('.login-btn');
         const originalText = loginBtn.textContent;
@@ -122,7 +145,7 @@
             }, 1000);
           } else {
             const errData = await response.json();
-            showToast(errData.detail || 'Invalid admin credentials', 'error');
+            showError('emailError', errData.detail || 'Invalid admin credentials');
           }
         } catch (err) {
           console.error(err);

@@ -27,25 +27,42 @@
 
         <form id="signupForm">
           <div class="input-group">
-            <input type="text" id="fullName" placeholder="Full Name" required />
-            <input
-              type="email"
-              id="email"
-              placeholder="Email Address"
-              required
-            />
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              required
-            />
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm Password"
-              required
-            />
+            <div class="form-control">
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Full Name"
+                required
+              />
+              <span class="error-msg" id="nameError"></span>
+            </div>
+            <div class="form-control">
+              <input
+                type="email"
+                id="email"
+                placeholder="Email Address"
+                required
+              />
+              <span class="error-msg" id="emailError"></span>
+            </div>
+            <div class="form-control">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+              <span class="error-msg" id="passwordError"></span>
+            </div>
+            <div class="form-control">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+              />
+              <span class="error-msg" id="confirmPasswordError"></span>
+            </div>
           </div>
 
           <button class="btn" type="submit">Sign Up</button>

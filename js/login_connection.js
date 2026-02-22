@@ -10,12 +10,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
+      // Helper functions for inline validation
+      const showError = (id, msg) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.textContent = msg;
+          el.classList.add("show");
+        }
+      };
+      const clearErrors = () => {
+        document.querySelectorAll(".error-msg").forEach((el) => {
+          el.textContent = "";
+          el.classList.remove("show");
+        });
+      };
+
       // 1. Prevent the page from refreshing
       e.preventDefault();
+      clearErrors();
 
       // 2. Get the email and password from the form
-      const email = document.getElementById("email").value;
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+
+      let hasError = false;
+      if (!email) {
+        showError("emailError", "Email is required");
+        hasError = true;
+      }
+      if (!password) {
+        showError("passwordError", "Password is required");
+        hasError = true;
+      }
+      if (hasError) return;
 
       // 3. Show a loading spinner and disable the button while we wait
       const loadingSpinner = document.getElementById("loadingSpinner");
@@ -58,7 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 1000);
         } else {
           // If login failed (e.g. wrong password)
-          showToast("Invalid email or password. Please try again.", "error");
+          showError(
+            "emailError",
+            "Invalid email or password. Please try again.",
+          );
 
           // Hide spinner and re-enable button so user can try again
           loadingSpinner.classList.remove("show");

@@ -3,20 +3,72 @@ const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
   signupForm.addEventListener("submit", async (e) => {
+    // Helper functions for inline validation
+    const showError = (id, msg) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = msg;
+        el.classList.add("show");
+      }
+    };
+    const clearErrors = () => {
+      document.querySelectorAll(".error-msg").forEach((el) => {
+        el.textContent = "";
+        el.classList.remove("show");
+      });
+    };
+
     // 1. Prevent the page from refreshing
     e.preventDefault();
+    clearErrors();
 
     // 2. Collect the information entered by the user
-    const fullName = document.getElementById("fullName").value;
-    const email = document.getElementById("email").value;
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // 3. Simple validation: Check if passwords match
-    if (password !== confirmPassword) {
-      showToast("Passwords do not match!", "error");
-      return;
+    let hasError = false;
+
+    // 3. Validation Logic
+    // Full Name: Only characters and spaces
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!fullName) {
+      showError("nameError", "Full Name is required");
+      hasError = true;
+    } else if (!nameRegex.test(fullName)) {
+      showError("nameError", "Only letters and spaces allowed");
+      hasError = true;
     }
+
+    // Email validation (basic)
+    if (!email) {
+      showError("emailError", "Email is required");
+      hasError = true;
+    }
+
+    // Password: Min 8 chars and at least one special character
+    const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    if (!password) {
+      showError("passwordError", "Password is required");
+      hasError = true;
+    } else if (!passwordRegex.test(password)) {
+      showError(
+        "passwordError",
+        "Min 8 chars with 1 special character required",
+      );
+      hasError = true;
+    }
+
+    if (!confirmPassword) {
+      showError("confirmPasswordError", "Please confirm your password");
+      hasError = true;
+    } else if (password !== confirmPassword) {
+      showError("confirmPasswordError", "Passwords do not match");
+      hasError = true;
+    }
+
+    if (hasError) return;
 
     // 4. Show a loading spinner and disable the button
     const signupBtn = signupForm.querySelector(".btn");
@@ -32,7 +84,7 @@ if (signupForm) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: email.split("@")[0], // Use part of email as a username
+          name: email.split("@")[0], // Derive username from email
           email: email,
           password: password,
           full_name: fullName,
