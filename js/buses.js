@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const source = params.get("source");
   const destination = params.get("destination");
-  const date = params.get("date");
 
   // 2. Update the page title/header to show the route (e.g., "London → Paris")
   const routeInfoDiv = document.querySelector(".route-info");
@@ -17,17 +16,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // 3. Update the date shown on the page
-  if (date) {
     const dateDiv = document.querySelector(".date-info");
     if (dateDiv) {
-      const dateObj = new Date(date);
-      dateDiv.textContent = dateObj.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      });
+let d = new Date();
+
+let day = d.getDate();
+let month = d.getMonth() + 1;
+let year = d.getFullYear();
+dateDiv.textContent = `${day} / ${month} / ${year}`;
     }
-  }
+
 
   // 4. Fetch the actual bus data from the Backend API
   const busListContainer = document.querySelector(".bus-list");

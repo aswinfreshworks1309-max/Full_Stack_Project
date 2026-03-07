@@ -1,5 +1,5 @@
 // This script handles the Home page: Profile popup and Booking History (My Tickets)
-document.addEventListener("DOMContentLoaded", () => {
+
   const myTicketsBtn = document.getElementById("myTicketsBtn");
   const modal = document.getElementById("ticketsModal");
   const closeModal = document.querySelector(".close-modal");
@@ -113,9 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
             },
           );
           const bookings = await res.json();
+          console.log("User bookings:", bookings);
           const groups = bookings.reduce((acc, b) => {
-            const time = b.booking_date ? b.booking_date.substring(0, 16) : "0";
-            acc[`${b.schedule_id}_${time}`] = true;
+            acc[`${b.schedule_id}`] = true;
             return acc;
           }, {});
           cachedTotalJourneys = Object.keys(groups).length;
@@ -258,5 +258,4 @@ document.addEventListener("DOMContentLoaded", () => {
           '<div class="loading" style="color:red">Failed to load tickets.</div>';
       }
     });
-  }
-});
+};

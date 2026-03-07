@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Continue to Payment ---
   const continueBtn = document.getElementById("continueBtn");
   if (continueBtn) {
-    continueBtn.addEventListener("click", () => {
+    continueBtn.addEventListener("click"||"keyup", () => {
       if (selectedSeats.size === 0) {
         showToast("Please select at least one seat.", "error");
         return;

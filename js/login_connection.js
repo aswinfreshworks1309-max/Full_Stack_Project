@@ -1,5 +1,5 @@
 // This script handles the login process
-document.addEventListener("DOMContentLoaded", () => {
+ 
   const loginForm = document.querySelector("form");
   const loginBtn = document.querySelector(".login-btn");
 
@@ -104,4 +104,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+ 
