@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 2. Fetch all the data we need from the Backend: Schedule, Bus, and Booked Seats
   const user = JSON.parse(localStorage.getItem("user"));
-  const headers = user?.access_token
+  const headers = user.access_token
     ? { Authorization: `Bearer ${user.access_token}` }
     : {};
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       headers,
     });
     const bus = await busRes.json();
- 
+
     // C. Get All Seats for this bus
     const seatsRes = await fetch(
       `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
@@ -58,8 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Updates the text at the top of the page (Bus name, Route, Time)
   function updatePageInfo(schedule, bus) {
-    document.querySelector(".bus-name").textContent =
-      bus.bus_number;
+    document.querySelector(".bus-name").textContent = bus.bus_number;
     document.querySelector(".bus-type").textContent =
       bus.bus_type || "Luxury Service";
 
@@ -99,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Sort seats by their label (e.g., A1, A2, B1...)
     seats.sort((a, b) =>
       a.seat_label.localeCompare(b.seat_label, undefined, { numeric: true }),
-    );
+    ); // undefined --> localeCompare language rules eg(en = english)
 
     let row = document.createElement("div");
     row.className = "seat-row";
@@ -139,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    // Add any leftover seats
+    // ChildNodes check the row it has any child element
     if (row.hasChildNodes()) layoutContainer.appendChild(row);
   }
 
@@ -165,8 +164,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   function calculateTotal(pricePerSeat) {
     const count = selectedSeats.size;
     const base = count * pricePerSeat;
-    const gst = base * 0.05; // 5% TAX
-    const total = base + gst;
+
+    const total = base;
 
     // Show labels of selected seats (e.g., "A1, B2")
     const labels = [];
@@ -177,14 +176,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("seatDisplay").textContent =
       count > 0 ? labels.join(", ") : "No seats selected";
     document.getElementById("baseFare").textContent = `₹${base}`;
-    document.getElementById("gst").textContent = `₹${gst.toFixed(2)}`;
-    document.getElementById("totalAmount").textContent = `₹${total.toFixed(2)}`;
+    document.getElementById("totalAmount").textContent = `₹${total}`;
   }
 
   // --- Continue to Payment ---
   const continueBtn = document.getElementById("continueBtn");
   if (continueBtn) {
-    continueBtn.addEventListener("click"||"keyup", () => {
+    const reDirect = () => {
       if (selectedSeats.size === 0) {
         showToast("Please select at least one seat.", "error");
         return;
@@ -201,6 +199,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Go to the payment page
       window.location.href = "./payment.html";
+    };
+
+    window.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        reDirect();
+      }
     });
+    continueBtn.addEventListener("click", () => reDirect());
   }
 });

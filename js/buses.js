@@ -16,16 +16,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // 3. Update the date shown on the page
-    const dateDiv = document.querySelector(".date-info");
-    if (dateDiv) {
-let d = new Date();
+  const dateDiv = document.querySelector(".date-info");
+  if (dateDiv) {
+    let d = new Date();
 
-let day = d.getDate();
-let month = d.getMonth() + 1;
-let year = d.getFullYear();
-dateDiv.textContent = `${day} / ${month} / ${year}`;
-    }
-
+    let day = d.getDate();
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+    dateDiv.textContent = `${day} / ${month} / ${year}`;
+  }
 
   // 4. Fetch the actual bus data from the Backend API
   const busListContainer = document.querySelector(".bus-list");

@@ -1,36 +1,35 @@
 // This script handles the Home page: Profile popup and Booking History (My Tickets)
 
-  const myTicketsBtn = document.getElementById("myTicketsBtn");
-  const modal = document.getElementById("ticketsModal");
-  const closeModal = document.querySelector(".close-modal");
-  const container = document.getElementById("ticketsContainer");
-  const profileIcon = document.getElementById("profile");
+const myTicketsBtn = document.getElementById("myTicketsBtn");
+const modal = document.getElementById("ticketsModal");
+const closeModal = document.querySelector(".close-modal");
+const container = document.getElementById("ticketsContainer");
+const profileIcon = document.getElementById("profile");
+let cachedTotalJourneys = null;
 
-  let cachedTotalJourneys = null;
+// --- SECTION 1: Profile Popup Logic ---
+if (profileIcon) {
+  profileIcon.addEventListener("click", () => {
+    const userJson = localStorage.getItem("user");
+    if (!userJson) {
+      showToast("Please login to see profile.", "info");
+      return;
+    }
+    const user = JSON.parse(userJson);
 
-  // --- SECTION 1: Profile Popup Logic ---
-  if (profileIcon) {
-    profileIcon.addEventListener("click", () => {
-      const userJson = localStorage.getItem("user");
-      if (!userJson) {
-        showToast("Please login to see profile.", "info");
-        return;
-      }
-      const user = JSON.parse(userJson);
+    const oldOverlay = document.getElementById("profilePopupOverlay");
+    if (oldOverlay) oldOverlay.remove();
 
-      const oldOverlay = document.getElementById("profilePopupOverlay");
-      if (oldOverlay) oldOverlay.remove();
-
-      const overlay = document.createElement("div");
-      overlay.id = "profilePopupOverlay";
-      overlay.style.cssText = `
+    const overlay = document.createElement("div");
+    overlay.id = "profilePopupOverlay";
+    overlay.style.cssText = `
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
         z-index: 2000; display: flex; justify-content: center; align-items: center;
         animation: fadeIn 0.4s ease-out;
       `;
 
-      overlay.innerHTML = `
+    overlay.innerHTML = `
         <style>
           @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
           @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -96,130 +95,130 @@
         </div>
       `;
 
-      document.body.appendChild(overlay);
+    document.body.appendChild(overlay);
 
-      // Fetch journey count in background
-      (async () => {
-        if (cachedTotalJourneys !== null) {
-          const el = document.getElementById("totalJourneysCount");
-          if (el) el.innerText = cachedTotalJourneys;
-          return;
-        }
-        try {
-          const res = await fetch(
-            `${API_BASE_URL}/bookings/?user_id=${user.id}`,
-            {
-              headers: { Authorization: `Bearer ${user.access_token}` },
-            },
-          );
-          const bookings = await res.json();
-          console.log("User bookings:", bookings);
-          const groups = bookings.reduce((acc, b) => {
-            acc[`${b.schedule_id}`] = true;
-            return acc;
-          }, {});
-          cachedTotalJourneys = Object.keys(groups).length;
-          const el = document.getElementById("totalJourneysCount");
-          if (el) el.innerText = cachedTotalJourneys;
-        } catch (e) {
-          const el = document.getElementById("totalJourneysCount");
-          if (el) el.innerText = "0";
-        }
-      })();
-
-      const closePopup = () => overlay.remove();
-      document.getElementById("closeProfileX").onclick = closePopup;
-      overlay.onclick = (e) => {
-        if (e.target === overlay) closePopup();
-      };
-      document.getElementById("viewHistBtn").onclick = () => {
-        closePopup();
-        myTicketsBtn.click();
-      };
-      document.getElementById("logoutBtn").onclick = () => {
-        localStorage.removeItem("user");
-        showToast("Logged out successfully!", "success");
-        setTimeout(() => {
-          window.location.href = "login.html";
-        }, 1000);
-      };
-    });
-  }
-
-  // --- SECTION 2: Modal Logic ---
-  if (closeModal)
-    closeModal.onclick = () => {
-      modal.style.display = "none";
-    };
-  window.onclick = (e) => {
-    if (e.target === modal) modal.style.display = "none";
-  };
-
-  // --- SECTION 3: Detailed Ticket Cards ---
-  if (myTicketsBtn) {
-    myTicketsBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const userJson = localStorage.getItem("user");
-      if (!userJson) {
-        showToast("Please login.", "error");
+    // Fetch journey count in background
+    (async () => {
+      if (cachedTotalJourneys !== null) {
+        const el = document.getElementById("totalJourneysCount");
+        if (el) el.innerText = cachedTotalJourneys;
         return;
       }
-      const user = JSON.parse(userJson);
-
-      modal.style.display = "flex";
-      container.innerHTML =
-        '<div class="loading">Fetching your tickets...</div>';
-
       try {
-        const headers = { Authorization: `Bearer ${user.access_token}` };
         const res = await fetch(
           `${API_BASE_URL}/bookings/?user_id=${user.id}`,
-          { headers },
+          {
+            headers: { Authorization: `Bearer ${user.access_token}` },
+          },
         );
         const bookings = await res.json();
-
-        if (bookings.length === 0) {
-          container.innerHTML = '<div class="loading">No tickets found.</div>';
-          return;
-        }
-
-        // Group bookings to show multi-seat journeys as one ticket
-        const grouped = bookings.reduce((acc, b) => {
-          const time = b.booking_date ? b.booking_date.substring(0, 16) : "0";
-          const key = `${b.schedule_id}_${time}`;
-          if (!acc[key])
-            acc[key] = { ...b, booking_ids: [b.id], seat_ids: [b.seat_id] };
-          else {
-            acc[key].booking_ids.push(b.id);
-            acc[key].seat_ids.push(b.seat_id);
-          }
+        console.log("User bookings:", bookings);
+        const groups = bookings.reduce((acc, b) => {
+          acc[`${b.schedule_id}`] = true;
           return acc;
         }, {});
+        // taking the length of key to show the total journey
+        cachedTotalJourneys = Object.keys(groups).length;
+        const el = document.getElementById("totalJourneysCount");
+        if (el) el.innerText = cachedTotalJourneys;
+      } catch (e) {
+        const el = document.getElementById("totalJourneysCount");
+        if (el) el.innerText = "0";
+      }
+    })();
 
-        const ticketsHtml = await Promise.all(
-          Object.values(grouped).map(async (group) => {
-            try {
-              const schedRes = await fetch(
-                `${API_BASE_URL}/schedules/${group.schedule_id}`,
-                { headers },
-              );
-              const schedule = await schedRes.json();
+    const closePopup = () => overlay.remove();
+    document.getElementById("closeProfileX").onclick = closePopup;
+    overlay.onclick = (e) => {
+      if (e.target === overlay) closePopup();
+    };
+    document.getElementById("viewHistBtn").onclick = () => {
+      closePopup();
+      myTicketsBtn.click();
+    };
+    document.getElementById("logoutBtn").onclick = () => {
+      localStorage.removeItem("user");
+      showToast("Logged out successfully!", "success");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1000);
+    };
+  });
+}
 
-              // Fetch seat labels for this bus
-              const seatsRes = await fetch(
-                `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
-                { headers },
-              );
-              const allSeats = await seatsRes.json();
-              const seatLabels = group.seat_ids
-                .map((sid) => {
-                  const s = allSeats.find((seat) => seat.id === sid);
-                  return s ? s.seat_label : sid;
-                })
-                .sort()
-                .join(", ");
+// --- SECTION 2: Modal Logic ---
+if (closeModal)
+  closeModal.onclick = () => {
+    modal.style.display = "none";
+  };
+window.onclick = (e) => {
+  if (e.target === modal) modal.style.display = "none";
+};
 
-              return `
+// --- SECTION 3: Detailed Ticket Cards ---
+if (myTicketsBtn) {
+  myTicketsBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const userJson = localStorage.getItem("user");
+    if (!userJson) {
+      showToast("Please login.", "error");
+      return;
+    }
+    const user = JSON.parse(userJson);
+
+    modal.style.display = "flex";
+    container.innerHTML = '<div class="loading">Fetching your tickets...</div>';
+
+    try {
+      const headers = { Authorization: `Bearer ${user.access_token}` };
+      const res = await fetch(`${API_BASE_URL}/bookings/?user_id=${user.id}`, {
+        headers,
+      });
+      const bookings = await res.json();
+
+      if (bookings.length === 0) {
+        container.innerHTML = '<div class="loading">No tickets found.</div>';
+        return;
+      }
+
+      // Group bookings to show multi-seat journeys as one ticket
+      const grouped = bookings.reduce((acc, b) => {
+        const time = b.booking_date ? b.booking_date.substring(0, 16) : "0";
+        const key = `${b.schedule_id}_${time}`;
+        if (!acc[key])
+          acc[key] = { ...b, booking_ids: [b.id], seat_ids: [b.seat_id] };
+        else {
+          acc[key].booking_ids.push(b.id);
+          acc[key].seat_ids.push(b.seat_id);
+        }
+        return acc;
+      }, {});
+
+      const ticketsHtml = await Promise.all(
+        // Taking the seats from one booking.
+        Object.values(grouped).map(async (group) => {
+          try {
+            const schedRes = await fetch(
+              `${API_BASE_URL}/schedules/${group.schedule_id}`,
+              { headers },
+            );
+            const schedule = await schedRes.json();
+
+            // Fetch seat labels for this bus
+            const seatsRes = await fetch(
+              `${API_BASE_URL}/seats/?bus_id=${schedule.bus_id}`,
+              { headers },
+            );
+            const allSeats = await seatsRes.json();
+            const seatLabels = group.seat_ids
+              .map((sid) => {
+                const s = allSeats.find((seat) => seat.id === sid);
+                return s ? s.seat_label : sid;
+              })
+              .sort()
+              .join(", ");
+
+            return `
               <div class="ticket-card">
                   <div class="ticket-info">
                       <label>Route</label>
@@ -246,16 +245,16 @@
                   </div>
               </div>
             `;
-            } catch (err) {
-              return '<div class="ticket-card">Error loading journey info.</div>';
-            }
-          }),
-        );
+          } catch (err) {
+            return '<div class="ticket-card">Error loading journey info.</div>';
+          }
+        }),
+      );
 
-        container.innerHTML = ticketsHtml.join("");
-      } catch (err) {
-        container.innerHTML =
-          '<div class="loading" style="color:red">Failed to load tickets.</div>';
-      }
-    });
-};
+      container.innerHTML = ticketsHtml.join("");
+    } catch (err) {
+      container.innerHTML =
+        '<div class="loading" style="color:red">Failed to load tickets.</div>';
+    }
+  });
+}
