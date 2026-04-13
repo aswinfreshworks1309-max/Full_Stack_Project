@@ -1,4 +1,4 @@
-// Recap: Handlers the final payment step and creates booking records.
+// Handlers the final payment step and creates booking records.
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Check Auth (Simple check)
   const userJson = localStorage.getItem("user");
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 4. Handle Payment Submission
   const oldPayBtn = document.getElementById("pay-btn");
-  let qr = null;
 
   // Recap: Generates a UPI QR code based on the current booking amount.
   function generateUPIQR() {

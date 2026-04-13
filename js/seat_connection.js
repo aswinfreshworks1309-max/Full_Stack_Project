@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     seats.forEach((seat, index) => {
       // 1. Create the Seat box
       const seatDiv = document.createElement("div");
-      const isBooked = bookedSet.has(seat.id);
+      const isBooked = bookedSet.has(seat.id); // has will return the value in boolean
 
       seatDiv.className = `seat ${isBooked ? "booked" : "available"}`;
       seatDiv.textContent = seat.seat_label;

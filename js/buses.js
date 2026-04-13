@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Get the logged-in user's token (needed for some API calls)
     const user = JSON.parse(localStorage.getItem("user"));
-    const headers = user?.access_token
+    const headers = user.access_token
       ? { Authorization: `Bearer ${user.access_token}` }
       : {};
 

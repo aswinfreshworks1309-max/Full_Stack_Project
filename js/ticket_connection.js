@@ -1,4 +1,4 @@
-// Recap: Fetches and displays booking details and seat information for the ticket page.
+//  Fetches and displays booking details and seat information for the ticket page.
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Get Params
   const params = new URLSearchParams(window.location.search);
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const bookingIds = bookingIdsStr.split(",");
   if (bookingIds.length === 0) return;
 
-  // Recap: Retrieves authentication headers from local storage.
+  //  Retrieves authentication headers from local storage.
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.access_token) {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { Authorization: `Bearer ${user.access_token}` };
   };
 
-  // Recap: Handles 401 Unauthorized errors by redirecting to login.
+  //  Handles 401 Unauthorized errors by redirecting to login.
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");

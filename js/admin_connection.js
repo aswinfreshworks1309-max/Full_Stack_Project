@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let editId = null;
   let activeFilter = "all";
 
-  // Recap: Retrieves authentication headers from local storage.
+  //  Retrieves authentication headers from local storage.
   const getAuthHeaders = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.access_token) {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { Authorization: `Bearer ${user.access_token}` };
   };
 
-  // Recap: Handles 401 Unauthorized errors by redirecting to login.
+  // Handles 401 Unauthorized errors by redirecting to login.
   const handleAuthError = (res) => {
     if (res.status === 401) {
       localStorage.removeItem("user");
@@ -26,8 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return false;
   };
 
-  // --- UTILS ---
-  // Recap: Determines bus status (running, scheduled, completed) based on time.
+  // Determines bus status (running, scheduled, completed) based on time.
   function getScheduleStatus(schedule) {
     const now = new Date();
     const dep = new Date(schedule.departure_time);
@@ -47,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // --- DASHBOARD DATA FETCHING ---
-  // Recap: Fetches all necessary data (buses, schedules, bookings) and updates the entire dashboard.
+  // Fetches all necessary data (buses, schedules, bookings) and updates the entire dashboard.
   async function refreshDashboardData() {
     const tbody = document.querySelector(".bus-table tbody");
     if (tbody && !tbody.children.length) {
@@ -321,7 +320,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // Recap: Closes the add bus modal.
-  window.closeAddBusModal = function () {
+  closeAddBusModal = function () {
     const modal = document.getElementById("addBusModal");
     modal.style.display = "none";
   };
@@ -558,9 +557,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         route_id: "Custom",
         source: source,
         destination: destination,
-        departure_time: new Date(depTime).toISOString(),
-        arrival_time: new Date(arrTime).toISOString(),
-        price: parseFloat(price) || 500.0,
+        departure_time: new Date(depTime),
+        arrival_time: new Date(arrTime),
+        price: parseFloat(price) || 50.0,
         available_seats: 40,
         status: status,
       };

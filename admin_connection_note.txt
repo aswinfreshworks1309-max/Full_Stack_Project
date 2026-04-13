@@ -1,0 +1,83 @@
+Admin Connection Function Reference
+
+File: Frontend/js/admin_connection.js
+
+1. getAuthHeaders()
+   - Reads `user` from localStorage and returns auth header.
+   - Used for all API calls to provide Bearer token.
+
+2. handleAuthError(res)
+   - Checks 401 responses and clears local session, redirects to admin login.
+   - Protects UI from using expired/invalid tokens.
+
+3. getScheduleStatus(schedule)
+   - Computes schedule status from `departure_time` and `arrival_time`.
+   - Supports fallback when scheduled status is missing.
+   - Returns "running", "scheduled", or "completed".
+
+4. formatDate(dateStr)
+   - Converts ISO (or date string) to localized short date-time string.
+   - Used for human-friendly table display.
+
+5. refreshDashboardData()
+   - Fetches buses, schedules, and bookings via API parallel calls.
+   - Updates caches (currentBuses/currentSchedules/currentCounts).
+   - Calls updateStats(), renderTable(), updateBusDropdown().
+   - Handles API and network errors with toasts.
+
+6. updateStats(schedules, totalBuses)
+   - Iterates schedules and counts run/scheduled/maintenance statuses.
+   - Writes values into dashboard stat cards.
+
+7. updateBusDropdown(buses)
+   - Ensures `#busSelect` exists (converts input to select if needed).
+   - Populates select with available buses.
+
+8. openAddBusModal(), closeAddBusModal()
+   - Show/hide modal for adding bus.
+   - Reset form when opening.
+
+9. Add bus form submit handler
+   - Reads form fields, POST to /buses/.
+   - Shows success/error toast, refreshes dashboard.
+
+10. openEditModal(id)
+    - Finds schedule by id, pre-fills modal form fields.
+    - Sets isEditing/editId and normalizes status for dropdown.
+
+11. deleteSchedule(id)
+    - Confirms delete, sends DELETE to /schedules/{id}.
+    - On success reloads page, shows toast.
+
+12. resetSeats(scheduleId)
+    - Confirms reset, POST to /seats/reset/{scheduleId}.
+    - On success refreshes dashboard.
+
+13. openAddModal()
+    - Prepares modal for new schedule creation.
+    - Sets date-time to now and +1 hour defaults.
+
+14. closeModal()
+    - Hides schedule edit/add modal.
+
+15. filter buttons setup
+    - Adds click listeners to filter status in table.
+    - Calls renderTable() with active filter.
+
+16. renderTable(schedules, bookingCounts, buses)
+    - Builds table rows for each schedule.
+    - Resolves status using schedule.status or getScheduleStatus().
+    - Maps schedule to bus plate number and booking counts.
+    - Adds action buttons to each row (Edit/Delete/Reset).
+
+17. save button handler
+    - On click, validates form fields, constructs schedule object.
+    - Uses POST (new) or PUT (edit) to /schedules/.
+    - On success closes modal and refreshes data.
+
+How each function helps run the code:
+- API helpers keep authentication and error handling centralized.
+- Status and formatting helpers keep UI data consistent.
+- refresh/update functions keep dashboard in sync with backend.
+- Modals and actions provide full CRUD workflows for admin scheduling.
+- Filters and rendering provide interactive table behavior.
